@@ -1,0 +1,27 @@
+section{
+    font-family: "Nunito Sans",Arvo,"Open Sans",sans-serif;
+    background-color: #edf7fa;
+}
+
+.grande{
+    font-size: 2em;   
+    font-weight: bolder;
+}
+
+.medio{
+    font-size: 1.2em;
+}
+
+input{
+    background-color:#edf7fa;
+    border: none;
+    width: 4%;
+}
+
+#tabla{
+    background-color:#ffb677;
+    border: 3px solid black;
+    border-collapse: collapse;
+    padding-left: 1px;
+    padding-right: 1px;
+}

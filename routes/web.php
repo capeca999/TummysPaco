@@ -39,8 +39,8 @@ Route::get('animales/', function() {
     
     
 
-        Route::get('/sobreNosotros/', function() {
-            return view('sobreNosotros');
+        Route::get('/aboutUs/', function() {
+            return view('aboutUs');
             });
         
     

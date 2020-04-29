@@ -23,7 +23,12 @@ class ApiController extends Controller
 
 public function getAnimalsSpecie($especie){
     $animales = $this::getAnimalsSpecieList(1, $especie, 20);
-
+/*
+    echo '<pre>';
+    echo var_dump(json_decode($animales));
+    echo '</pre>';
+die;
+*/
     return view ('animales')->with('animales', json_decode($animales));
 
 }

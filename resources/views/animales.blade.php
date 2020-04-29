@@ -21,7 +21,7 @@
             <div class="col-12">
                 <p class="product-description">{{$animal->description}}</p>
                 <div class="row">
-                    <div class="col-6"> <button class="btn btn-light" type="button">Mas Sobre {{$animal->nickname}}</button></div>
+                    <div class="col-6">  <a href="/animal/{{$animal->id}}"> <button class="btn btn-light"  type="button">Mas Sobre {{$animal->nickname}}</button> </a></div>
                     <div class="col-6">
                     </div>
                 </div>

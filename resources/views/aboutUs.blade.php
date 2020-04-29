@@ -4,8 +4,9 @@
 @endsection
 @section('contenido')
     <div class="container">
-        <h1>Sobre Nosotros y Nuestro Equipo!</h1>
-        <p>Somos Tummys.</p>
+        <h1>Sobre Nosotros</h1>
+        <p>Somos Tummys, una organización protectora de animales especializada, desde 2010, en la ayuda a perros y gatos maltratados y/o abandonados. Practicamos el sacrificio cero, denunciamos judicialmente a los maltratadores y buscamos adoptantes para todos los animales que acogemos.</p>
+
         <div class="row">
             <div class="col-lg-12">
                 <h2 class="my-4">Nuestro Equipo</h2>

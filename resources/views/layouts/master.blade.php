@@ -57,7 +57,7 @@
         <div class="row">
             <div class="col-sm-6 col-md-4 footer-navigation">
                 <h3><a href="#">Company<span>logo </span></a></h3>
-                <p class="links"><a href="#">Home</a><strong> · </strong><a href="/politicaPrivacidad/">Pólitica de Privacidad</a><strong> · </strong><a href="/condicionesAdoptar/">Condiciones De Adopción</a><strong> · </strong><a href="/sobreNosotros/">Sobre Nosotros</a><strong> · </strong><a href="/faq/">Faq</a><strong> · </strong>
+                <p class="links"><a href="#">Home</a><strong> · </strong><a href="/politicaPrivacidad/">Pólitica de Privacidad</a><strong> · </strong><a href="/condicionesAdoptar/">Condiciones De Adopción</a><strong> · </strong><a href="/aboutUs/">Sobre Nosotros</a><strong> · </strong><a href="/faq/">Faq</a><strong> · </strong>
                     <a
                         href="#">Información Importante&nbsp;</a>
                 </p>
@@ -71,7 +71,7 @@
                     <p class="footer-center-info email text-left"> +34 722513578</p>
                 </div>
                 <div><i class="fa fa-envelope footer-contacts-icon"></i>
-                    <p> <a href="#" target="_blank">capeca999@gmail.com</a></p>
+                    <p> <a href="#" target="_blank">tummysrefugio@gmail.com</a></p>
                 </div>
             </div>
             <div class="clearfix"></div>

@@ -23,8 +23,8 @@
 
       <!-- JavaScript -->
     <script src="/js/masterlayout.js"></script>
-    <script src="/js/giftaza.js"></script>
-    
+
+
       @yield('scripts')
 </head>
 

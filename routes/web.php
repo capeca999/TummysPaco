@@ -16,7 +16,11 @@
 Route::get('animales/', function() {
     return view('animalesCategorias');
     });
-
+    Route::get('contacto/', function() {
+        return view('contacto');
+        });
+    
+        
     
 
     Route::get('/politicaPrivacidad/', function() {

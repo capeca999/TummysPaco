@@ -20,7 +20,7 @@
             @if( empty($animal->condition))
             @if($animal->species == "Hamster")
             <img  title="Hamster" class="iconoEstrella" src="/img/icons/hamster.png">    
-            <span class="tooltiptext">Tooltip text</span>
+         
             @elseif  ($animal->species == "Gato")
             <img title="Gato"class="iconoEstrella" src="/img/icons/gato.png">    
             @elseif  ($animal->species == "Ave")

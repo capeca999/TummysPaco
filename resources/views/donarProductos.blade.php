@@ -113,4 +113,5 @@
   </div>
 </div>
 </div>
+<script src="/js/giftaza.js"></script>
 @endsection

@@ -1,6 +1,53 @@
+
+  .iconoEstrella .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .iconoEstrella .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+  
+  .iconoEstrella:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+
+
+
+
 .globosaboutus{
     width: 50%;
     height: 50%;
+}
+
+.iconoEstrella{
+    width: 10%;
+    height: 10%;
+}
+
+.iconoEstrellaDetalles{
+    width: 10%;
+    height: 60%;
 }
 
 .faq,
@@ -1818,7 +1865,7 @@ body{
 
 
 .custom-header {
-    background: #292c2f;
+    background: #116979;
     padding: 20px 40px;
     box-sizing: border-box;
     border: 0;
@@ -1830,7 +1877,7 @@ body{
     font: 400 28px Cookie, Arial, Helvetica, sans-serif;
     line-height: .5;
     margin-right: 40px;
-    background: #292c2f
+    background: #116979
 }
 
 .custom-header a.navbar-brand span {
@@ -1842,7 +1889,7 @@ body{
     opacity: .9;
     text-decoration: none;
     color: #fff;
-    background: #292c2f;
+    background: #116979;
     border: 0
 }
 
@@ -1863,14 +1910,14 @@ body{
 
 .custom-header li.dropdown,
 .custom-header li.dropdown.open {
-    background: #3a3c3e
+    background: #116979
 }
 
 .custom-header li.dropdown .dropdown-toggle {
     border-radius: 2px;
     color: #fff;
     padding: 8px 14px;
-    background: #3a3c3e;
+    background: #116979;
     opacity: .9;
     border: 0;
     margin: 0
@@ -1879,7 +1926,7 @@ body{
 .custom-header li.dropdown .dropdown-toggle:active,
 .custom-header li.dropdown .dropdown-toggle:focus,
 .custom-header li.dropdown .dropdown-toggle:hover {
-    background: #3a3c3e;
+    background: #116979;
     color: #fff
 }
 

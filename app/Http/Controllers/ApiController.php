@@ -32,9 +32,41 @@ die;
     return view ('animales')->with('animales', json_decode($animales));
 
 }
+//getAnimalsEspeciales
 
+
+public  function getAnimalsEspeciales($pagina=1,  $cantidad=20){
+    $animales = $this::getAnimalsEspecialesList(1,20);
+
+
+
+    return view ('animalesEspeciales')->with('animales', json_decode($animales));
+}
+
+
+
+public static function getAnimalsEspecialesList($pagina=1,  $cantidad=20){
+    if($cantidad<=0){
+        $cantidad=20;
+    }
+    if($pagina<1){
+        $pagina=1;
+    }
+    $pagina--;
+    return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'images.url')
+    ->join('images', 'images.id_animal', '=',  'animals.id')
+    ->whereNotNull('condition')
+    ->groupBy('animals.id')
+    ->get()
+    ->splice(($cantidad*$pagina), $cantidad)
+    ->toJson();
+    }
+    
 
 public static function getAnimalsSpecieList($pagina=1, $especie, $cantidad=20){
+
+
+
 
 if($cantidad<=0){
     $cantidad=20;
@@ -46,13 +78,24 @@ if($pagina<1){
 
 $pagina--;
 
-return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'images.url')
+
+if($especie=="Todos"){
+    return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition' , 'images.url')
+->join('images', 'images.id_animal', '=',  'animals.id')
+->groupBy('animals.id')
+->get()
+->splice(($cantidad*$pagina), $cantidad)
+->toJson();
+}
+else{
+    return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition' , 'images.url')
 ->join('images', 'images.id_animal', '=',  'animals.id')
 ->where('species', 'like', $especie)
 ->groupBy('animals.id')
 ->get()
 ->splice(($cantidad*$pagina), $cantidad)
 ->toJson();
+}
 }
 
 

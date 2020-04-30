@@ -14,7 +14,36 @@
         </div>
         <div class="row">
             <div class="col-8">
-                <h2>{{$animal->nickname}}</h2>
+            <h2>
+                
+            
+            @if( empty($animal->condition))
+            @if($animal->species == "Hamster")
+            <img  title="Hamster" class="iconoEstrella" src="/img/icons/hamster.png">    
+            <span class="tooltiptext">Tooltip text</span>
+            @elseif  ($animal->species == "Gato")
+            <img title="Gato"class="iconoEstrella" src="/img/icons/gato.png">    
+            @elseif  ($animal->species == "Ave")
+            <img title="Ave" class="iconoEstrella" src="/img/icons/pajaro.png">  
+            @elseif  ($animal->species == "Conejo")
+            <img title="Conejo"class="iconoEstrella" src="/img/icons/conejo.png">  
+            @elseif  ($animal->species == "Uron")
+            <img title="Uron" class="iconoEstrella" src="/img/icons/uron.png">  
+            @elseif  ($animal->species == "Cobaya")
+            <img title="Cobaya" class="iconoEstrella" src="/img/icons/cobaya.png">  
+            @elseif  ($animal->species == "Canina")
+            <img title="Perro"class="iconoEstrella" src="/img/icons/perro.png">  
+            @endif
+@else
+
+<img  title="Caso Especial" class="iconoEstrella" src="/img/icons/star.png">      
+   
+            @endif
+
+        
+ 
+
+            {{$animal->nickname}}  </h2> 
             </div>
         </div>
         <div class="row">

@@ -44,7 +44,7 @@
 
     <div class="container">
 
-    <form action="https://google.com">
+    <form action="/animales/Todos">
     <input type="submit" class="verTodos" value="todos los animales" />
 </form>
 

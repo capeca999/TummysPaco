@@ -36,7 +36,7 @@
                 id="navbar-collapse">
                 <ul class="nav navbar-nav links">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/animales/">Animales En Adopción</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Casos Especiales</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/animales/casosEspeciales">Casos Especiales</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="#"> Preguntas Y Respuestas</a></li>
                     <li class="nav-item" role="presentation"></li>
                 </ul>

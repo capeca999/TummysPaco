@@ -44,7 +44,7 @@ $diff = date_diff(date_create($dateOfBirth), date_create($today));
 						
 					</div>
 					<div class="details col-md-6">
-						<h1 class="product-title">{{ $animales[0]->nickname }} </h1>
+						<h1 class="product-title"> <img class="iconoEstrellaDetalles" src="/img/icons/star.png"> {{ $animales[0]->nickname }} </h1>
 						<div class="rating">
 							<div class="stars">
                  <b>  Fecha De Nacimiento: </b> {{$animales[0]->date_of_birth}}   &nbsp  <b>Edad:</b>   {{ $diff->format('%y')}} <b>Años </b> &nbsp <br>

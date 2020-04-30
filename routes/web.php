@@ -55,6 +55,8 @@ Route::get('/preguntas/', 'PreguntasController@indexJugetesDias');
 
 
 
+Route::get('/animales/casosEspeciales/', 'ApiController@getAnimalsEspeciales');
+
     Route::get('/animales/{especie}', 'ApiController@getAnimalsSpecie');
 
 Route::get('/animal/{id}', 'AnimalController@getAnimalID');

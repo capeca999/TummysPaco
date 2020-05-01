@@ -1,7 +1,7 @@
 
 var i, acc = document.getElementsByClassName("faq");
 
-alert(acc.length)
+
 
 for (i = 0; i < acc.length; i++) acc[i].addEventListener("click", function() {
  

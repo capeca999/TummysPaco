@@ -37,7 +37,7 @@
                 <ul class="nav navbar-nav links">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/animales/">Animales En Adopción</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/animales/casosEspeciales">Casos Especiales</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#"> Preguntas Y Respuestas</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/preguntas/"> Preguntas Y Respuestas</a></li>
                     <li class="nav-item" role="presentation"></li>
                 </ul>
                 <ul class="nav navbar-nav ml-auto">
@@ -78,7 +78,7 @@
             <div class="col-md-4 footer-about">
                 <h4>Siguenos en las redes sociales&nbsp;</h4>
                 <p>Tambien puedes apoyar al refugio siguiendonos en las distintas redes sociales!</p>
-                <div class="social-links social-icons"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-linkedin"></i></a><a href="#"><i class="fa fa-github"></i></a></div>
+                <div class="social-links social-icons"><a href="#"><i class="fa fa-facebook"></i></a><a href="https://twitter.com/Tummys1"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-linkedin"></i></a><a href="#"><i class="fa fa-github"></i></a></div>
             </div>
         </div>
     </footer>

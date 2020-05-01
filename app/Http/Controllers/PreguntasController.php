@@ -92,6 +92,15 @@ class PreguntasController extends Controller
 public function indexJugetesDias(){
     $preguntas = $this::listarPreguntasHoy(1,10);
 
+
+
+    echo "<pre>";
+echo var_dump(json_decode($preguntas));
+echo "</pre>";
+die;
+
+
+
     return view('preguntasRespuestas')->with('preguntas', json_decode($preguntas, true));
 }
 
@@ -120,8 +129,7 @@ $preguntas = Question::select('questions.id', 'questions.id_user', DB::raw("DATE
 ->toJson();
 
 
-
-
+return $preguntas;
 
 
 }

@@ -56,7 +56,7 @@
 <footer>
         <div class="row">
             <div class="col-sm-6 col-md-4 footer-navigation">
-                <h3><a href="#">Company<span>logo </span></a></h3>
+                <h3><a href="#"> <img style="width: 120px;" src ="/img/Casa.png"> <img style="width: 120px;" src ="/img/Nombre.png"></a></h3>
                 <p class="links"><a href="#">Home</a><strong> · </strong><a href="/politicaPrivacidad/">Pólitica de Privacidad</a><strong> · </strong><a href="/condicionesAdoptar/">Condiciones De Adopción</a><strong> · </strong><a href="/aboutUs/">Sobre Nosotros</a><strong> · </strong><a href="/faq/">Faq</a><strong> · </strong>
                     <a
                         href="#">Información Importante&nbsp;</a>
@@ -78,7 +78,7 @@
             <div class="col-md-4 footer-about">
                 <h4>Siguenos en las redes sociales&nbsp;</h4>
                 <p>Tambien puedes apoyar al refugio siguiendonos en las distintas redes sociales!</p>
-                <div class="social-links social-icons"><a href="#"><i class="fa fa-facebook"></i></a><a href="https://twitter.com/Tummys1"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-linkedin"></i></a><a href="#"><i class="fa fa-github"></i></a></div>
+                <div class="social-links social-icons"><a href="https://www.facebook.com/tummysrefugio/"><i class="fa fa-facebook"></i></a><a href="https://twitter.com/Tummys1"><i class="fa fa-twitter"></i></a><a href="https://www.instagram.com/tummysrefugio/"><i class="fa fa-instagram"></i></a><a href="https://github.com/capeca999/TummysPaco"><i class="fa fa-github"></i></a></div>
             </div>
         </div>
     </footer>

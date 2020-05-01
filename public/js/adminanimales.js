@@ -1,4 +1,9 @@
 $(document).ready(function() {
+
+
+    var cantidad = $("<td>").length
+
+alert(cantidad);
     alert("hola");
     $(".search").keyup(function() {
         var t = $(".search").val(),
@@ -20,12 +25,11 @@ $(document).ready(function() {
 
 
 
-    
 
 
    /*MODIFICAR PRODUCTO (Añadir input)- Al hacer doble click creara un input en el td cliqueado*/
-   $( "#animalesAdmin" ).on( "dbclick", "td", function() {
-  alert("hola");
+   $(document).on( "dblclick", "td", function() {
+    if($(this).attr('id') != 'noresult' && $(this).attr('name') != "id"){
         if($(this).text() != ''){
             var contenido=$(this).html();
             $(this).html('');
@@ -37,14 +41,48 @@ $(document).ready(function() {
             input.select();
         }
 
-
+    }
 
     });
 
 
 
 
+/*MODIFICAR PRODUCTO (Modificar datos) - Al perder el foco del input creado anteriormente, según que contenga se guardara a la BBDD o no*/
+$(document).on('blur',"td",function(){
 
+    var atributo=$(this).attr('name');
+    var id=$(this).attr('id');
+
+    if($(this).val() == ''){
+        $(this).parent().html($(this).attr('placeholder'));
+    }else{
+        if(!comprobacionModificacion(atributo,$(this).val())){
+            $.ajax({
+                url: "/animal/listar/modificar/"+id+"/"+atributo+"/"+$(this).val(),
+                method: "GET",
+            });
+
+        }
+
+
+        $(this).parent().html($(this).val());
+    }
+
+
+
+
+
+
+
+});
+
+/*******************    QUEDAN LAS COMPROBACIONES    ********************/
+function comprobacionModificacion(atributo,valor){
+    var error=false;
+  
+    return error;
+}
 
 
 });

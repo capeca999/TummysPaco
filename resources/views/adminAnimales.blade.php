@@ -28,29 +28,30 @@
                     </tr>
                 </thead>
            
-                <tbody>
+                <tbody id="animalesAdmin">
+                
                     <tr class="warning no-result">
-                        <td colspan="12"><i class="fa fa-warning"></i>&nbsp; No Result !!!</td>
+                        <td id="noresult" colspan="12"><i class="fa fa-warning"></i>&nbsp; No Result !!!</td>
                     </tr>
           
-                    <div id="animalesAdmin">
-                    </div>
+                  
+              
                     @foreach($animales as $animal)
                     <tr>
                  
 
-                        <td>{{$animal->id}}</td>
-                        <td>{{$animal->race}}</td>
-                        <td>{{$animal->species}}</td>
-                        <td>{{$animal->gender}}</td>
-                        <td>{{$animal->date_of_birth}}</td>
-                        <td>{{$animal->description}}</td>
-                        <td>{{$animal->health}}</td>
-                        <td>{{$animal->nickname}}</td>
-                        <td>{{$animal->place_found}}</td>
-                        <td>{{$animal->size}}</td>
-                        <td>{{$animal->date_found}}</td>
-                        <td>{{$animal->condition}}</td>
+                        <td name="id">{{$animal->id}}</td>
+                        <td name="race">{{$animal->race}}</td>
+                        <td name="species">{{$animal->species}}</td>
+                        <td name="gender">{{$animal->gender}}</td>
+                        <td name="date_of_birth">{{$animal->date_of_birth}}</td>
+                        <td name="description">{{$animal->description}}</td>
+                        <td name="health">{{$animal->health}}</td>
+                        <td name="nickname">{{$animal->nickname}}</td>
+                        <td name="place_found">{{$animal->place_found}}</td>
+                        <td name="size">{{$animal->size}}</td>
+                        <td name="date_found">{{$animal->date_found}}</td>
+                        <td name="condition">{{$animal->condition}}</td>
                         <td><button class="btn btn-success" style="margin-left: 5px;" type="submit"><i class="fa fa-check" style="font-size: 15px;"></i></button><button class="btn btn-danger" style="margin-left: 5px;" type="submit"><i class="fa fa-trash" style="font-size: 15px;"></i></button></td>
                      
                     </tr>

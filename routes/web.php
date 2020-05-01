@@ -53,12 +53,12 @@ Route::get('animales/', function() {
                 });
 
 
+Route::get('/AnimalesAdmin/', 'AnimalController@getAnimalesAdmin');
+
+
 
                 
 Route::get('/preguntas/', 'PreguntasController@indexJugetesDias');
-
-
-
 Route::get('/animales/casosEspeciales/', 'ApiController@getAnimalsEspeciales');
 
     Route::get('/animales/{especie}', 'ApiController@getAnimalsSpecie');

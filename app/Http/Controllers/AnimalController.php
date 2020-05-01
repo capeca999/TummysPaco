@@ -131,7 +131,7 @@ return view('animalDetalles')->with('animales', json_decode($animales));
 }
 
 
-}
+
 
 /*
 
@@ -141,3 +141,24 @@ return Animal::select('animals.id', 'animals.race', 'animals.species','animals.d
 ->get()
 ->splice(($cantidad*$pagina), $cantidad)
 ->toJson();*/
+public  function getAnimalesAdmin(){
+    $animales = $this::getAnimalesAdminList();
+
+
+
+    return view ('adminAnimales')->with('animales', json_decode($animales));
+}
+
+
+
+public static function getAnimalesAdminList(){
+  
+  
+    return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition', 'animals.gender', 'animals.health', 'animals.size','images.url')
+    ->join('images', 'images.id_animal', '=',  'animals.id')
+    ->groupBy('animals.id')
+    ->get()
+    ->toJson();
+    }
+
+}

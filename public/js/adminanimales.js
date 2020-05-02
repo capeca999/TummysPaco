@@ -49,24 +49,31 @@ alert(cantidad);
 
 
 /*MODIFICAR PRODUCTO (Modificar datos) - Al perder el foco del input creado anteriormente, según que contenga se guardara a la BBDD o no*/
-$(document).on('blur',"td",function(){
+$(document).on('blur','#dato-anyadir',function(){
 
-    var atributo=$(this).attr('name');
-    var id=$(this).attr('id');
-
+    var atributo=$(this).parent().attr('name');
+    var id=$(this).parent().parent().attr('id');
+    var valor= $(this).val();
     if($(this).val() == ''){
         $(this).parent().html($(this).attr('placeholder'));
     }else{
-        if(!comprobacionModificacion(atributo,$(this).val())){
+        if(!comprobacionModificacion(atributo,valor)){
+            alert("hola");
+            alert(id);
+            alert("atributo " + atributo);
+            alert("valor " + valor);
             $.ajax({
-                url: "/animal/listar/modificar/"+id+"/"+atributo+"/"+$(this).val(),
+                headers: {
+                    'X-CSRF-TOKEN': $ ('meta[name="csrf-token"]').attr ('content')
+                },
+                url: "/listar/modificar/"+id+"/"+atributo+"/"+valor,
                 method: "GET",
             });
 
         }
 
 
-        $(this).parent().html($(this).val());
+        $(this).parent().html(valor);
     }
 
 
@@ -76,14 +83,34 @@ $(document).on('blur',"td",function(){
 
 
 });
-
+//id race species gender date_of_birth description nickname place_found size date_found condition
 /*******************    QUEDAN LAS COMPROBACIONES    ********************/
-function comprobacionModificacion(atributo,valor){
-    var error=false;
-  
+function comprobacionModificacion(atributo, valor) {
+    var expresionRegular = ""
+    var res = false;
+    switch (atributo) {
+        case "race":
+            expresionRegular = new RegExp("[A-Za-z]");
+            res = expresionRegular.test(valor);
+            break;
+
+        case "gender":
+            if (valor != "Macho" && valor != "Hembra") {
+                res = false;
+            } else res = true;
+            break;
+        case "Apple":
+            text = "How you like them apples?";
+            break;
+        default:
+            text = "I have never heard of that fruit...";
+    }
+
+
+    var error = false;
+
     return error;
 }
-
 
 });
 

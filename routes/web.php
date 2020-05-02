@@ -57,7 +57,8 @@ Route::get('/AnimalesAdmin/', 'AnimalController@getAnimalesAdmin');
 
 
 
-                
+         
+    Route::get('/listar/modificar/{id}/{atributo}/{valor}', 'AnimalController@modificarAnimal');       
 Route::get('/preguntas/', 'PreguntasController@indexJugetesDias');
 Route::get('/animales/casosEspeciales/', 'ApiController@getAnimalsEspeciales');
 
@@ -165,8 +166,9 @@ Route::group(['prefix' => 'producto'], function(){
     });
     Route::get('listar/mostrar/', 'ProductController@listarProductos');
 
-    Route::get('listar/modificar/{id}/{atributo}/{valor}', 'ProductController@modificarProducto');
 
+
+    
     Route::get('listar/{categoria}', 'ProductController@listarProductosCategoria');
 
 });

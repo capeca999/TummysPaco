@@ -91,7 +91,7 @@ public static function getNewerAnimals()
 {
     $animales = DB::table('animals')
     ->orderBy('date_found')
-    ->join('images', 'images.id_animal', 'animals.id')
+    ->join('images_animals', 'images_animals.id_animal', 'animals.id')
     ->groupBy('animals.id')
     ->limit(6)
     ->get();
@@ -119,8 +119,8 @@ return $animales;
 
 public static function getAnimalID($id){
 
-$animales = Animal::select('animals.id','animals.id_user','animals.race','animals.species','animals.date_of_birth','animals.description','animals.health','animals.nickname','animals.place_found','animals.size','animals.date_found','animals.condition','animals.gender', 'images.url')
-->join('images','images.id_animal','animals.id')
+$animales = Animal::select('animals.id','animals.id_user','animals.race','animals.species','animals.date_of_birth','animals.description','animals.health','animals.nickname','animals.place_found','animals.size','animals.date_found','animals.condition','animals.gender', 'images_animals.url')
+->join('images_animals','images_animals.id_animal','animals.id')
 ->where('animals.id', '=', $id)
 ->get()
 ->toJson();
@@ -152,13 +152,34 @@ public  function getAnimalesAdmin(){
 
 
 public static function getAnimalesAdminList(){
+
   
-  
-    return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition', 'animals.gender', 'animals.health', 'animals.size','images.url')
-    ->join('images', 'images.id_animal', '=',  'animals.id')
+    return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition', 'animals.gender', 'animals.health', 'animals.size','images_animals.url')
+    ->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
     ->groupBy('animals.id')
     ->get()
     ->toJson();
     }
 
+
+
+
+    /**
+     * Modifica el valor con el $valor pasado del atributo pasado con el valor $atributo del animal con ese id 
+     *
+     * @param  int $id
+     * @param  string $atributo
+     * @param  string $valor
+     *
+     * @return array Animales
+     */
+    public static function modificarAnimal($id,$atributo,$valor){
+        $animal = Animal::find($id);
+        $animal->$atributo = $valor;
+        $animal->save(); 
+    }
+
+
 }
+
+

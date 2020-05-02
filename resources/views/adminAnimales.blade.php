@@ -37,7 +37,7 @@
                   
               
                     @foreach($animales as $animal)
-                    <tr>
+                    <tr id ="{{$animal->id}}">
                  
 
                         <td name="id">{{$animal->id}}</td>

@@ -3,8 +3,6 @@ $(document).ready(function() {
 
     var cantidad = $("<td>").length
 
-alert(cantidad);
-    alert("hola");
     $(".search").keyup(function() {
         var t = $(".search").val(),
             e = ($(".results tbody").children("tr"), t.replace(/ /g, "'):containsi('"));
@@ -29,16 +27,30 @@ alert(cantidad);
 
    /*MODIFICAR PRODUCTO (Añadir input)- Al hacer doble click creara un input en el td cliqueado*/
    $(document).on( "dblclick", "td", function() {
+    var atributo=$(this).attr('name');
+    var contenido=$(this).html();
+
     if($(this).attr('id') != 'noresult' && $(this).attr('name') != "id"){
         if($(this).text() != ''){
-            var contenido=$(this).html();
+             contenido=$(this).html();
             $(this).html('');
             var input =$('<input>');
-            input.attr('type','text');
+if ($(this).attr('name')=="date_of_birth" ||  $(this).attr('name')=="date_found"){
+    input.attr('type','date');
+    input.attr('value',contenido);
+
+}
+else{
+   
+    input.attr('type','text');
+
+
+}
             input.attr('id','dato-anyadir');
             input.attr('placeholder',contenido);
             $(this).append(input);
             input.select();
+         
         }
 
     }
@@ -57,11 +69,8 @@ $(document).on('blur','#dato-anyadir',function(){
     if($(this).val() == ''){
         $(this).parent().html($(this).attr('placeholder'));
     }else{
-        if(!comprobacionModificacion(atributo,valor)){
-            alert("hola");
-            alert(id);
-            alert("atributo " + atributo);
-            alert("valor " + valor);
+        if(comprobacionModificacion(atributo,valor)){
+        
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $ ('meta[name="csrf-token"]').attr ('content')
@@ -69,11 +78,15 @@ $(document).on('blur','#dato-anyadir',function(){
                 url: "/listar/modificar/"+id+"/"+atributo+"/"+valor,
                 method: "GET",
             });
-
+            $(this).parent().html(valor);
+        }
+      
+        else{
+            $(this).parent().html($(this).attr('placeholder'));
         }
 
 
-        $(this).parent().html(valor);
+       
     }
 
 
@@ -83,33 +96,107 @@ $(document).on('blur','#dato-anyadir',function(){
 
 
 });
-//id race species gender date_of_birth description nickname place_found size date_found condition
+//id race species gender date_of_birth description nickname place_found size 
+//date_found condition
 /*******************    QUEDAN LAS COMPROBACIONES    ********************/
 function comprobacionModificacion(atributo, valor) {
+
     var expresionRegular = ""
     var res = false;
+    
     switch (atributo) {
         case "race":
             expresionRegular = new RegExp("[A-Za-z]");
             res = expresionRegular.test(valor);
             break;
-
+    
         case "gender":
             if (valor != "Macho" && valor != "Hembra") {
                 res = false;
             } else res = true;
             break;
-        case "Apple":
-            text = "How you like them apples?";
+    
+        case "date_of_birth":
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; 
+            var yyyy = today.getFullYear();
+          
+            if(mm<10) 
+            {
+                mm='0'+mm;
+            } 
+        
+            valor = parseInt(valor.split("-").reverse().join(''));
+            today=dd+mm+yyyy;
+            alert("today" + today + "valor " + valor);
+
+            if (valor > today) {
+                alert("valor mas que hoy");
+                res = false;
+            } else res = true;
+
+
             break;
+    
+        case "description":
+            
+            expresionRegular = new RegExp("[A-Za-z]");
+            res = expresionRegular.test(valor);
+            break;
+    
+    
+        case "nickname":
+            expresionRegular = new RegExp("[A-Za-z]");
+            res = expresionRegular.test(valor);
+            break;
+    
+    
+        case "place_found":
+            expresionRegular = new RegExp("[^A-Za-z0-9]+");
+            res = expresionRegular.test(valor);
+            break;
+    
+        case "size":
+            expresionRegular = new RegExp("[^A-Za-z0-9]+");
+            res = expresionRegular.test(valor);
+            break;
+    
+        case "date_found":
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; 
+            var yyyy = today.getFullYear();
+          
+            if(mm<10) 
+            {
+                mm='0'+mm;
+            } 
+        
+            valor = parseInt(valor.split("-").reverse().join(''));
+            today=dd+mm+yyyy;
+            alert("today" + today + "valor " + valor);
+
+            if (valor > today) {
+                alert("valor mas que hoy");
+                res = false;
+            } else res = true;
+
+
+            break;
+    
+        case "condition":
+            expresionRegular = new RegExp("[^A-Za-z0-9]+");
+            res = expresionRegular.test(valor);
+            break;
+    
+    
         default:
-            text = "I have never heard of that fruit...";
+            res = false;
     }
 
-
-    var error = false;
-
-    return error;
+ 
+    return res;
 }
 
 });

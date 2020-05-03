@@ -121,21 +121,27 @@ function comprobacionModificacion(atributo, valor) {
             var dd = today.getDate();
             var mm = today.getMonth()+1; 
             var yyyy = today.getFullYear();
-          
             if(mm<10) 
             {
                 mm='0'+mm;
             } 
-        
-            valor = parseInt(valor.split("-").reverse().join(''));
-            today=dd+mm+yyyy;
-            alert("today" + today + "valor " + valor);
+            valor = valor.split("-");
 
-            if (valor > today) {
-                alert("valor mas que hoy");
-                res = false;
-            } else res = true;
 
+
+            if(parseInt(valor[0])>yyyy){
+                res=false;
+            }
+            else if(parseInt(valor[1])>mm){
+                res=false;
+            }
+            else if (parseInt(valor[2])>dd){
+                res=false;
+            }   else res=true;
+
+          
+ 
+      alert(res);
 
             break;
     
@@ -167,20 +173,23 @@ function comprobacionModificacion(atributo, valor) {
             var dd = today.getDate();
             var mm = today.getMonth()+1; 
             var yyyy = today.getFullYear();
-          
             if(mm<10) 
             {
                 mm='0'+mm;
             } 
-        
-            valor = parseInt(valor.split("-").reverse().join(''));
-            today=dd+mm+yyyy;
-            alert("today" + today + "valor " + valor);
+            valor = valor.split("-");
 
-            if (valor > today) {
-                alert("valor mas que hoy");
-                res = false;
-            } else res = true;
+
+
+            if(parseInt(valor[0])>yyyy){
+                res=false;
+            }
+            else if(parseInt(valor[1])>mm){
+                res=false;
+            }
+            else if (parseInt(valor[2])>dd){
+                res=false;
+            }   else res=true;
 
 
             break;

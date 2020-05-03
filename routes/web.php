@@ -13,6 +13,21 @@
 |
 */
 
+
+ 
+Route::get('registro/', function () {
+    return view('auth.register');
+});
+
+
+
+Route::get('login/', function () {
+    return view('auth.login');
+});
+
+Route::get('/home','PrincipalController@index' );
+Route::get('/', 'PrincipalController@index');
+
 Route::get('animales/', function() {
     return view('animalesCategorias');
     });
@@ -20,8 +35,7 @@ Route::get('animales/', function() {
         return view('contacto');
         });
     
-        
-    
+ 
 
     Route::get('/politicaPrivacidad/', function() {
         return view('politicaDePrivacidad');
@@ -53,7 +67,9 @@ Route::get('animales/', function() {
                 });
 
 
-Route::get('/AnimalesAdmin/', 'AnimalController@getAnimalesAdmin');
+                Route::get('/AnimalesAdmin/', 'AnimalController@getAnimalesAdmin');
+
+                Route::get('/UsuariosAdmin/', 'UserController@getUsuariosAdmin');
 
 
 
@@ -66,8 +82,6 @@ Route::get('/animales/casosEspeciales/', 'ApiController@getAnimalsEspeciales');
 
 Route::get('/animal/{id}', 'AnimalController@getAnimalID');
 
-Route::get('/home','PrincipalController@index' );
-Route::get('/', 'PrincipalController@index');
 Auth::routes();
 Route::get('/productos/busqueda', 'ApiController@indexToysGenerico');
 Route::get('/productos/busqueda/{nombre}/{pagina?}', 'ApiController@indexToysName');
@@ -103,16 +117,7 @@ Route::group(['prefix' => 'usuario'], function(){
     Route::get('listar/historial/fecha/{nif}/{fecha}', 'UserController@historialFecha');
 
     
-    
-    Route::get('registro/', function () {
-        return view('auth.register');
-    });
-
-
-
-    Route::get('login/', function () {
-        return view('auth.login');
-    });
+   
 
     //LISTAR USUARIOS
     Route::get('listar/', function () {

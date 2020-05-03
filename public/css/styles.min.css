@@ -71,7 +71,11 @@
 
 
 
-
+.iconos{
+    width: 2.0em;
+    height: 2.3em;
+    cursor:pointer;
+}
 
 
 

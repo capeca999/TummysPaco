@@ -96,9 +96,6 @@ $(document).on('blur','#dato-anyadir',function(){
 
 
 });
-//id race species gender date_of_birth description nickname place_found size 
-//date_found condition
-/*******************    QUEDAN LAS COMPROBACIONES    ********************/
 function comprobacionModificacion(atributo, valor) {
 
     var expresionRegular = ""
@@ -139,9 +136,7 @@ function comprobacionModificacion(atributo, valor) {
                 res=false;
             }   else res=true;
 
-          
- 
-      alert(res);
+    
 
             break;
     

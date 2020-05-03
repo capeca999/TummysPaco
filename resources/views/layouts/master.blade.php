@@ -31,13 +31,33 @@
 <body>
     <nav class="navbar navbar-light navbar-expand-md custom-header">
         <div class="container-fluid">
-            <div><a class="navbar-brand" href="/"><img style="width: 120px;" src ="/img/Casa.png"><span>  <img style="width: 120px;" src ="/img/Nombre.png"></span></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button></div>
+            <div><a class="navbar-brand" href="{{url('/')}}"><img style="width: 120px;" src ="/img/Casa.png"><span>  <img style="width: 120px;" src ="/img/Nombre.png"></span></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button></div>
             <div class="collapse navbar-collapse"
                 id="navbar-collapse">
                 <ul class="nav navbar-nav links">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/animales/">Animales En Adopción</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/animales/casosEspeciales">Casos Especiales</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/preguntas/"> Preguntas Y Respuestas</a></li>
+
+                    @if(Auth::user()==null)
+                    <a href="{{url('/login/')}}"><img class="cursorHand iconos ml-3" src="/img/icons/login.svg" id="loginHeader" alt="Login" title="Login"></a>
+                
+                <a href="{{url('/register/')}}"><img class="cursorHand iconos ml-5" src="/img/icons/register.svg" id="registerHeader" alt="Registrarse" title="Registrarse"></a>
+                    @endif
+
+
+                    @if(Auth::user()!=null)
+{{Auth::user()->role=='Administrador'}}
+<a href="{{url('/AnimalesAdmin')}}"><img class="cursorHand iconos ml-5" src="/img/icons/listaranimales.png" id="lista2Header" alt="listaranimales" title="listaranimales"></a>     
+<a href="{{url('/UsuariosAdmin')}}"><img class="cursorHand iconos ml-5" src="/img/icons/listarusuarios.png" id="lista2Header" alt="listarusuarios" title="listarusuarios"></a>         
+
+
+                    <a href="{{ route('logout') }}" id="logout"><img class="cursorHand iconos ml-3" src="/img/icons/logout.svg" id="logoutHeader" alt="Logout" title="Logout"></a>
+                       
+                       <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                           {{ csrf_field() }}
+                       </form>
+                    @endif
                     <li class="nav-item" role="presentation"></li>
                 </ul>
                 <ul class="nav navbar-nav ml-auto">

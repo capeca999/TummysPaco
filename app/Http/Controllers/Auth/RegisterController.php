@@ -57,8 +57,8 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'nif' => ['required', 'string', 'min:8', 'regex:/^[0-9]+$/',  'max:8', 'unique:users'],
             'date_of_birth' =>['required', 'date'],
-            'surname1' =>['nullable',  'string', 'min:2'],
-            'surname2' =>['nullable',  'string', 'min:2'],
+            'first_name' =>['nullable',  'string', 'min:2'],
+            'last_name' =>['nullable',  'string', 'min:2'],
             'captcha' => 'required|captcha'
         ]);
     }
@@ -73,13 +73,13 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
             'nif' => $data['nif'] . self::LetraNIF($data['nif']),
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),           
             'date_of_birth' => $data['date_of_birth'],
             'role' => "Usuario",
-            'surname1' =>$data['surname1'],
-            'surname2' =>$data['surname2'],
+            'first_name' =>$data['first_name'],
+            'last_name' =>$data['last_name'],
         ]);
     }
 }

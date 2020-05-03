@@ -166,4 +166,32 @@ class UserController extends Controller
             ->get();
     */
 
+
+
+    public  function getUsuariosAdmin(){
+        $usuarios = $this::getUsuariosAdminList();
+        return view ('adminUsuarios')->with('usuarios', json_decode($usuarios));
+    }
+    
+    
+    
+    public static function getUsuariosAdminList(){
+
+        $usuarios = User::all();
+         return json_encode($usuarios);
+
+      /*
+        return User::select('users.id', 'users.nif', 'users.role','users.name',
+        'users.first_name','users.last_name', 'users.image', 'users.password', 'users.date_birth', 'users.email', 'users.province',
+         'users.location','users.telephone_number')
+        ->groupBy('users.id')
+        ->get()
+        ->toJson();
+        }
+    
+    */
+
+
+
+}
 }

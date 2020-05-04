@@ -1,7 +1,124 @@
 
+.container {
+    max-width: 960px;
+  }
+  
+  .border-top { border-top: 1px solid #e5e5e5; }
+  .border-bottom { border-bottom: 1px solid #e5e5e5; }
+  .border-top-gray { border-top-color: #adb5bd; }
+  
+  .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+  
+  .lh-condensed { line-height: 1.25; }
+  
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+.button {
+    width: 100%;
+	display: inline-block;
+	position: relative;
+	margin: 1em;
+	padding: 10px 30px;
+	border: 2px solid #cc8f52;
+	overflow: hidden;
+	text-decoration: none;
+	font-size: 14px;
+	outline: 0;
+	color: #cc8f52;
+	background: 0 0;
+	font-family: 'Titillium Web', sans-serif;
+	font-weight: 700
+}
+
+.button span {
+
+	transition: .4s
+}
+
+.button:after,
+.button:before {
+	content: '';
+	position: absolute;
+	top: 10px;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	opacity: 0;
+
+	transition: .4s
+}
+
+.button:before {
+	content: attr(data-hover);
+
+	transform: .4s
+}
+
+.button:active span,
+.button:hover span {
+	opacity: 0;
+
+	transform: .4s
+}
+
+.button:active:after,
+.button:hover:before {
+	opacity: 1;
+
+	transform: .4s;
+
+	transition-delay: .4s
+}
+
+.button:active:before {
+
+	transform: .4s;
+	
+	transition-delay: 0s
+}
+
+.iconoUsuariosAdmin{
+    width: 20px;
+    height: 20px;
+}
+
+
+#top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+ 
+  }
+
+.beautiful.alert {
+	border-width: 1px;
+	background-image: none;
+	border-color: transparent;
+	border-radius: 0;
+	box-shadow: none
+}
+
+.alert.alert-warning.beautiful {
+	background-color: #f9e491;
+	border-color: #f9e491;
+	color: #c29d0b
+}
 
 #trs-hd,
 .bill-header,

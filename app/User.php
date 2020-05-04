@@ -14,7 +14,7 @@ class User extends Authenticatable{
      * @var array
      */
     protected $hidden = [
-        'remember_token',
+        'password', 'remember_token',
     ];
 
     /**
@@ -27,5 +27,5 @@ class User extends Authenticatable{
     ];
 
 
-    protected $primaryKey = 'nif';
+    protected $primaryKey = 'id';
 }

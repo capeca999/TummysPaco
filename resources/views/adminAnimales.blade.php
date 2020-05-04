@@ -4,7 +4,7 @@
 @section('titulo')
     - Admin Animales
 @endsection
-@section('contenido')      
+@section('contenido')    
     <div class="col-md-12 search-table-col">
         <div class="form-group pull-right col-lg-4"><input type="text" class="search form-control" placeholder="Search by typing here.."></div><span class="counter pull-right"></span>
         <div class="table-responsive table-bordered table table-hover table-bordered results">
@@ -63,6 +63,7 @@
         
         </div>
     </div>
+ 
     <script src="/js/adminanimales.js"></script>
-
+  
     @endsection

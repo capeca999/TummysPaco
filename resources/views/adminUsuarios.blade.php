@@ -5,7 +5,7 @@
     - Admin Usuarios
 @endsection
 @section('contenido')      
-    <div class="col-md-12 search-table-col">
+    <div id="diventero" class="col-md-12 search-table-col">
         <div class="form-group pull-right col-lg-4"><input type="text" class="search form-control" placeholder="Search by typing here.."></div><span class="counter pull-right"></span>
         <div class="table-responsive table-bordered table table-hover table-bordered results">
      
@@ -18,8 +18,7 @@
                         <th id="trs-hd" class="col-lg-1">Name</th>
                         <th id="trs-hd" class="col-lg-1">First_Name</th>
                         <th id="trs-hd" class="col-lg-1">Last_Name</th>
-                        <th id="trs-hd" class="col-lg-1">Image</th>
-                        <th id="trs-hd" class="col-lg-1">Password</th>
+                        <th id="trs-hd" class="col-lg-2">Image</th>
                         <th id="trs-hd" class="col-lg-1">Date_Birth</th>
                         <th id="trs-hd" class="col-lg-1">Email</th>
                         <th id="trs-hd" class="col-lg-1">Province</th>
@@ -47,8 +46,20 @@
                         <td name="name">{{$usuario->name}}</td>
                         <td name="first_name">{{$usuario->first_name}}</td>
                         <td name="last_name">{{$usuario->last_name}}</td>
-                        <td name="image">{{$usuario->image}}</td>
-                        <td name="password">{{$usuario->password}}</td>
+
+
+                        <td name="image">
+                            
+                        
+@if($usuario->image=="")
+<img src="/img/avatar.png" class="iconoUsuariosAdmin">
+@else
+<img src="{{$usuario->image}}" class="iconoUsuariosAdmin">
+@endif
+
+
+
+                    </td>
                         <td name="date_birth">{{$usuario->date_birth}}</td>
                         <td name="email">{{$usuario->email}}</td>
                         <td name="province">{{$usuario->province}}</td>
@@ -66,6 +77,6 @@
         
         </div>
     </div>
-    <script src="/js/adminanimales.js"></script>
+    <script src="/js/adminusuarios.js"></script>
 
     @endsection

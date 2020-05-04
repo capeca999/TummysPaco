@@ -75,7 +75,7 @@ $(document).on('blur','#dato-anyadir',function(){
                 headers: {
                     'X-CSRF-TOKEN': $ ('meta[name="csrf-token"]').attr ('content')
                 },
-                url: "/listar/modificar/"+id+"/"+atributo+"/"+valor,
+                url: "/listar/modificarAnimal/"+id+"/"+atributo+"/"+valor,
                 method: "GET",
             });
             $(this).parent().html(valor);

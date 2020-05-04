@@ -14,11 +14,19 @@
 */
 
 
- 
+
+
+Route::get('/paginaComprar/', function() {
+    return view('Checkout');
+    });
+    
+   
+
 Route::get('registro/', function () {
     return view('auth.register');
 });
-
+Route::get('/listar/modificarUsuario/{id}/{atributo}/{valor}', 'UserController@modificarUsuario');    
+Route::get('/listar/modificarAnimal/{id}/{atributo}/{valor}', 'AnimalController@modificarAnimal');       
 
 
 Route::get('login/', function () {
@@ -51,10 +59,6 @@ Route::get('animales/', function() {
         });
 
 
-        Route::get('/condicionesAdoptar/', function() {
-            return view('condicionesAdoptar');
-            });
-    
     
 
         Route::get('/aboutUs/', function() {
@@ -74,8 +78,11 @@ Route::get('animales/', function() {
 
 
          
-    Route::get('/listar/modificar/{id}/{atributo}/{valor}', 'AnimalController@modificarAnimal');       
-Route::get('/preguntas/', 'PreguntasController@indexJugetesDias');
+   
+                
+
+
+                Route::get('/preguntas/', 'PreguntasController@indexJugetesDias');
 Route::get('/animales/casosEspeciales/', 'ApiController@getAnimalsEspeciales');
 
     Route::get('/animales/{especie}', 'ApiController@getAnimalsSpecie');

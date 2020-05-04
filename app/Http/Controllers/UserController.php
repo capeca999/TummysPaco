@@ -10,6 +10,7 @@ use Auth;
 use App\Order;
 use App\Line;
 use App\Product;
+use DB;
 
 
 class UserController extends Controller
@@ -103,6 +104,27 @@ class UserController extends Controller
         return json_encode($usuarios);
     }
 
+    
+    /**
+     * Modifica el valor con el $valor pasado del atributo pasado con el valor $atributo del usuario con ese id 
+     *
+     * @param  int $id
+     * @param  string $atributo
+     * @param  string $valor
+     *
+     * @return array usuario
+     */
+    public static function modificarUsuario($id,$atributo,$valor){
+        echo $id;
+        $usuario = User::find($id);
+        $usuario->$atributo = $valor;
+        $usuario->save(); 
+
+
+
+    }
+
+
     public static function historialUsuario(){
         $historiales = User::select('lines.id_order','orders.payment_methods','orders.total_price','products.price','orders.date','lines.quantity','products.name')
             ->join('orders','users.nif','=','orders.nif')
@@ -194,4 +216,7 @@ class UserController extends Controller
 
 
 }
+
+
+
 }

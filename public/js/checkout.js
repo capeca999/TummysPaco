@@ -32,8 +32,6 @@ var preciototal=0;
 
 
 for(property in compras){
-  console.log(compras.length);
-
 if(compras[property]!="" && compras[property]!=undefined && compras[property]!=null && compras[property]!=0 && compras[property]!="0"){
  parseInt(property)
 $.ajax({
@@ -47,7 +45,7 @@ $.ajax({
   var titulo =$("<h6>"+response[0].name+ "</h6>").attr("class", "my-0").appendTo(div);
   var descripcion = $("<small>"+response[0].description+"</small>").attr("class", "text-muted").appendTo(div);
   var spanPrecio = $("<span>"+response[0].price+"€"+"</span>").attr("class", "text-muted").appendTo(li);
-  
+  $("#cantidadProductos").text=parseInt($("#cantidadProductos").text+1);
 preciototal=preciototal+parseInt(response[0].price);
 if($("#liprecioid").length==0){
 
@@ -80,11 +78,12 @@ $("#submitid").click(function (e) {
       url:  '/api/productosCupon/'+$("#promocodeinput").val()
     })
     .done(function(response){
-      if($("#lidescuento").length==1){
-     let cantidaddescuento= $("#cantidaddescuento").text();
-    cantidaddescuento=cantidaddescuento.substr(2);
-    cantidaddescuento=cantidaddescuento.substr(0, cantidaddescuento.length -2);
-        $("#preciototalnumero").text(parseInt($("#preciototalnumero").text())+parseInt(cantidaddescuento));
+if(response.length!=0){
+  if($("#lidescuento").length==1){
+    let cantidaddescuento= $("#cantidaddescuento").text();
+   cantidaddescuento=cantidaddescuento.substr(2);
+   cantidaddescuento=cantidaddescuento.substr(0, cantidaddescuento.length -2);
+       $("#preciototalnumero").text(parseInt($("#preciototalnumero").text())+parseInt(cantidaddescuento));
 $("#lidescuento").remove();
 let lidescuento=$("<li>").attr("class", "list-group-item d-flex justify-content-between bg-light").attr("id", "lidescuento").appendTo($("#productosComprando"));
 let textsucces=$("<div>").attr("class", "text-success").appendTo(lidescuento);
@@ -93,15 +92,19 @@ let codigopromocional =$("<small>"+response[0].codigo + "<small>").appendTo(text
 let spandescuento = $("<span> -"+ response[0].descuento+" € </span>").attr("class", "text-success").attr("id", "cantidaddescuento").appendTo(textsucces);
 $("#preciototalnumero").text(parseInt($("#preciototalnumero").text())-parseInt(response[0].descuento));
 }
-      else{
-        let lidescuento=$("<li>").attr("class", "list-group-item d-flex justify-content-between bg-light").attr("id", "lidescuento").appendTo($("#productosComprando"));
-        let textsucces=$("<div>").attr("class", "text-success").appendTo(lidescuento);
-        let codigo= $("<h6>Codigo Promocional</h6>").attr("class", "my-0").appendTo(textsucces);
-        let codigopromocional =$("<small>"+response[0].codigo + "<small>").appendTo(textsucces);
-        let spandescuento = $("<span> -"+ response[0].descuento+"€ </span>").attr("class", "text-success").attr("id", "cantidaddescuento").appendTo(textsucces);
-        $("#preciototalnumero").text(parseInt($("#preciototalnumero").text())-parseInt(response[0].descuento));
+     else{
+       let lidescuento=$("<li>").attr("class", "list-group-item d-flex justify-content-between bg-light").attr("id", "lidescuento").appendTo($("#productosComprando"));
+       let textsucces=$("<div>").attr("class", "text-success").appendTo(lidescuento);
+       let codigo= $("<h6>Codigo Promocional</h6>").attr("class", "my-0").appendTo(textsucces);
+       let codigopromocional =$("<small>"+response[0].codigo + "<small>").appendTo(textsucces);
+       let spandescuento = $("<span> -"+ response[0].descuento+"€ </span>").attr("class", "text-success").attr("id", "cantidaddescuento").appendTo(textsucces);
+       $("#preciototalnumero").text(parseInt($("#preciototalnumero").text())-parseInt(response[0].descuento));
 
-      }
+     }
+
+}
+// false){
+
 
 
 

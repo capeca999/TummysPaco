@@ -14,7 +14,7 @@
         <div class="col-md-4 order-md-2 mb-4">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">Tus Donaciones</span>
-            <span class="badge badge-secondary badge-pill">3</span>
+            <span id="cantidadProductos" class="badge badge-secondary badge-pill">0</span>
           </h4>
 
           <ul  id="productosComprando" class="list-group mb-3">

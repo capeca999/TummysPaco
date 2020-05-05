@@ -1,44 +1,17 @@
 //Cargamos la página completamente antes de empezar
 $(function(){
 
-
-$("#giftaza").hover(function(){
+/*
+$("img").attr("").hover(function(){
 $(this).attr("src", "/img/products/TazaTummys/gif2.gif");
 });
 
 
-$("#giftaza").mouseout(function(){
+$("#1").mouseout(function(){
     $(this).attr("src", "/img/products/TazaTummys/taza.jpg");
     });
-    
-    $("#blancoLargo").click(function(){
-        $("#camisetaLarga").attr("src", "/img/products/camisetaBlancaTummys/1.jpg");
-        });
-    
-        $("#grisLargo").click(function(){
-            $("#camisetaLarga").attr("src", "/img/products/camisetaGrisTummys/1.jpg");
-            });
-        
-        
-            
-            $("#negroLargo").click(function(){
-                $("#camisetaLarga").attr("src", "/img/products/camisetaNegraTummys/1.jpg");
-                });
-            
-
-
-                $("#blancoCorto").click(function(){
-                    $("#camisetaCorta").attr("src", "/img/products/camisetaCortaBlancaTummys/1.jpg");
-                    });  
-
-                    $("#moradoCorto").click(function(){
-                        $("#camisetaCorta").attr("src", "/img/products/camisetaMoradaCortaTummys/1.jpg");
-                        });  
-
-
-                        $("#negroCorto").click(function(){
-                            $("#camisetaCorta").attr("src", "/img/products/camisetaNegraCortaTummys/1.jpg");
-                            });  
+  */  
+  
 
                             (function ($) {
                                 $.fn.serializeFormJSON = function () {
@@ -61,11 +34,13 @@ $("#giftaza").mouseout(function(){
 
 
                             $('#formDonar').submit(function (e) {
+                           
                                 e.preventDefault();
                                 var data = $(this).serializeFormJSON();
                                 
                                 window.localStorage.setItem('checkout', JSON.stringify(data));
                                 window.location.href = "/paginaComprar/";
+                             
                             });
 
 });

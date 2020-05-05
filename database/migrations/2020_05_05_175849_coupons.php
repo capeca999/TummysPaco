@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Lines extends Migration
+class Coupons extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class Lines extends Migration
      */
     public function up()
     {
-        Schema::create('lines', function (Blueprint $table) {
-            $table->bigInteger('id_order')->unsigned();
-            $table->bigInteger('id_product')->unsigned();
-            $table->double('price');
-            $table->integer('quantity');
-            $table->primary(['id_product', 'id_order']);
+        Schema::create('coupons', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('codigo');
+            $table->integer('descuento');
             $table->timestamps();
         });
     }
@@ -30,7 +28,6 @@ class Lines extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lines');
-
+        Schema::dropIfExists('coupons');
     }
 }

@@ -18,6 +18,9 @@ class Orders extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('id_user')->unsigned();
             $table->date('date_order');
+            $table->bigInteger('coupon_id')->unsigned();
+            $table->integer('descuento');
+            $table->double('total_price',8,2);
             $table->timestamps();
         });
 

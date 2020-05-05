@@ -14,13 +14,15 @@
 */
 
 
+    Route::get('/donarProductos/', 'ProductController@getProductosAgrupados');    
 
 
 Route::get('/paginaComprar/', function() {
     return view('Checkout');
     });
     
-   
+
+
 
 Route::get('registro/', function () {
     return view('auth.register');
@@ -49,10 +51,7 @@ Route::get('animales/', function() {
         return view('politicaDePrivacidad');
         });
     
-        Route::get('/donarProductos/', function() {
-            return view('donarProductos');
-            });
-        
+      
         
     Route::get('/condicionesAdoptar/', function() {
         return view('condicionesAdoptar');

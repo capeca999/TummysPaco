@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Animal;
+use App\Coupon;
 use DB;
 
 class ApiController extends Controller
@@ -19,6 +20,22 @@ class ApiController extends Controller
 
 */
 
+public static function getProductById($id){
+    return Product::select ('products.id', 'products.price', 'products.stock', 'products.name', 'products.description', 'products.description')
+    ->where('products.id', 'like', $id)
+    ->get()
+    ->toJson();
+    }
+
+
+
+
+    public static function getCouponById($id){
+        return Coupon::select ('coupons.id', 'coupons.codigo', 'coupons.descuento')
+        ->where('coupons.codigo', '=', $id)
+        ->get()
+        ->toJson();
+        }
 
 
 public function getAnimalsSpecie($especie){
@@ -97,6 +114,8 @@ else{
 ->toJson();
 }
 }
+
+
 
 
 

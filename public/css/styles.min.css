@@ -1,4 +1,17 @@
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 .container {
     max-width: 960px;
   }
@@ -10,21 +23,6 @@
   .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
   
   .lh-condensed { line-height: 1.25; }
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 .button {
@@ -1621,7 +1619,6 @@ body {
     }
     
     div.avatar-bg {
-    background:url(https://www.gravatar.com/avatar/1234566?size=200&d=mm) 50% 50%;
     height:200px;
     width:200px;
     background-size:cover;

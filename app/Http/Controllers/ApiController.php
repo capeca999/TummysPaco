@@ -9,6 +9,10 @@ use App\Product;
 use App\Animal;
 use App\Coupon;
 use DB;
+use App\User;
+use Auth;
+use App\Order;
+use App\Line;
 
 class ApiController extends Controller
 {
@@ -182,6 +186,24 @@ public static function  getToys($pagina, $cantidad=21 ){
     public static function  getAllCategory(){
         return Category::all();
     }
+
+
+
+
+
+
+    public static function historialUsuarioPedidos(){
+  
+        $historiales = User::select('lines.id_order','orders.payment_methods','orders.total_price','products.price','orders.date_order','lines.quantity','products.name')
+            ->join('orders','users.id','=','orders.id_user')
+            ->join('lines','orders.id','=','lines.id_order')
+            ->join('products','lines.id_product','=','products.id')
+            ->where('orders.id',Auth::user()->id)
+            ->get();
+        return $historiales;
+    }
+
+
 
 
     //

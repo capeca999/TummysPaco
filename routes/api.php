@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::middleware('auth:api')->get('/productos/{id?}', 'ApiController@getProductById');
+
+
+//Route::middleware('auth:api')->get('/usuarios/perfil/getHistorial/{id?}', 'ApiController@getHistorialUsuario');
+
 
 
 Route::get('/productos/{id?}', 'ApiController@getProductById');

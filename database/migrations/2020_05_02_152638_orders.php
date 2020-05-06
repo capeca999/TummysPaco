@@ -21,6 +21,8 @@ class Orders extends Migration
             $table->bigInteger('coupon_id')->unsigned();
             $table->integer('descuento');
             $table->double('total_price',8,2);
+            $table->enum('payment_method', ['Credit card', 'Debit Card', 'Paypal']);
+
             $table->timestamps();
         });
 

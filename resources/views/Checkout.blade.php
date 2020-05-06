@@ -18,16 +18,6 @@
           </h4>
 
           <ul  id="productosComprando" class="list-group mb-3">
-          
-
-          
-     
-
-
-
-
-
-
           </ul>
 
             <div class="input-group">
@@ -189,5 +179,5 @@
       
     </div>
     <script src="/js/checkout.js"></script>
-
+ 
     @endsection

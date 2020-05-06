@@ -125,12 +125,16 @@ class UserController extends Controller
     }
 
 
-    public static function historialUsuario(){
-        $historiales = User::select('lines.id_order','orders.payment_methods','orders.total_price','products.price','orders.date','lines.quantity','products.name')
-            ->join('orders','users.nif','=','orders.nif')
+    public static function historialUsuarioPedidos(){
+        echo "<pre>";
+        echo "hola";
+        echo "</pre>";
+die;
+        $historiales = User::select('lines.id_order','orders.payment_methods','orders.total_price','products.price','orders.date_order','lines.quantity','products.name')
+            ->join('orders','users.id','=','orders.id_user')
             ->join('lines','orders.id','=','lines.id_order')
             ->join('products','lines.id_product','=','products.id')
-            ->where('orders.nif',Auth::user()->nif)
+            ->where('orders.id',Auth::user()->id)
             ->get();
         return $historiales;
     }
@@ -195,7 +199,19 @@ class UserController extends Controller
         return view ('adminUsuarios')->with('usuarios', json_decode($usuarios));
     }
     
-    
+    public static function getperfil(){
+        $historiales = User::select('lines.id_order','orders.payment_methods','orders.total_price',
+        'products.price','orders.date_order','lines.quantity','products.name')
+        ->join('orders','users.id','=','orders.id_user')
+        ->join('lines','orders.id','=','lines.id_order')
+        ->join('products','lines.id_product','=','products.id')
+        ->where('orders.id_user', '=' , Auth::user()->id)
+        ->get()
+        ->toJson();
+
+        return view ('perfil')->with('historiales', json_decode($historiales));
+    }
+
     
     public static function getUsuariosAdminList(){
 

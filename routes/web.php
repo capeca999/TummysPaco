@@ -21,9 +21,9 @@ Route::get('/paginaComprar/', function() {
     return view('Checkout');
     });
     
+    Route::middleware('auth')->get('/usuario/perfil', 'UserController@getperfil');
 
-
-
+   
 Route::get('registro/', function () {
     return view('auth.register');
 });
@@ -97,7 +97,6 @@ Route::get('/productos/busqueda/{nombre}/{pagina?}', 'ApiController@indexToysNam
 Route::get('watermark-image', 'WaterMarkController@imageWatermark');
 Route::get('watermark-text', 'WaterMarkController@textWatermark');
 
-Route::middleware('auth')->get('/usuario/perfil', 'UserController@perfilUsuario');
 Route::get('cesta/pagar','pagoController@getMetodos');
 /*
 |--------------------------------------------------------------------------
@@ -149,9 +148,7 @@ Route::get('/politicaDePrivacidad/',function(){
     return view('politicaDePrivacidad');
 });
     
-Route::get('cesta/',function(){	
-    return view('cesta');	   
-}); 	
+
                               
 
 
@@ -184,6 +181,3 @@ Route::group(['prefix' => 'producto'], function(){
 
 });
 
-Route::get('cesta/',function(){
-    return view('cesta');
-});

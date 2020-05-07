@@ -126,10 +126,6 @@ class UserController extends Controller
 
 
     public static function historialUsuarioPedidos(){
-        echo "<pre>";
-        echo "hola";
-        echo "</pre>";
-die;
         $historiales = User::select('lines.id_order','orders.payment_methods','orders.total_price','products.price','orders.date_order','lines.quantity','products.name')
             ->join('orders','users.id','=','orders.id_user')
             ->join('lines','orders.id','=','lines.id_order')
@@ -206,6 +202,7 @@ die;
         ->join('lines','orders.id','=','lines.id_order')
         ->join('products','lines.id_product','=','products.id')
         ->where('orders.id_user', '=' , Auth::user()->id)
+        ->orderBy('id_order')
         ->get()
         ->toJson();
 

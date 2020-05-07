@@ -23,7 +23,9 @@ Route::get('/paginaComprar/', function() {
     
     Route::middleware('auth')->get('/usuario/perfil', 'UserController@getperfil');
 
-   
+    Route::middleware('auth')->get('/animales/formularioAdoptar/{id}', 'AnimalController@getAnimalIDFormulario');
+        
+
 Route::get('registro/', function () {
     return view('auth.register');
 });
@@ -69,18 +71,8 @@ Route::get('animales/', function() {
                 return view('faq');
                 });
 
-
                 Route::get('/AnimalesAdmin/', 'AnimalController@getAnimalesAdmin');
-
                 Route::get('/UsuariosAdmin/', 'UserController@getUsuariosAdmin');
-
-
-
-         
-   
-                
-
-
                 Route::get('/preguntas/', 'PreguntasController@indexJugetesDias');
 Route::get('/animales/casosEspeciales/', 'ApiController@getAnimalsEspeciales');
 

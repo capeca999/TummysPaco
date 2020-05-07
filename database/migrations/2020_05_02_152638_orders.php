@@ -22,7 +22,12 @@ class Orders extends Migration
             $table->integer('descuento');
             $table->double('total_price',8,2);
             $table->enum('payment_method', ['Credit card', 'Debit Card', 'Paypal']);
-
+            $table->date('expected_arrival');
+            $table->enum('status', ['Order
+            Processed', 'Order
+            Shipped', 'Order
+            En Route', 'Order Arrived']);
+            $table->string('USPS');
             $table->timestamps();
         });
 

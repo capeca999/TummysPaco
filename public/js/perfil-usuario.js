@@ -41,6 +41,17 @@ $(function(){
 
     }
 
+/*
+
+array(1) { [0]=> object(stdClass)#344 (7) 
+    { ["id_order"]=> int(2) ["payment_methods"]=>
+     string(11) "Credit Card" ["total_price"]=>
+      int(20) ["price"]=> int(10) ["date_order"]=> 
+      string(10) "2020-05-06" ["quantity"]=> int(1)
+       ["name"]=> string(17) "Taza Tummys White" } }
+ORDER 
+
+*/
 
 
     //DOBLE CLICK en los SPAN PERFIL: Al hacer doble click sobre un span, vaciaremos el 'span' y crearemos un input
@@ -56,7 +67,21 @@ $(function(){
             input.val(valor);
             console.log(valor);
             input.attr('placeholder',valor);
-        }else{
+        }
+        else if($(this).attr('id')=='telefono'){
+            input.attr('type', 'tel');
+            input.val(valor);
+            input.attr('placeholder',valor);
+            input.attr('pattern', "^[9|8|7|6]\d{8}$");
+        }
+        
+        /*
+<input type="tel" id="phone" name="phone"
+       pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+       required>
+
+        */
+        else{
             input.attr('type','text');
             input.attr('placeholder',valor);
         }

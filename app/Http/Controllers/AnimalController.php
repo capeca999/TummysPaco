@@ -131,7 +131,20 @@ return view('animalDetalles')->with('animales', json_decode($animales));
 }
 
 
+public static function getAnimalIDFormulario($id){
 
+    $animales = Animal::select('animals.id','animals.id_user','animals.race','animals.species','animals.date_of_birth','animals.description','animals.health','animals.nickname','animals.place_found','animals.size','animals.date_found','animals.condition','animals.gender', 'images_animals.url')
+    ->join('images_animals','images_animals.id_animal','animals.id')
+    ->where('animals.id', '=', $id)
+    ->get()
+    ->toJson();
+    
+    
+    return view('formularioAdoptar')->with('animales', json_decode($animales));
+    
+    }
+    
+    
 
 /*
 

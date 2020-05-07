@@ -42,6 +42,7 @@ if ($(this).attr('name')=="date_birth"){
     input.attr('value',contenido);
 }
 
+
 else if ($(this).attr('name')=="image"){
     input.attr('type','file');
     input.attr('value',contenido);
@@ -122,10 +123,13 @@ function comprobacionModificacion(atributo, valor) {
             res = expresionRegular.test(valor);
             break;
 
+         
+
 
         case "first_name":
             expresionRegular = new RegExp("[A-Za-z]");
             res = expresionRegular.test(valor);
+     
             break;
 
 
@@ -192,14 +196,19 @@ function comprobacionModificacion(atributo, valor) {
 
 
         case "location":
+            
             expresionRegular = new RegExp("[^A-Za-z0-9]+");
             res = expresionRegular.test(valor);
+       
             break;
 
-        case "telephone_number":
-            expresionRegular = new RegExp("(\+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}");
-            res = expresionRegular.test(valor);
-            break;
+            case "telephone_number":
+
+                expresionRegular = new RegExp("^[679]{1}[0-9]{8}$");
+                res = expresionRegular.test(valor);
+    
+                break;
+
         default:
             res = false;
     }

@@ -28,6 +28,7 @@ $diff = date_diff(date_create($dateOfBirth), date_create($today));
 						<div class="preview-pic tab-content">
                         
 
+
 						  <div class="tab-pane active" id="pic-1"><img src="{{ $animales[0]->url }}" /></div>
 						  <div class="tab-pane" id="pic-2"><img src="{{ $animales[1]->url }}" /></div>
 						  <div class="tab-pane" id="pic-3"><img src="{{ $animales[2]->url }}" /></div>
@@ -71,12 +72,26 @@ $diff = date_diff(date_create($dateOfBirth), date_create($today));
 							<span class="color green"></span>
 							<span class="color blue"></span>
 						</h5>
+						@if(Auth::user()!=null)
 						<div class="action">
-							<button class="add-to-cart btn btn-default" type="button">Adoptar Gordin</button>
+							<button id="adoptar" name="{{$animales[0]->id}}" class="add-to-cart btn btn-default" type="button">Adoptar Gordin</button>
 							<button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
 						</div>
+@endif
+
+
+@if(Auth::user()==null)
+<div class="action">
+							<button id="adoptarIniciar" class="add-to-cart btn btn-default" type="button">Inicia Sesión Para Adoptar</button>
+							<button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+						</div>
+						@endif
+
 					</div>
 				</div>
 			</div>
 		</div>
-	</div> @endsection
+	</div>
+	<script src="/js/animaldetalles.js"></script>
+
+	@endsection

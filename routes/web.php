@@ -13,10 +13,24 @@
 |
 */
 
+Route::get('sendmail/{mensaje}/{email}', function($mensaje, $email){
+$data=array(
+    'mensaje' => $mensaje,
+);
+Mail::send('emails.welcome', $data, function ($message){
+$message->from('tummysrefugio@gmail.com', 'Felicidades Por Tu Adopción!');
+$message->to("capeca999@gmail.com")->subject('Felicidades Por Tu Adopción');
+});
+return "Tu Email se ha enviado";
+});
+
+
 
     Route::get('/donarProductos/', 'ProductController@getProductosAgrupados');    
+    Route::middleware('auth')->post('anydadirpeticion', 'HomeController@ProcesoAdopciónPost');    
+    Route::middleware('auth')->post('comprobarPeticion', 'HomeController@ProcesoAdopciónConsultar');    
 
-
+   
 Route::get('/paginaComprar/', function() {
     return view('Checkout');
     });
@@ -31,6 +45,7 @@ Route::get('registro/', function () {
 });
 Route::get('/listar/modificarUsuario/{id}/{atributo}/{valor}', 'UserController@modificarUsuario');    
 Route::get('/listar/modificarAnimal/{id}/{atributo}/{valor}', 'AnimalController@modificarAnimal');       
+Route::get('/listar/modificarStatus/{id}/{atributo}/{valor}', 'PetitionController@modificarPetition');       
 
 
 Route::get('login/', function () {
@@ -73,12 +88,19 @@ Route::get('animales/', function() {
 
                 Route::get('/AnimalesAdmin/', 'AnimalController@getAnimalesAdmin');
                 Route::get('/UsuariosAdmin/', 'UserController@getUsuariosAdmin');
+                Route::get('/PeticionesAdmin/', 'PetitionController@getPetitionsAdmin');
+
+                
+
+
+
+
                 Route::get('/preguntas/', 'PreguntasController@indexJugetesDias');
 Route::get('/animales/casosEspeciales/', 'ApiController@getAnimalsEspeciales');
 
     Route::get('/animales/{especie}', 'ApiController@getAnimalsSpecie');
+    Route::get('/animal/{id}', 'AnimalController@getAnimalID');
 
-Route::get('/animal/{id}', 'AnimalController@getAnimalID');
 
 Auth::routes();
 Route::get('/productos/busqueda', 'ApiController@indexToysGenerico');

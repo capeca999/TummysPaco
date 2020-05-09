@@ -13,7 +13,7 @@ use App\User;
 use Auth;
 use App\Order;
 use App\Line;
-
+use App\Petitions;
 class ApiController extends Controller
 {
 
@@ -31,7 +31,14 @@ public static function getProductById($id){
     ->toJson();
     }
 
-
+ 
+    public static function getAnimalById($id){
+        return Animal::select('animals.id','animals.id_user','animals.race','animals.species','animals.date_of_birth','animals.description','animals.health','animals.nickname','animals.place_found','animals.size','animals.date_found','animals.condition','animals.gender', 'images_animals.url')
+        ->join('images_animals','images_animals.id_animal','animals.id')
+        ->where('animals.id', '=', $id)
+        ->get()
+        ->toJson();
+        }
 
 
     public static function getCouponById($id){
@@ -63,6 +70,7 @@ public  function getAnimalsEspeciales($pagina=1,  $cantidad=20){
 
     return view ('animalesEspeciales')->with('animales', json_decode($animales));
 }
+
 
 
 
@@ -189,7 +197,7 @@ public static function  getToys($pagina, $cantidad=21 ){
 
 
 
-
+  
 
 
     public static function historialUsuarioPedidos(){

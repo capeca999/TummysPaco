@@ -17,9 +17,10 @@ $today = date("Y-m-d");
 $diff = date_diff(date_create($dateOfBirth), date_create($today));
 
 ?>
+<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">    <div>
 
 
-	<div class="container">
+	<div id="todoContenido" class="container">
 		<div class="card">
 			<div class="container-fliud">
 				<div class="wrapper row">
@@ -46,7 +47,8 @@ $diff = date_diff(date_create($dateOfBirth), date_create($today));
 						  <li><a data-target="#pic-4" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
 						  <li><a data-target="#pic-5" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
 						</ul>
-						
+						<input type="hidden"  id="hiddenid" value="{{$animales[0]->id}}">
+
 					</div>
 					<div class="details col-md-6">
 						<h1 class="product-title"> <img class="iconoEstrellaDetalles" src="/img/icons/star.png"> {{ $animales[0]->nickname }} </h1>

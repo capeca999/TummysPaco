@@ -3,7 +3,7 @@
    - Animales
 @endsection
 @section('contenido')
-    <div>
+<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">    <div>
         <div class="container-fluid">
             <h1>Formulario De Adopción</h1>
             <hr>
@@ -33,15 +33,16 @@
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-phone"></i></span></div><input class="form-control" type="text" id="from-phone" name="phone" required="" value="{{Auth::user()->telephone_number}}" placeholder="Primary Phone"></div>
                                 </div>
                             </div>
-                        
+                        <input type="hidden" id="hidden" value="{{$animales[0]->id}}">
                         </div>
                         <div class="form-group"><label for="from-comments">Porque quieres adoptar a <b> {{$animales[0]->nickname}} </b></label><textarea class="form-control" id="from-comments" name="comments" placeholder="Porque es super bonito y guapo" rows="5"></textarea></div>
                         <div class="form-group">
                             <div class="form-row">
                                 <div class="col"><button class="btn btn-primary btn-block" type="reset"><i class="fa fa-undo"></i> Reset</button></div>
-                                <div class="col"><button class="btn btn-primary btn-block" type="submit">Submit <i class="fa fa-chevron-circle-right"></i></button></div>
+                                <div class="col"><button class="btn btn-primary btn-block" id="buttonSubmit" type="submit">Submit <i class="fa fa-chevron-circle-right"></i></button></div>
                             </div>
                         </div>
+
                         <hr class="d-flex d-md-none">
                     </div>
                     <div class="col-12 col-md-6">
@@ -114,7 +115,7 @@
                                     <div class="form-group">
                                         <div class="form-row">
                                             <div class="col"><button class="btn btn-primary btn-block" type="reset"><i class="fa fa-undo"></i> Reset</button></div>
-                                            <div class="col"><button class="btn btn-primary btn-block" type="submit">Submit <i class="fa fa-chevron-circle-right"></i></button></div>
+                                            <div class="col"><button class="btn btn-primary btn-block"  type="submit">Submit <i class="fa fa-chevron-circle-right"></i></button></div>
                                         </div>
                                     </div>
                                     <hr class="d-flex d-md-none">

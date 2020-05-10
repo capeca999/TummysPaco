@@ -48,6 +48,14 @@
     <input type="submit" class="verTodos" value="todos los animales" />
 </form>
 
+
+
+            
+
+
+
+
+
         <div class="row product-list dev">
 
             @foreach($animales as $animal)
@@ -58,7 +66,16 @@
                     </div>
                     <div class="row">
                         <div class="col-8">
-                            <h2> <a href="/animal/{{$animal->id}}">{{$animal->nickname}}</h2>
+                            <h2> <a href="/animal/{{$animal->id}}">{{$animal->nickname}}
+                            
+                            @if( empty($animal->condition))
+        <img  title="{{$animal->species}}" class="iconoEstrella" src="/img/icons/{{$animal->species}}.png">    
+@else
+<img  title="Caso Especial" class="iconoEstrella" src="/img/icons/star.png">      
+  @endif
+                            
+                            
+                            </h2>
                         </div>
                     </div>
                     <div class="row">

@@ -35,7 +35,7 @@
               <input id="emailusuario" type="hidden"  value="{{Auth::user()->email}}">
 
                     @foreach($petitions as $petition)
-                    <tr id ="{{$petition->id}}">
+                    <tr>
                  
 
                         <td name="id">{{$petition->id}}</td>
@@ -46,8 +46,8 @@
                         <td name="telephone_number">{{$petition->telephone_number}}</td>
                         <td name="commentary">{{$petition->commentary}}</td>
                         <td name="Status">{{$petition->Status}}</td>
-                        <td id="botones"><button class="btn btn-success" id="aceptar" title="aceptar petición" value="{{$petition->id}}" name="Accepted" style="margin-left: 5px;" type="submit"><i class="fa fa-check" style="font-size: 15px;"></i></button>
-                        <button class="btn btn-danger" id="cancelar"  title="negar petición"  value="{{$petition->id}}"   name="Cancelled" style="margin-left: 5px;" type="submit"><i class="fa fa-trash" style="font-size: 15px;"></i></button></td>
+                        <td id="{{$petition->id}}" name="{{$petition->id_animal}}"><button class="btn btn-success"  title="aceptar petición" value="{{$petition->id}}" name="Accepted" style="margin-left: 5px;" type="submit"><i class="fa fa-check" style="font-size: 15px;"></i></button>
+                                                   <button class="btn btn-danger"  title="negar petición"  value="{{$petition->id}}"   name="Cancelled" style="margin-left: 5px;" type="submit"><i class="fa fa-trash" style="font-size: 15px;"></i></button></td>
                     </tr>
                    
                     @endforeach

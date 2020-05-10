@@ -12,17 +12,33 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['middleware' => 'checkAdmin'], function () {
+    Route::get('sendmail/{mensaje}/{email}', function($mensaje, $email){
+        $data=array(
+            'mensaje' => $mensaje,
+        );
+        Mail::send('emails.welcome', $data, function ($message){
+        $message->from('tummysrefugio@gmail.com', 'Felicidades Por Tu Adopción!');
+        $message->to($email)->subject('Felicidades Por Tu Adopción');
+        });
+        return "Tu Email se ha enviado";
+        });
 
-Route::get('sendmail/{mensaje}/{email}', function($mensaje, $email){
-$data=array(
-    'mensaje' => $mensaje,
-);
-Mail::send('emails.welcome', $data, function ($message){
-$message->from('tummysrefugio@gmail.com', 'Felicidades Por Tu Adopción!');
-$message->to("capeca999@gmail.com")->subject('Felicidades Por Tu Adopción');
+        Route::get('/listar/modificarUsuario/{id}/{atributo}/{valor}', 'UserController@modificarUsuario');    
+        Route::get('/listar/modificarAnimal/{id}/{atributo}/{valor}', 'AnimalController@modificarAnimal');       
+        Route::get('/listar/modificarStatus/{id}/{atributo}/{valor}', 'PetitionController@modificarPetition');  
+
+
+        Route::get('/AnimalesAdmin/', 'AnimalController@getAnimalesAdmin');
+        Route::get('/UsuariosAdmin/', 'UserController@getUsuariosAdmin');
+        Route::get('/PeticionesAdmin/', 'PetitionController@getPetitionsAdmin');
 });
-return "Tu Email se ha enviado";
-});
+
+
+
+
+Route::get('/home','PrincipalController@index' );
+Route::get('/', 'PrincipalController@index');
 
 
 
@@ -43,17 +59,13 @@ Route::get('/paginaComprar/', function() {
 Route::get('registro/', function () {
     return view('auth.register');
 });
-Route::get('/listar/modificarUsuario/{id}/{atributo}/{valor}', 'UserController@modificarUsuario');    
-Route::get('/listar/modificarAnimal/{id}/{atributo}/{valor}', 'AnimalController@modificarAnimal');       
-Route::get('/listar/modificarStatus/{id}/{atributo}/{valor}', 'PetitionController@modificarPetition');       
+     
 
 
 Route::get('login/', function () {
     return view('auth.login');
 });
 
-Route::get('/home','PrincipalController@index' );
-Route::get('/', 'PrincipalController@index');
 
 Route::get('animales/', function() {
     return view('animalesCategorias');
@@ -86,9 +98,7 @@ Route::get('animales/', function() {
                 return view('faq');
                 });
 
-                Route::get('/AnimalesAdmin/', 'AnimalController@getAnimalesAdmin');
-                Route::get('/UsuariosAdmin/', 'UserController@getUsuariosAdmin');
-                Route::get('/PeticionesAdmin/', 'PetitionController@getPetitionsAdmin');
+    
 
                 
 
@@ -100,7 +110,6 @@ Route::get('/animales/casosEspeciales/', 'ApiController@getAnimalsEspeciales');
 
     Route::get('/animales/{especie}', 'ApiController@getAnimalsSpecie');
     Route::get('/animal/{id}', 'AnimalController@getAnimalID');
-
 
 Auth::routes();
 Route::get('/productos/busqueda', 'ApiController@indexToysGenerico');

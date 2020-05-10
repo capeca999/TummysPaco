@@ -17,8 +17,6 @@ $(document).ready(function() {
                 window.location.href = "/animales/formularioAdoptar/"+$("#adoptar").attr("name");
                 },
             error:function(data){
-          
-
                 if($("#top").length == 1) {
 
                     $("#top").remove();

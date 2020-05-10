@@ -4,7 +4,7 @@
 @endsection
 @section('contenido')
 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">    <div>
-        <div class="container-fluid">
+        <div id="todoContenido" class="container-fluid">
             <h1>Formulario De Adopción</h1>
             <hr>
             <form id="contactForm" action="javascript:void(0);" method="get"><input class="form-control" type="hidden" name="Introduction" value="This email was sent from www.awebsite.com"><input class="form-control" type="hidden" name="subject" value="Awebsite.com Contact Form"><input class="form-control" type="hidden"

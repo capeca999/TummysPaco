@@ -10,8 +10,9 @@
  
 
     Muchisimas gracias de parte de Tummys!
-    <img src="{{$message->embed(asset('/img/Casa.png'))}}">
-    <img src="{{$message->embed(asset('/img/Nombre.png'))}}">
+
+
+
 </div>
 
 </body>

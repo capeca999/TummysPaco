@@ -37,7 +37,6 @@ public function refreshCaptcha(){
 
 
 public  function ProcesoAdopciónPost(Request $request){
-
     $petitions = DB::table('petitions')
     ->where('id_animal' ,'=', $_POST['idanimal'])
     ->where('id_user' ,'=',  Auth::user()->id)
@@ -51,11 +50,7 @@ public  function ProcesoAdopciónPost(Request $request){
 
     }
     else{
-
-    
-
 //ProcesoAdopciónConsultar
-
     $input = $request->all();
     DB::table('petitions')->insert([
         ['id_user' => Auth::user()->id, 'id_animal' => $_POST['idanimal'], 'name_petition' => $_POST['nombre'], 'email_petition' => $_POST['email'], 'telephone_number' => $_POST['phone'], 'commentary' => $_POST['comments'], 'status' => 'Sended']
@@ -107,31 +102,22 @@ try {
 
 public  function ProcesoAdopciónConsultar(Request $request){
 
-    try{
+  
+$peticiones = DB::table('petitions')
+        ->where('id_animal', '=', $_POST['idanimal'])
+        ->where('id_user', '=', Auth::user()->id)
+        ->first();
+        if(is_null($peticiones)){
+            return response()->json(['success'=>'Got Simple Ajax Request.']);
+        }else{
+            header('HTTP/1.1 500 Internal Server Booboo');
+            header('Content-Type: application/json; charset=UTF-8');
+            die(json_encode(array('message' => 'Has realizado la petición con anterioridad', 'code' => 1337)));
+        }
 
-    if (Petitions::where(['id_animal', '=', $_POST['idanimal']], ['id_user', '=',  Auth::user()->id])->exists()) {
-        throw new Exception ("Has realizado la petición con anterioridad", 123);
-     }
-
-
-        $input = $request->all();
-        DB::table('petitions')->insert([
-            ['id_user' => Auth::user()->id, 'id_animal' => $_POST['idanimal'], 'name_petition' => $_POST['nombre'], 'email_petition' => $_POST['email'], 'telephone_number' => $_POST['phone'], 'commentary' => $_POST['comments'], 'status' => 'Sended']
-         
-        ]);
-        return response()->json(['success'=>'Got Simple Ajax Request.']);
-
-     
    //     return response()->json(['error'=>'Has realizado la petición con anterioridad']);
-    }    
-catch(Exception $e){
-    echo json_encode(array(
-        'error' => array(
-            'msg' => $e->getMessage(),
-            'code' => $e->getCode(),
-        ),
-    ));
-}
+     
+
  
 
 

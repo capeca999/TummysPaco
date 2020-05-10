@@ -225,6 +225,14 @@
 	color: #c29d0b
 }
 
+.alert.alert-warning.beautifulcorrect {
+	background-color: lightgreen;
+	border-color: green;
+	color: black;
+}
+
+
+
 #trs-hd,
 .bill-header,
 .warning.no-result {

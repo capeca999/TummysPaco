@@ -89,8 +89,8 @@ class AnimalController extends Controller
 
 public static function getNewerAnimals()
 {
-    $animales = DB::table('animals')
-    ->orderBy('date_found')
+    $animales = Animal::select('animals.id','animals.id_user','animals.race','animals.species','animals.date_of_birth','animals.description','animals.health','animals.nickname','animals.place_found','animals.size','animals.date_found','animals.condition','animals.gender', 'images_animals.url')
+    ->orderBy('date_found', 'DESC')
     ->join('images_animals', 'images_animals.id_animal', 'animals.id')
     ->groupBy('animals.id')
     ->limit(6)
@@ -108,7 +108,7 @@ return $animales;
 
 public static function getAnimalCategory()
 {
-    $animales = DB::table('animals')
+    $animales = DB::select('animals')
     ->orderBy('date_found')
     ->limit(6)
     ->get();
@@ -138,8 +138,6 @@ public static function getAnimalIDFormulario($id){
     ->where('animals.id', '=', $id)
     ->get()
     ->toJson();
-    
-    
     return view('formularioAdoptar')->with('animales', json_decode($animales));
     
     }

@@ -17,12 +17,11 @@ $(document).ready(function() {
         $(".counter").text(n + " item"), "0" == n ? $(".no-result").show() : $(".no-result").hide()
     })
 /*MODIFICAR PRODUCTO (Añadir input)- Al hacer doble click creara un input en el td cliqueado*/
-$('#aceptar,#cancelar').click(function(event) {
-var animalId = $("#botones").prev().prev().prev().prev().prev().prev().text();
-
+$('button.btn-success ,button.btn-danger').click(function(event) {
+var id=$(this).attr("value");
     var atributo = "Status";
-    var id=$(this).attr("value");
-    var valor=  $(this).attr("name");
+    var valor= $(this).attr("name");
+   animalId=$(this).prev().parent().attr("name");
 
     $.ajax({
         dataType:"json",
@@ -32,8 +31,6 @@ var animalId = $("#botones").prev().prev().prev().prev().prev().prev().text();
         url: "/api/animalinfo/"+animalId,
         method: "GET",
         success:function(data) {
-            console.log(data);
-
 
 if(valor=="Accepted"){
     var mensaje="Felicidades " + $("#idusuario").attr("value") + "! Tu solicitud de adopción de " + data[0].nickname + " Ha sido aceptada!, el siguiente paso es ir a nuestro refugio y cojer a tu mascota";
@@ -50,7 +47,9 @@ $.ajax({
     url: "/sendmail/"+mensaje+"/"+$("#emailusuario").attr("value"),
     method: "GET",
 });
-
+alert(id);
+alert(atributo);
+alert(valor);
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $ ('meta[name="csrf-token"]').attr ('content')
@@ -62,17 +61,17 @@ $.ajax({
 
             error : function(jqXHR,textStatus,errorThrown)
             {
-                console.log(textStatus)
+         
             }
          
             
     });
+    alert($(this).parent().parent().text());
 
       
   
             //var name = $(this).closest('tr').find('.contact_name').text();
 
-var cambiartd = $("#botones").prev().text(valor);
 
 });
 });

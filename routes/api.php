@@ -22,6 +22,9 @@ Route::middleware('auth:api')->get('/productos/{id?}', 'ApiController@getProduct
 
 Route::get('/productos/{id?}', 'ApiController@getProductById');
 Route::get('/productosCupon/{id?}', 'ApiController@getCouponById');
+
+Route::post('/crearPedido/', 'ApiController@postOrder');
+
 Route::get('/animalinfo/{id?}', 'ApiController@getAnimalById');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

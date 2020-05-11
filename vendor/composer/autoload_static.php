@@ -436,6 +436,7 @@ class ComposerStaticInit3467a817a505648f318474a951ae02eb
     );
 
     public static $classMap = array (
+        'App\\Addresses' => __DIR__ . '/../..' . '/app/Addresses.php',
         'App\\Animal' => __DIR__ . '/../..' . '/app/Animal.php',
         'App\\Answer' => __DIR__ . '/../..' . '/app/Answer.php',
         'App\\Award' => __DIR__ . '/../..' . '/app/Award.php',
@@ -454,6 +455,7 @@ class ComposerStaticInit3467a817a505648f318474a951ae02eb
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\PetitionController' => __DIR__ . '/../..' . '/app/Http/Controllers/PetitionController.php',
         'App\\Http\\Controllers\\PreguntasController' => __DIR__ . '/../..' . '/app/Http/Controllers/PreguntasController.php',
         'App\\Http\\Controllers\\PrincipalController' => __DIR__ . '/../..' . '/app/Http/Controllers/PrincipalController.php',
         'App\\Http\\Controllers\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProductController.php',
@@ -466,6 +468,7 @@ class ComposerStaticInit3467a817a505648f318474a951ae02eb
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Middleware\\checkAdmin' => __DIR__ . '/../..' . '/app/Http/Middleware/checkAdmin.php',
         'App\\Image' => __DIR__ . '/../..' . '/app/Image.php',
         'App\\Petitions' => __DIR__ . '/../..' . '/app/Petitions.php',
         'App\\Product' => __DIR__ . '/../..' . '/app/Product.php',

@@ -196,7 +196,7 @@ class UserController extends Controller
     }
     
     public static function getperfil(){
-        $historiales = User::select('lines.id_order','orders.payment_methods','orders.total_price',
+        $historiales = User::select('lines.id_order','orders.payment_method','orders.total_price',
         'products.price','orders.date_order','lines.quantity','products.name')
         ->join('orders','users.id','=','orders.id_user')
         ->join('lines','orders.id','=','lines.id_order')

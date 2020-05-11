@@ -45,7 +45,8 @@
     <div class="container">
 
     <form action="/animales/Todos">
-    <input type="submit" class="verTodos" value="todos los animales" />
+    <button  class="button" type="submit" value="Submit" data-hover="Haz Click Aqui!"><span>Ver todos los animales!</span></button>
+
 </form>
 
 

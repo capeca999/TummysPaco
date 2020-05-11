@@ -1,10 +1,16 @@
 <?php
 
 namespace App;
-
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\CanResetPassword;
+
 class User extends Authenticatable{
+
+    use Notifiable;
+
     protected $fillable = [
         'name', 'first_name', 'last_name', 'password', 'date_birth', 'email', 'nif'
     ];

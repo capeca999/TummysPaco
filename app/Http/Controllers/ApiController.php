@@ -214,6 +214,39 @@ public static function  getToys($pagina, $cantidad=21 ){
 
 
 
+    public static function postOrder(Request $request){
+     
+        DB::table('orders')->insert([
+'id_user' =>$request->idusuario,
+'coupon_id'=>$request->coupon_id,
+'descuento'=>$request->codigoDescuentoCantidad,
+'total_price'=>$request->total_price,
+'payment_method'=>$request->payment_method,
+'USPS'=>$request->uspsnumber,
+'street'=>$request->street,
+'number'=>$request->number,
+'postal_code'=>$request->postal_code,
+'location'=>$request->location,
+'province'=>$request->province,
+'country'=>$request->country,
+'way'=>$request->way
+        ]);
+
+
+return response()->json(
+  [  
+    'success'=>true,
+    'message'=>'Data inserted successfully'
+  ]
+  );
+
+
+
+
+    }
+
+
+
     //
 }
 

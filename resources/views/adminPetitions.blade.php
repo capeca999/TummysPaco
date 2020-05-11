@@ -5,7 +5,7 @@
     - Admin Petitions
 @endsection
 @section('contenido')    
-    <div class="col-md-12 search-table-col">
+    <div id="divprincipal" class="col-md-12 search-table-col">
         <div class="form-group pull-right col-lg-4"><input type="text" class="search form-control" placeholder="Search by typing here.."></div><span class="counter pull-right"></span>
         <div class="table-responsive table-bordered table table-hover table-bordered results">
      
@@ -46,8 +46,9 @@
                         <td name="telephone_number">{{$petition->telephone_number}}</td>
                         <td name="commentary">{{$petition->commentary}}</td>
                         <td name="Status">{{$petition->Status}}</td>
-                        <td id="{{$petition->id}}" name="{{$petition->id_animal}}"><button class="btn btn-success"  title="aceptar petición" value="{{$petition->id}}" name="Accepted" style="margin-left: 5px;" type="submit"><i class="fa fa-check" style="font-size: 15px;"></i></button>
-                                                   <button class="btn btn-danger"  title="negar petición"  value="{{$petition->id}}"   name="Cancelled" style="margin-left: 5px;" type="submit"><i class="fa fa-trash" style="font-size: 15px;"></i></button></td>
+                        <td id="{{$petition->id}}" name="{{$petition->id_animal}}">
+                                                   <button class="btn btn-success"  title="Aceptado" value="{{$petition->id}}" name="Accepted" style="margin-left: 5px;" type="submit"><i class="fa fa-check" style="font-size: 15px;"></i></button>
+                                                   <button class="btn btn-danger"  title="Cancelado"  value="{{$petition->id}}"   name="Cancelled" style="margin-left: 5px;" type="submit"><i class="fa fa-trash" style="font-size: 15px;"></i></button></td>
                     </tr>
                    
                     @endforeach

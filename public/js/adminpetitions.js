@@ -21,7 +21,7 @@ $('button.btn-success ,button.btn-danger').click(function(event) {
 var id=$(this).attr("value");
     var atributo = "Status";
     var valor= $(this).attr("name");
-   animalId=$(this).prev().parent().attr("name");
+   animalId=$("#"+id).attr("name");
 
     $.ajax({
         dataType:"json",
@@ -47,9 +47,7 @@ $.ajax({
     url: "/sendmail/"+mensaje+"/"+$("#emailusuario").attr("value"),
     method: "GET",
 });
-alert(id);
-alert(atributo);
-alert(valor);
+
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $ ('meta[name="csrf-token"]').attr ('content')
@@ -58,21 +56,25 @@ alert(valor);
                 method: "GET",
             });
             },
-
             error : function(jqXHR,textStatus,errorThrown)
-            {
-         
-            }
-         
-            
+            {        
+            }           
     });
-    alert($(this).parent().parent().text());
+  var parentBoton=$(this).parent();
+$(parentBoton).prev().text(valor);
 
-      
-  
+
+
+if($("#top").length == 1) {
+
+    $("#top").remove();
+    }
+    var diverror = $("<div>Has " + $(this).attr("title")+" la petición</div>" ).attr("class" , "alert alert-warning beautiful").attr("role",  "alert").attr("id", "top").appendTo($("#divprincipal"));
+    var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
+    var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
+
+
             //var name = $(this).closest('tr').find('.contact_name').text();
-
-
 });
 });
 

@@ -14,7 +14,9 @@ use Auth;
 use App\Order;
 use App\Line;
 use App\Petitions;
+
 class ApiController extends Controller
+
 {
 
 /*
@@ -93,10 +95,6 @@ public static function getAnimalsEspecialesList($pagina=1,  $cantidad=20){
     
 
 public static function getAnimalsSpecieList($pagina=1, $especie, $cantidad=20){
-
-
-
-
 if($cantidad<=0){
     $cantidad=20;
 }
@@ -210,13 +208,100 @@ public static function  getToys($pagina, $cantidad=21 ){
             ->get();
         return $historiales;
     }
-
-
+   
 
 
     public static function postOrder(Request $request){
-     
-        DB::table('orders')->insert([
+
+        if(self::comprobarCampos("descuento", $request->codigoDescuentoCantidad)==0){
+       
+            return response()->json(
+                [  
+                    'success'=>false,
+                    'message'=>'Campo Erroneo',
+                  ]
+                );
+        }
+
+        if(self::comprobarCampos("total_price", $request->total_price)==0){
+            return response()->json(
+                [  
+                    'success'=>false,
+                    'message'=>'Campo Erroneo',
+                  ]
+                );
+        }
+
+        if(self::comprobarCampos("payment_method", $request->payment_method)==0){
+            return response()->json(
+                [  
+                    'success'=>false,
+                    'message'=>'Campo Erroneo',
+                  ]
+                );
+        }
+
+        if(self::comprobarCampos("street", $request->street)==0){
+            return response()->json(
+                [  
+                    'success'=>false,
+                    'message'=>'Campo Erroneo',
+                  ]
+                );
+        }
+        if(self::comprobarCampos("number", $request->number)==0){
+            return response()->json(
+                [  
+                    'success'=>false,
+                    'message'=>'Campo Erroneo',
+                  ]
+                );
+        }
+
+        if(self::comprobarCampos("postal_code", $request->postal_code)==0){
+            return response()->json(
+                [  
+                    'success'=>false,
+                    'message'=>'Campo Erroneo',
+                  ]
+                );
+        }
+
+        if(self::comprobarCampos("location", $request->location)==0){
+            return response()->json(
+                [  
+                    'success'=>false,
+                    'message'=>'Campo Erroneo',
+                  ]
+                );
+        }
+        if(self::comprobarCampos("province", $request->province)==0){
+            return response()->json(
+                [  
+                    'success'=>false,
+                    'message'=>'Campo Erroneo',
+                  ]
+                );
+        }
+
+        if(self::comprobarCampos("country", $request->country)==0){
+            return response()->json(
+                [  
+                    'success'=>false,
+                    'message'=>'Campo Erroneo',
+                  ]
+                );
+        }
+
+        if(self::comprobarCampos("way", $request->way)==0){
+            return response()->json(
+                [  
+                    'success'=>false,
+                    'message'=>'Campo Erroneo',
+                  ]
+                );
+        }
+        $column_id =     DB::table('orders')->insertGetId([
 'id_user' =>$request->idusuario,
 'coupon_id'=>$request->coupon_id,
 'descuento'=>$request->codigoDescuentoCantidad,
@@ -229,25 +314,158 @@ public static function  getToys($pagina, $cantidad=21 ){
 'location'=>$request->location,
 'province'=>$request->province,
 'country'=>$request->country,
-'way'=>$request->way
+'way'=>$request->way,
         ]);
-
-
 return response()->json(
   [  
     'success'=>true,
-    'message'=>'Data inserted successfully'
+    'message'=>'Data inserted successfully',
+    'id'=> $column_id
   ]
   );
+    
 
 
+}
+
+public static  function comprobarCampos($nombreCampo,$valorcampo){
+    $correcto=1;
+    switch ($nombreCampo) {
+        case "id_user":
+            if (User::where('id', '=', $valorcampo)->exists()) {
+                $correcto=1;
+             }
+             else $correcto=0;
+          break; 
+        case "descuento":
+     if(preg_match("/[0-9]*$/", $valorcampo)==1){
+         $correcto=1;
+     } else $correcto=0;
+        break;
+    case "payment_method":
+    if($valorcampo=="Credit card" || $valorcampo=="Debit card" || $valorcampo=="Paypal"){
+        $correcto=1;
+    }
+    else{
+        $correcto=0;
+    }
+     break;
+     case "USPS":
+        if(preg_match("/[0-9]*$/", $valorcampo)==1){
+            $correcto=1;
+        } else $correcto=0;
+         break;
+     case "street":
+     if(preg_match("/[a-zA-Z0-9_.-]{3,}/", $valorcampo)==1){
+                $correcto=1;
+            } else $correcto=0;
+             break;
+     case "streetnumber":
+      if(preg_match("/[a-zA-Z0-9_. -]{3,}/", $valorcampo)==1){
+                    $correcto=1;
+                } else $correcto=0;
+                 break;
+                 case "postal_code":
+                    if(preg_match("/[0-9]*$/", $valorcampo)==1){
+                        $correcto=1;
+                    } else $correcto=0;
+                     break;
+                     case "location":
+                        if(preg_match("/[a-zA-Z]{2,}$/", $valorcampo)==1){
+                            $correcto=1;
+                        } else $correcto=0;
+                         break;
+                         case "province":
+                            if($valorcampo!="Choose..."){
+                                $correcto=1;
+                            } else $correcto=0;
+                             break;
+                             case "country":
+                                if($valorcampo!="Choose..."){
+                                    $correcto=1;
+                                } else $correcto=0;
+                                 break;
+                                 case "way":
+                                    if($valorcampo!="Elegir..." || $valorcampo!="Avenida" ||$valorcampo!="Bulevar" ||$valorcampo!="calle" || $valorcampo!="Plaza"){
+                                        $correcto=1;
+                                    } else $correcto=0;
+                                     break;                    
+                 case "price":
+                    if(preg_match("/[0-9]*$/", $valorcampo)==1){
+                        $correcto=1;
+                    } else $correcto=0;
+                     break;                  
+                 case "quantity":
+                    if(preg_match("/[0-9]*$/", $valorcampo)==1){
+                        $correcto=1;
+                    } else $correcto=0;
+                     break;
+        default:
+        $correcto=1;
+      }
+    return $correcto;
+    } 
+
+    public static function postLinea(Request $request){
 
 
+        $column_id =DB::table('lines')->insertGetId([
+'id_order' =>$request->id_order,
+'id_product'=>$request->id_product,
+'price'=>$request->price,
+'quantity'=>$request->quantity,
+
+        ]);
+$product = new Product;
+$product->where('id', '=', $request->id_product)->decrement('stock', $request->quantity);
+return response()->json(
+  [  
+    'success'=>true,
+    'message'=>'Data inserted successfully',
+    'id'=> $column_id
+  ]
+  );
     }
 
 
 
-    //
+    public static function postDireccion(Request $request){
+        $column_id =DB::table('addresses')->insertGetId([
+            'street'=>$request->street,
+            'number'=>$request->number,
+            'postal_code'=>$request->postal_code,
+            'location'=>$request->location,
+            'province'=>$request->province,
+            'country'=>$request->country,
+            'way'=>$request->way,
+            'id_user'=>$request->idusuario,
+        ]);
+return response()->json(
+  [  
+    'success'=>true,
+    'message'=>'Data inserted successfully',
+    'id'=> $column_id
+  ]
+  );
+    }
+
+    public static function postInsignia(Request $request){
+        $column_id =DB::table('awards')->insertGetId([
+            'id_user'=>$request->iduser,
+            'id_badge'=>$request->idbadge,
+ ]);
+            return response()->json(
+  [  
+    'success'=>true,
+    'message'=>'Data inserted successfully',
+    'id'=> $column_id
+  ]
+  );
+
+
+    
+    //crearDireccion
+}
 }
 
 ///api/products()

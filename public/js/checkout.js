@@ -8,12 +8,15 @@ $(function() {
   var preciototal = 0;
   var cantidades = [];
 var codigoDescuento="";
-
+var idproduct=[];
+var idprice=[];
+var idquantity=[];
   for (property in compras) {
 
 
       if (compras[property] != "" && compras[property] != undefined && compras[property] != null && compras[property] != 0 && compras[property] != "0") {
 
+      
           parseInt(property);
 
           cantidades.push(compras[property])
@@ -24,7 +27,7 @@ var codigoDescuento="";
 
               })
               .done(function(response) {
-
+                setarrays(response[0].id, response[0].price, cantidades[0]);
                   var li = $("<li>").attr("class", "list-group-item d-flex justify-content-between lh-condensed").appendTo($("#productosComprando"));
                   var div = $("<div>").appendTo(li);
                   var titulo = $("<h6>" + response[0].name + " x" + cantidades[0] + "</h6>").attr("class", "my-0").appendTo(div);
@@ -47,12 +50,16 @@ var codigoDescuento="";
                   }
               })
               .fail(function(response) {
-                  console.log(response);
               });
       }
   }
 
-
+  function setarrays(id, precio, cantidad){
+    idproduct.push(id);
+    idprice.push(precio);
+    idquantity.push(cantidad);
+    }
+    
 
  
 
@@ -97,7 +104,6 @@ setvariables(codigoDescuento, cantidadDescuento, codigoDescuento);
                   }
               })
               .fail(function(response) {
-                  console.log(response);
               });
       }
   });
@@ -228,17 +234,12 @@ if (typeof x === "undefined") {
 
 */
 if (fin==true){
-
-
     $("#top").remove();
 var total_price=$("#preciototalnumero").text();
 var checked = $('#checkboxsave:checkbox:checked').length > 0;
-
 var uspsnumber = Math.floor((Math.random()*99999999999)+1);
 var paymentmethod=$('input[name=paymentMethod]:checked').val();
-
 if(  typeof codigoDescuentoCantidad==="undefined"){
-    alert("hola");
     codigoDescuentoCantidad="";
 }
 $.ajax({
@@ -253,11 +254,142 @@ $.ajax({
 })
 .done(function(response) {
 
-console.log(response);
-})
-.fail(function(response) {
-    console.log(response);
+
+for (var cont = 0; cont < idproduct.length; cont++) {
+  
+    $.ajax({
+        type: 'post',
+         dataType: "json",
+         url: '/api/crearLinea/',
+     
+         headers: {
+             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         },
+         data:{"_token": $('#token').val(), id_order:response.id,id_product:idproduct[cont],price:idprice[cont],quantity:idquantity[cont]},
+     })
+    
+     .done(function(response){
+     })
+    
+    .fail(function(response){
+    
+
+        if($("#top").length == 1) {
+
+            $("#top").remove();
+            }
+            var diverror = $("<div>  Has tenido un error en un campo, comprueba tus datos</div>").attr("class" , "alert alert-warning beautiful").attr("role",  "alert").attr("id", "top").appendTo($("#diventero"));
+            var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
+            var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
+
+
+    });
+    
+    
+}
+
+
+
+if ($('#save-info').is(':checked')) {
+    $.ajax({
+        type: 'post',
+         dataType: "json",
+         url: '/api/crearDireccion/',
+     
+         headers: {
+             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         },
+         data:{"_token": $('#token').val(), street:$("#street").val(),number:$("#streetnumber").val(),postal_code:$("#postal_code").val(),location:$("#location").val(),province:$("#province option:selected").text(),country:$("#country option:selected").text(),way:$("#way option:selected").text(),idusuario:$("#hiddenid").val()},
+     })
+    
+     .done(function(response){
+     })
+    
+    .fail(function(response){
+
+        
+    if($("#top").length == 1) {
+
+        $("#top").remove();
+        }
+        var diverror = $("<div>  Has tenido un error en un campo, comprueba tus datos</div>").attr("class" , "alert alert-warning beautiful").attr("role",  "alert").attr("id", "top").appendTo($("#diventero"));
+        var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
+        var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
+
+
+
+
+    });
+    
+}
+
+$.ajax({
+    type: 'post',
+     dataType: "json",
+     url: '/api/crearInsignia/',
+     headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+     },
+     data:{"_token": $('#token').val(), iduser:$("#hiddenid").val(),idbadge:1},
+ })
+
+ .done(function(response){
+ })
+
+.fail(function(response){
 });
+//    var mensaje="Felicidades " + $("#idusuario").attr("value") + "! Tu solicitud de adopción de " + data[0].nickname + " Ha sido aceptada!, el siguiente paso es ir a nuestro refugio y cojer a tu mascota";
+var mensaje="¡Felicidades por tu compra! ¡Se le notificara cuando su producto esté llegando! ¡Ademas, su perfil ha ganado una insignia por esta compra! Muchísimas Gracias";
+
+$.ajax({
+    headers: {
+        'X-CSRF-TOKEN': $ ('meta[name="csrf-token"]').attr ('content')
+    },
+
+    url: "/sendmailProducto/"+mensaje+"/"+"capeca999@gmail.com",
+    method: "GET",
+})
+.done(function(response){
+ 
+     })
+    
+    .fail(function(response){
+     
+    });
+
+
+   
+
+        // Your application has indicated there's an error
+        window.setTimeout(function(){
+            localStorage.clear();
+            // Move to a new location or you can do something else
+            window.location.href = "/";
+    
+        }, 5000);
+    
+  
+//Esto es el done
+})
+
+
+
+
+.fail(function(response) {
+
+    if($("#top").length == 1) {
+
+        $("#top").remove();
+        }
+        var diverror = $("<div>  Has tenido un error en un campo, comprueba tus datos</div>").attr("class" , "alert alert-warning beautiful").attr("role",  "alert").attr("id", "top").appendTo($("#diventero"));
+        var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
+        var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
+});
+
+
+
+
+
 
 }
 else{
@@ -270,6 +402,12 @@ else{
         var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
         var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
       }
+
+
+
+
+
+
 
 
   

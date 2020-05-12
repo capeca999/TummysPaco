@@ -26,7 +26,7 @@ class Orders extends Migration
             $table->enum('status', ['Order Processed', 'Order Shipped', 'Order En Route', 'Order Arrived']);
             $table->string('USPS');
             $table->string('street');
-            $table->smallInteger('number');
+            $table->string('number');
             $table->mediumInteger('postal_code');
             $table->string('location');
             $table->string('province');

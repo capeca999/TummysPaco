@@ -17,12 +17,11 @@ class Addresses extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('street');
-            $table->smallInteger('number');
+            $table->string('number');
             $table->mediumInteger('postal_code');
             $table->string('location');
             $table->string('province');
             $table->string('country');
-            $table->enum('type', ['envio', 'facturacion']);
             $table->enum('way', ['plaza', 'avenida', 'bulevar', 'calle']);
             $table->bigInteger('id_user')->unsigned();
             $table->timestamps();

@@ -5,6 +5,7 @@
 @endsection
 @section('contenido')
 <input type="hidden" id="hiddenid" value="{{Auth::user()->id}}">
+<input type="hidden" id="hiddenemail" value="{{Auth::user()->email}}">
 
 
     <div id="diventero" class="container">

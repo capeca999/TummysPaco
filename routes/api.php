@@ -24,6 +24,9 @@ Route::get('/productos/{id?}', 'ApiController@getProductById');
 Route::get('/productosCupon/{id?}', 'ApiController@getCouponById');
 
 Route::post('/crearPedido/', 'ApiController@postOrder');
+Route::post('/crearLinea/', 'ApiController@postLinea');
+Route::post('/crearDireccion/', 'ApiController@postDireccion');
+Route::post('/crearInsignia/', 'ApiController@postInsignia');
 
 Route::get('/animalinfo/{id?}', 'ApiController@getAnimalById');
 Route::middleware('auth:api')->get('/user', function (Request $request) {

@@ -13,16 +13,37 @@
 |
 */
 Route::group(['middleware' => 'checkAdmin'], function () {
+
     Route::get('sendmail/{mensaje}/{email}', function($mensaje, $email){
+      
         $data=array(
             'mensaje' => $mensaje,
         );
-        Mail::send('emails.welcome', $data, function ($message){
+        var_dump($email);
+
+        Mail::send('emails.adoptar', $data, function ($message) use($email){
         $message->from('tummysrefugio@gmail.com', 'Felicidades Por Tu Adopción!');
         $message->to($email)->subject('Felicidades Por Tu Adopción');
         });
         return "Tu Email se ha enviado";
         });
+
+
+               
+    Route::get('sendmailProducto/{mensaje}/{email}', function($mensaje, $emaildonar){
+        var_dump($emaildonar);
+        $data=array(
+            'mensaje' => $mensaje,
+        );
+        var_dump($emaildonar);
+
+        Mail::send('emails.comprar', $data, function ($message) use($emaildonar){
+        $message->from('tummysrefugio@gmail.com', 'Felicidades Por Tu Compra!');
+        $message->to($emaildonar)->subject('Felicidades Por Tu Compra');
+        });
+        return "Tu Email se ha enviado";
+        });
+
 
         Route::get('/listar/modificarUsuario/{id}/{atributo}/{valor}', 'UserController@modificarUsuario');    
         Route::get('/listar/modificarAnimal/{id}/{atributo}/{valor}', 'AnimalController@modificarAnimal');       
@@ -35,6 +56,51 @@ Route::group(['middleware' => 'checkAdmin'], function () {
 });
 
 
+/*
+
+Route::group(['middleware' => 'checkAdmin'], function () {
+
+    Route::get('sendmail/{mensaje}/{email}', function($mensaje, $email){
+      
+        $data=array(
+            'mensaje' => $mensaje,
+        );
+        Mail::send('emails.welcome', $data, function ($message){
+        $message->from('tummysrefugio@gmail.com', 'Felicidades Por Tu Adopción!');
+        $message->to($email)->subject('Felicidades Por Tu Adopción');
+        });
+        return "Tu Email se ha enviado";
+        });
+
+
+               
+    Route::get('sendmailProducto/{mensaje}/{email}', function($mensaje, $emaildonar){
+        var_dump($emaildonar);
+        $data=array(
+            'mensaje' => $mensaje,
+        );
+        var_dump($emaildonar);
+
+        Mail::send('emails.welcome', $data, function ($message){
+        $message->from('tummysrefugio@gmail.com', 'Felicidades Por Tu Compra!');
+        $message->to($emaildonar)->subject('Felicidades Por Tu Compra');
+        });
+        return "Tu Email se ha enviado";
+        });
+
+
+        Route::get('/listar/modificarUsuario/{id}/{atributo}/{valor}', 'UserController@modificarUsuario');    
+        Route::get('/listar/modificarAnimal/{id}/{atributo}/{valor}', 'AnimalController@modificarAnimal');       
+        Route::get('/listar/modificarStatus/{id}/{atributo}/{valor}', 'PetitionController@modificarPetition');  
+
+
+        Route::get('/AnimalesAdmin/', 'AnimalController@getAnimalesAdmin');
+        Route::get('/UsuariosAdmin/', 'UserController@getUsuariosAdmin');
+        Route::get('/PeticionesAdmin/', 'PetitionController@getPetitionsAdmin');
+});
+
+
+*/
 
 
 Route::get('/home','PrincipalController@index' );

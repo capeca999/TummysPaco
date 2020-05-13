@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Awards extends Migration
+class LikesAnswers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class Awards extends Migration
      */
     public function up()
     {
-        Schema::create('awards', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('likes_answers', function (Blueprint $table) {
+         
             $table->bigInteger('id_user')->unsigned();
-            $table->bigInteger('id_badge')->unsigned();
-            $table->unique(['id_user', 'id_badge']);
+            $table->bigInteger('id_answer')->unsigned();
+            $table->primary(['id_answer', 'id_user']);
             $table->timestamps();
         });
     }
@@ -29,7 +29,7 @@ class Awards extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('awards');
+        Schema::dropIfExists('likes_answers');
 
     }
 }

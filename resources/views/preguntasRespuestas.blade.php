@@ -38,8 +38,8 @@
                             <ul class="thread-list">
             
                             @foreach ((array)$preguntas   as  $pregunta)
-                            {{ $pregunta['id'] }}
-                            <li class="thread"><span class="time">Apr 21</span><span class="title">aaa </span><span class="icon"> <a class="subscribe" href="javascript:void(0)"><i class="fa fa-star-o"></i></a><a class="flag" href="javascript:void(0)"><i class="fa fa-flag"></i></a></span></li>
+                        
+                            <li class="thread"><span class="time">{{ $pregunta['date'] }}</span><span class="title">{{ $pregunta['title'] }} </span><span class="icon"> <a class="subscribe" href="javascript:void(0)"><i class="fa fa-star-o"></i></a><a class="flag" href="javascript:void(0)"><i class="fa fa-flag"></i></a></span></li>
                         
                               @endforeach
                             </ul>

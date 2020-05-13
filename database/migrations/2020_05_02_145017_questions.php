@@ -19,6 +19,9 @@ class Questions extends Migration
             $table->bigInteger('id_user')->unsigned();
             $table->date('date');
             $table->string('title');
+            $table->Integer('likes');
+            $table->Integer('views');
+
             $table->string('description');
             $table->timestamps();
         });
@@ -34,6 +37,6 @@ class Questions extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('questions');
     }
 }

@@ -358,15 +358,16 @@ $.ajax({
     });
 
 
-   
+    window.setTimeout(function(){
+        localStorage.clear();
+        alert("Gracias por tu compra!")
+        // Move to a new location or you can do something else
+        window.location.href = "/";
+
+    }, 5000);
 
         // Your application has indicated there's an error
-        window.setTimeout(function(){
-            localStorage.clear();
-            // Move to a new location or you can do something else
-            window.location.href = "/";
-    
-        }, 5000);
+   
     
   
 //Esto es el done

@@ -165,13 +165,11 @@ Route::get('animales/', function() {
                 });
 
     
-
+                
+                Route::get('/forum/thread/{id}', 'PreguntasController@getthread');
+                Route::get('/forum/', 'PreguntasController@preguntas');
                 
 
-
-
-
-                Route::get('/preguntas/', 'PreguntasController@indexJugetesDias');
 Route::get('/animales/casosEspeciales/', 'ApiController@getAnimalsEspeciales');
 
     Route::get('/animales/{especie}', 'ApiController@getAnimalsSpecie');

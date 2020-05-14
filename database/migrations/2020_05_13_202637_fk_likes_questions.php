@@ -13,7 +13,7 @@ class FkLikesQuestions extends Migration
      */
     public function up()
     {
-        Schema::table('likes_questions', function (Blueprint $table) {
+        Schema::table('like_questions', function (Blueprint $table) {
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_question')->references('id')->on('questions')->onDelete('cascade');
         });
@@ -26,7 +26,7 @@ class FkLikesQuestions extends Migration
      */
     public function down()
     {
-        Schema::table('likes_questions', function (Blueprint $table) {
+        Schema::table('like_questions', function (Blueprint $table) {
             $table->dropForeign('id_user');
             $table->dropForeign('id_question');
         });

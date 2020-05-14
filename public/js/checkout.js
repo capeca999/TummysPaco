@@ -213,25 +213,6 @@ else {
 
 
 
-
-//Guardamos pedido datos que hacen falta: 
-//
-//codigoDescuento
-//id id_user date_order coupon_id id_address total_price payment_method status USPS street number posta_code location province country way 
-//
-
-
-
-/*
-
-if (typeof x === "undefined") {
-  txt = "x is undefined";
-} else {
-  txt = "x is defined";
-} 
-
-
-
 */
 if (fin==true){
     $("#top").remove();

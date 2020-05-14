@@ -13,7 +13,7 @@ class LikesQuestion extends Migration
      */
     public function up()
     {
-        Schema::create('likes_questions', function (Blueprint $table) {
+        Schema::create('like_questions', function (Blueprint $table) {
             $table->bigInteger('id_user')->unsigned();
             $table->bigInteger('id_question')->unsigned();
             $table->primary(['id_question', 'id_user']);
@@ -28,7 +28,7 @@ class LikesQuestion extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('likes_questions');
+        Schema::dropIfExists('like_questions');
 
     }
 }

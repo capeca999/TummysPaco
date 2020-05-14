@@ -28,7 +28,7 @@
         <hr class="m-0">
         <div class="card-body py-3">
             <div class="row no-gutters align-items-center">
-                <div class="col"> <a href="forum/thread/{{$pregunta['question_id']}}" class="text-big" data-abc="true">{{ $pregunta['title'] }}</a> <span class="badge badge-success align-text-bottom ml-1">Solved</span>
+                <div class="col"> <a href="/forum/thread/{{$pregunta['question_id']}}" class="text-big" data-abc="true">{{ $pregunta['title'] }}</a> <span class="badge badge-success align-text-bottom ml-1">Solved</span>
                     <div class="text-muted small mt-1">{{ $pregunta['date'] }} &nbsp;·&nbsp; <a href="javascript:void(0)" class="text-muted" data-abc="true"> {{$pregunta['first_name']}} {{$pregunta['last_name']}}</a></div>
                 </div>
                 <div class="d-none d-md-block col-4">

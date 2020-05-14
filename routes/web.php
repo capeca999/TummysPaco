@@ -164,8 +164,17 @@ Route::get('animales/', function() {
                 return view('faq');
                 });
 
+
+         
+
     
-                
+                Route::get('/darLike/{id}', 'PreguntasController@likequestion');
+                Route::get('/quitarLike/{id}', 'PreguntasController@quitarlikequestion');
+
+                Route::get('/darLikeAnswer/{idquestion}/{idanswer}', 'PreguntasController@likeanswer');
+                Route::get('/quitarLikeAnswer/{idquestion}/{idanswer}', 'PreguntasController@quitarlikeanswer');
+
+
                 Route::get('/forum/thread/{id}', 'PreguntasController@getthread');
                 Route::get('/forum/', 'PreguntasController@preguntas');
                 

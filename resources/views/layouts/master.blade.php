@@ -37,7 +37,7 @@
                 <ul class="nav navbar-nav links">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/animales/">Animales En Adopción</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/animales/casosEspeciales">Casos Especiales</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/preguntas/"> Preguntas Y Respuestas</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/forum/"> Preguntas Y Respuestas</a></li>
 
                     @if(Auth::user()==null)
                     <a href="{{url('/login/')}}"><img class="cursorHand iconos ml-3" src="/img/icons/login.svg" id="loginHeader" alt="Login" title="Login"></a>

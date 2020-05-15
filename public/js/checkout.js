@@ -213,7 +213,7 @@ else {
 
 
 
-*/
+
 if (fin==true){
     $("#top").remove();
 var total_price=$("#preciototalnumero").text();

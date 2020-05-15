@@ -1,5 +1,14 @@
 $(function(){
 
+
+
+    $(document).on('change','#fotousuario' , function(){
+        $('#formimagen').submit();
+       }
+    );
+
+
+
     //HISTORIAL crear el a apartado de historiales
 
 
@@ -55,32 +64,41 @@ ORDER
 
 
     //DOBLE CLICK en los SPAN PERFIL: Al hacer doble click sobre un span, vaciaremos el 'span' y crearemos un input
-    $('#usuario-perfil').on('dblclick', '#contenedor-perfil span',function(){
+    $(document).on('dblclick', '.editarcampo',function(){
+       
         var valor=$(this).text();
-        console.log(valor);
+        var valor = $.trim(valor);
         $(this).empty();
+
         var input=$('<input>');
         input.attr('id','perfil-input');
-        if($(this).attr('id') == 'nacimiento'){
-            console.log('entra fecha');
-            input.attr('type','date');
-            input.val(valor);
-            console.log(valor);
-            input.attr('placeholder',valor);
-        }
-        else if($(this).attr('id')=='telefono'){
-            input.attr('type', 'tel');
-            input.val(valor);
-            input.attr('placeholder',valor);
-            input.attr('pattern', "^[9|8|7|6]\d{8}$");
-        }
-        
-        /*
-<input type="tel" id="phone" name="phone"
-       pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-       required>
+if($(this).attr('id')=="email"){
+    input.attr('type','email');
+    input.val(valor);
+    input.attr('placeholder',valor);
 
-        */
+}
+else if($(this).attr('id')=="telephone_number"){
+    input.attr('type','tel');
+    input.val(valor);
+    input.attr('placeholder',valor);
+    input.attr('pattern', "^[9|8|7|6]\d{8}$");
+
+
+}
+else if($(this).attr('id')=="date_birth"){
+    input.attr('type','date');
+    input.val(valor);
+    input.attr('placeholder',valor);
+
+}
+else if($(this).attr('id')=="nif"){
+    input.attr('type','text');
+    input.val(valor);
+    input.attr("pattern", "[0-9]{8}[A-Za-z]{1}")
+
+
+}
         else{
             input.attr('type','text');
             input.attr('placeholder',valor);
@@ -91,28 +109,246 @@ ORDER
     });
 
 
-    //BLUR en los INPUT PERFIL: Al hacer blur sobre un input se debe comporbar los datos introducidos por el ususario
-    $('#usuario-perfil').on('blur', '#perfil-input',function(){
-        var span=$(this).parent();
 
-        if($(this).val()!= ''){
-            var dato=$(this).val();
-            span.empty();
-            span.text(dato);
 
-            if(!$('#guardar-perfil').length > 0){
-                var img=$('<img>');
-                img.attr('src','/img/icons/guarda.svg');
-                img.attr('id','guardar-perfil');
-                $('#recu-contras').append(img);
-            }
 
-        }else{
-            var dato=$(this).attr('placeholder');
-            span.empty();
-            span.text(dato);
+/*
+
+
+$(document).on('blur','#dato-anyadir',function(){
+
+    var atributo=$(this).parent().attr('name');
+    var id=$(this).parent().parent().attr('id');
+    var valor= $(this).val();
+    if($(this).val() == ''){
+        $(this).parent().html($(this).attr('placeholder'));
+    }else{
+        if(comprobacionModificacion(atributo,valor)){
+        
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $ ('meta[name="csrf-token"]').attr ('content')
+                },
+                url: "/listar/modificarAnimal/"+id+"/"+atributo+"/"+valor,
+                method: "GET",
+            });
+            $(this).parent().html(valor);
         }
+        else{
+            $(this).parent().html($(this).attr('placeholder'));
+        }
+    }
+});
+
+
+
+*/
+    //BLUR en los INPUT PERFIL: Al hacer blur sobre un input se debe comporbar los datos introducidos por el ususario
+    $(document).on('blur', '.editarcampo',function(){
+
+        var atributo=$(this).attr('id');
+        var valor=$(this).find("input").val();         
+        var valor = $.trim(valor);
+        var error=$(this).attr('name');
+
+ 
+if($(this).find("input").val()==''){
+
+    if($("#top").length == 1) {
+
+        $("#top").remove();
+        }
+        var diverror = $("<div> El atributo " + error + "  está vacio </div>").attr("class" , "alert alert-warning beautiful").attr("role",  "alert").attr("id", "top").appendTo($(".container"));
+        var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
+        var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
+
+
+
+    
+    var p =$("<p>"+ $(this).find("input").attr('placeholder')+"</p>")
+ $(p).appendTo($(this));
+     $(this).find("input").remove();
+}
+else{
+if(comprobacionModificacion(atributo,valor)){
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $ ('meta[name="csrf-token"]').attr ('content')
+        },
+        url: "/listar/modificarUsuarioPerfil/"+atributo+"/"+valor,
+        method: "GET",
+    })
+    
+    .done(function(response){
+
+
+    })
+    .fail(function(response){
+
     });
+    
+
+    if($("#top").length == 1) {
+
+        $("#top").remove();
+        }
+        var diverror = $("<div> " + error + " cambiado con exito</div>").attr("class" , "alert alert-warning beautifulcorrect").attr("role",  "alert").attr("id", "top").appendTo($(".container"));
+        var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
+        var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
+
+
+
+
+    var p =$("<p>"+valor+"</p>")
+    $(p).appendTo($(this));
+    $(this).find("input").remove();
+
+
+}
+
+else{
+
+    if($("#top").length == 1) {
+
+        $("#top").remove();
+        }
+        var diverror = $("<div>Has tenido un error en el " + error + "</div>").attr("class" , "alert alert-warning beautifulerror").attr("role",  "alert").attr("id", "top").appendTo($(".container"));
+        var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
+        var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
+
+    var p =$("<p>"+ $(this).find("input").attr('placeholder')+"</p>")
+
+     $(p).appendTo($(this));
+    $(this).find("input").remove();
+
+}
+
+}
+
+  
+    });
+
+
+
+
+    function comprobacionModificacion(atributo, valor) {
+
+        var expresionRegular = ""
+        var res = false;
+    
+        switch (atributo) {
+            case "nif":
+                expresionRegular = new RegExp("[0-9]{8}[A-Za-z]{1}");
+                res = expresionRegular.test(valor);
+                break;
+    
+    
+            case "name":
+                expresionRegular = new RegExp("[a-zA-Z áéíóúÁÉÍÓÚñÑ]");
+                res = expresionRegular.test(valor);
+                break;
+    
+             
+    
+    
+            case "first_name":
+                expresionRegular = new RegExp("[a-zA-Z áéíóúÁÉÍÓÚñÑ]");
+                res = expresionRegular.test(valor);
+         
+                break;
+    
+    
+            case "last_name":
+                expresionRegular = new RegExp("[a-zA-Z áéíóúÁÉÍÓÚñÑ]");
+                res = expresionRegular.test(valor);
+                break;
+    
+            case "date_birth":
+             
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1;
+                var yyyy = today.getFullYear();
+                if (mm < 10) {
+                    mm = '0' + mm;
+                }
+                valor = valor.split("-");
+                if (parseInt(valor[0]) < yyyy) {
+                    res = true;
+                }
+                else if (parseInt(valor[0]) > yyyy){
+                    res = false;
+                }
+    
+                if (parseInt(valor[0]) == yyyy) {
+                    if (parseInt(valor[1]) < mm) {
+                     
+                        res = true;
+                    }
+                    else if (parseInt(valor[1]) > mm){
+                        res = false;
+                    }
+                    else if (parseInt(valor[1]) == mm){
+                     
+                        if (parseInt(valor[2]) < dd) {
+                            alert("entrado al dia");
+            
+                            res = true;
+                        }
+                        else if (parseInt(valor[2]) > dd){
+                            res = false;
+                        }
+                        else if (parseInt(valor[2])==dd){
+                            res=true
+                        }
+    
+    
+                    }
+    
+                } 
+                break;
+    
+            case "email":
+                expresionRegular = new RegExp("[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}");
+                res = expresionRegular.test(valor);
+                break;
+    
+    
+            case "province":
+                expresionRegular = new RegExp("[A-Za-z]");
+                res = expresionRegular.test(valor);
+                break;
+    
+    
+            case "location":
+                
+                expresionRegular = new RegExp("[^A-Za-z0-9]+");
+                res = expresionRegular.test(valor);
+           
+                break;
+    
+                case "telephone_number":
+    
+                    expresionRegular = new RegExp("^[679]{1}[0-9]{8}$");
+                    res = expresionRegular.test(valor);
+        
+                    break;
+    
+            default:
+                res = false;
+        }
+    
+    
+        return res;
+    }
+    
+
+
+
+
+
+
 
     $('#usuario-perfil').on('click','#guardar-perfil',function(){
         console.log('MODIFICARLO - para insertar los datos en la BBDD');

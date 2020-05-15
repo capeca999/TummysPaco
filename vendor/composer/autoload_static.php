@@ -482,6 +482,8 @@ class ComposerStaticInit3467a817a505648f318474a951ae02eb
         'App\\Vaccination' => __DIR__ . '/../..' . '/app/Vaccination.php',
         'App\\Vaccines' => __DIR__ . '/../..' . '/app/Vaccines.php',
         'App\\Weight' => __DIR__ . '/../..' . '/app/Weight.php',
+        'App\\like_answer' => __DIR__ . '/../..' . '/app/like_answer.php',
+        'App\\like_question' => __DIR__ . '/../..' . '/app/like_question.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonImmutable' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonImmutable.php',
         'Carbon\\CarbonInterface' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterface.php',

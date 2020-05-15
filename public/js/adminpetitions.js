@@ -22,6 +22,7 @@ var id=$(this).attr("value");
     var atributo = "Status";
     var valor= $(this).attr("name");
    animalId=$("#"+id).attr("name");
+  var emailenviar = $(this).parent();
 
     $.ajax({
         dataType:"json",
@@ -31,22 +32,33 @@ var id=$(this).attr("value");
         url: "/api/animalinfo/"+animalId,
         method: "GET",
         success:function(data) {
-
+       
 if(valor=="Accepted"){
-    var mensaje="Felicidades " + $("#idusuario").attr("value") + "! Tu solicitud de adopción de " + data[0].nickname + " Ha sido aceptada!, el siguiente paso es ir a nuestro refugio y cojer a tu mascota";
+    var mensaje="Felicidades " + $(emailenviar).prev().prev().prev().prev().prev().text()+ "! Tu solicitud de adopción de " + data[0].nickname + " Ha sido aceptada!, el siguiente paso es ir a nuestro refugio y cojer a tu mascota";
 
 }
 else{
-    var mensaje="Lo sentimos " + $("#idusuario").attr("value") +  "Tu solicitud de adopción de " + data[0].nickname + " no ha sido aceptada, intentelo de nuevo o contactanos para mas información";
+    var mensaje="Lo sentimos " +$(emailenviar).prev().prev().prev().prev().prev().text() +  "Tu solicitud de adopción de " + data[0].nickname + " no ha sido aceptada, intentelo de nuevo o contactanos para mas información";
 }
 
 $.ajax({
     headers: {
         'X-CSRF-TOKEN': $ ('meta[name="csrf-token"]').attr ('content')
     },
-    url: "/sendmail/"+mensaje+"/"+$("#emailusuario").attr("value"),
+    url: "/sendmail/"+mensaje+"/"+$(emailenviar).prev().prev().prev().prev().text(),
     method: "GET",
 });
+
+
+$.ajax({
+    headers: {
+        'X-CSRF-TOKEN': $ ('meta[name="csrf-token"]').attr ('content')
+    },
+    url: "/eliminarPetition/"+$(emailenviar).prev().prev().prev().prev().prev().prev().prev().prev().text(),
+    method: "GET",
+});
+
+
 
             $.ajax({
                 headers: {
@@ -63,17 +75,26 @@ $.ajax({
   var parentBoton=$(this).parent();
 $(parentBoton).prev().text(valor);
 
-
+$(emailenviar).parent().remove();
 
 if($("#top").length == 1) {
 
     $("#top").remove();
     }
-    var diverror = $("<div>Has " + $(this).attr("title")+" la petición</div>" ).attr("class" , "alert alert-warning beautiful").attr("role",  "alert").attr("id", "top").appendTo($("#divprincipal"));
-    var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
-    var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
 
+    if($(this).attr("title")=="Cancelled"){
+        var diverror = $("<div>Has " + $(this).attr("title")+" la petición</div>" ).attr("class" , "alert alert-warning beautifulerror").attr("role",  "alert").attr("id", "top").appendTo($("#divprincipal"));
+        var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
+        var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
+    }
+    else{
 
+  
+    diverror = $("<div>Has " + $(this).attr("title")+" la petición</div>" ).attr("class" , "alert alert-warning beautifulcorrect").attr("role",  "alert").attr("id", "top").appendTo($("#divprincipal"));
+     buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
+     spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
+
+}
             //var name = $(this).closest('tr').find('.contact_name').text();
 });
 });

@@ -52,6 +52,8 @@ return array(
     'App\\Vaccination' => $baseDir . '/app/Vaccination.php',
     'App\\Vaccines' => $baseDir . '/app/Vaccines.php',
     'App\\Weight' => $baseDir . '/app/Weight.php',
+    'App\\like_answer' => $baseDir . '/app/like_answer.php',
+    'App\\like_question' => $baseDir . '/app/like_question.php',
     'Carbon\\Carbon' => $vendorDir . '/nesbot/carbon/src/Carbon/Carbon.php',
     'Carbon\\CarbonImmutable' => $vendorDir . '/nesbot/carbon/src/Carbon/CarbonImmutable.php',
     'Carbon\\CarbonInterface' => $vendorDir . '/nesbot/carbon/src/Carbon/CarbonInterface.php',

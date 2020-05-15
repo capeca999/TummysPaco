@@ -38,5 +38,15 @@ class PetitionController extends Controller
             $petition->$atributo = $valor;
             $petition->save(); 
         }
-    
+ 
+        
+
+
+
+        public static function eliminarPetition($id){
+
+            Petitions::where('id',$id)->delete();
+
+        }
+
 }

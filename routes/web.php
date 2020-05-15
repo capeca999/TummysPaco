@@ -19,12 +19,13 @@ Route::group(['middleware' => 'checkAdmin'], function () {
         $data=array(
             'mensaje' => $mensaje,
         );
-        var_dump($email);
-
+ 
         Mail::send('emails.adoptar', $data, function ($message) use($email){
+       
         $message->from('tummysrefugio@gmail.com', 'Felicidades Por Tu Adopción!');
         $message->to($email)->subject('Felicidades Por Tu Adopción');
         });
+       
         return "Tu Email se ha enviado";
         });
 
@@ -44,9 +45,14 @@ Route::group(['middleware' => 'checkAdmin'], function () {
         return "Tu Email se ha enviado";
         });
 
+        Route::get('/eliminarPetition/{id}', 'PetitionController@eliminarPetition');  
 
-        Route::get('/listar/modificarUsuario/{id}/{atributo}/{valor}', 'UserController@modificarUsuario');    
-        Route::get('/listar/modificarAnimal/{id}/{atributo}/{valor}', 'AnimalController@modificarAnimal');       
+
+
+        Route::get('/listar/modificarUsuario/{id}/{atributo}/{valor}', 'UserController@modificarUsuario');  
+
+        Route::get('/listar/modificarAnimal/{id}/{atributo}/{valor}', 'AnimalController@modificarAnimal');  
+
         Route::get('/listar/modificarStatus/{id}/{atributo}/{valor}', 'PetitionController@modificarPetition');  
 
 
@@ -54,6 +60,7 @@ Route::group(['middleware' => 'checkAdmin'], function () {
         Route::get('/UsuariosAdmin/', 'UserController@getUsuariosAdmin');
         Route::get('/PeticionesAdmin/', 'PetitionController@getPetitionsAdmin');
 });
+Route::get('/listar/modificarUsuarioPerfil/{atributo}/{valor}', 'UserController@modificarUsuarioperfil');  
 
 
 /*
@@ -119,8 +126,10 @@ Route::get('/paginaComprar/', function() {
     
     Route::middleware('auth')->get('/usuario/perfil', 'UserController@getperfil');
 
+
     Route::middleware('auth')->get('/animales/formularioAdoptar/{id}', 'AnimalController@getAnimalIDFormulario');
-        
+
+        Route::post('/usuario/perfil', 'UserController@update_avatar');
 
 Route::get('registro/', function () {
     return view('auth.register');

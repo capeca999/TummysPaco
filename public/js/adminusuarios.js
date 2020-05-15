@@ -119,7 +119,7 @@ function comprobacionModificacion(atributo, valor) {
 
 
         case "name":
-            expresionRegular = new RegExp("[A-Za-z]");
+            expresionRegular = new RegExp("[a-zA-Z áéíóúÁÉÍÓÚñÑ]");
             res = expresionRegular.test(valor);
             break;
 
@@ -127,14 +127,14 @@ function comprobacionModificacion(atributo, valor) {
 
 
         case "first_name":
-            expresionRegular = new RegExp("[A-Za-z]");
+            expresionRegular = new RegExp("[a-zA-Z áéíóúÁÉÍÓÚñÑ]");
             res = expresionRegular.test(valor);
      
             break;
 
 
         case "last_name":
-            expresionRegular = new RegExp("[A-Za-z]");
+            expresionRegular = new RegExp("[a-zA-Z áéíóúÁÉÍÓÚñÑ]");
             res = expresionRegular.test(valor);
             break;
 

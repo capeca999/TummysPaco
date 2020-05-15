@@ -147,6 +147,9 @@ return view('animalDetalles')->with('animales', json_decode($animales));
         ->get()
         ->toJson();
 
+   
+
+
         $preguntas= json_decode($preguntas);
 
 //$arraythread[$cont1]->liked=true;

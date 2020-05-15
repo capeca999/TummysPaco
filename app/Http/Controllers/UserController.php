@@ -11,7 +11,7 @@ use App\Order;
 use App\Line;
 use App\Product;
 use DB;
-
+use Image;
 
 class UserController extends Controller
 {
@@ -115,14 +115,19 @@ class UserController extends Controller
      * @return array usuario
      */
     public static function modificarUsuario($id,$atributo,$valor){
-        echo $id;
-        $usuario = User::find($id);
+        $usuario = User::find(Auth::user()->id);
         $usuario->$atributo = $valor;
         $usuario->save(); 
-
-
-
     }
+    public static function modificarUsuarioperfil($atributo,$valor){
+
+ 
+
+        $usuario = User::find(Auth::user()->id);
+        $usuario->$atributo = $valor;
+        $usuario->save(); 
+    }
+
 
 
     public static function historialUsuarioPedidos(){
@@ -208,6 +213,41 @@ class UserController extends Controller
 
         return view ('perfil')->with('historiales', json_decode($historiales));
     }
+
+
+
+    public function update_avatar(Request $request){
+
+    	// Handle the user upload of avatar
+    	if($request->hasFile('avatar')){
+    		$avatar = $request->file('avatar');
+    		$filename = time() . '.' . $avatar->getClientOriginalExtension();
+    		Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
+
+    		$user = Auth::user();
+    		$user->avatar = $filename;
+    		$user->save();
+        }
+        
+        $historiales = User::select('lines.id_order','orders.payment_method','orders.total_price',
+        'products.price','orders.date_order','lines.quantity','products.name')
+        ->join('orders','users.id','=','orders.id_user')
+        ->join('lines','orders.id','=','lines.id_order')
+        ->join('products','lines.id_product','=','products.id')
+        ->where('orders.id_user', '=' , Auth::user()->id)
+        ->orderBy('id_order')
+        ->get()
+        ->toJson();
+
+
+        return view ('perfil')->with('historiales', json_decode($historiales));
+
+    }
+
+
+
+
+
 
     
     public static function getUsuariosAdminList(){

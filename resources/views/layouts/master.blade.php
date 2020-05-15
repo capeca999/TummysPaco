@@ -65,6 +65,8 @@
                         <div class="dropdown-menu dropdown-menu-right" role="menu"><a class="dropdown-item" role="presentation" href="#">Settings </a><a class="dropdown-item" role="presentation" href="#">Payments </a><a class="dropdown-item" role="presentation" href="#">Logout </a></div>
                     </li>
                 </ul>
+
+                
             </div>
         </div>
     </nav>

@@ -8,29 +8,28 @@
 
 
 <div class="container emp-profile">
-<form id="formimagen" enctype="multipart/form-data" action="/usuario/perfil" method="POST">
-
+         
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
                         <img src="/uploads/avatars/{{Auth::user()->avatar}}" alt=""/>
                             <div class="file btn btn-lg btn-primary">
                                 Change Photo
+                                <form id="formimagen" enctype="multipart/form-data" action="/usuario/perfil/imagen" method="POST">
                                 <input  id="fotousuario" type="file" name="avatar" value=""/>
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             </div>
                         </div>
                     </div>
                     </form>
-
+                    <form method="post">
                     <div class="col-md-6">
-                    <form method="post">  
                         <div class="profile-head">
-                                    <h5 class="editarPerfil">
-                                    {{Auth::user()->name}} {{Auth::user()->first_name}} {{Auth::user()->last_name}}
+                                    <h5>
+                                        Kshiti Ghelani
                                     </h5>
                                     <h6>
-                                       Usuario De Tummys!
+                                        Web Developer and Designer
                                     </h6>
                                     <p class="proile-rating">RANKINGS : <span>8/10</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -43,7 +42,9 @@
                             </ul>
                         </div>
                     </div>
-                
+                    <div class="col-md-2">
+                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
@@ -65,128 +66,44 @@
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="row">
                                             <div class="col-md-6">
+                                                <label>User Id</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>Kshiti123</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
                                                 <label>Name</label>
                                             </div>
-                                            <div id="name" name="Nombre" class="col-md-6 editarcampo">
-                                                <p>{{Auth::user()->name}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col-md-6">
-                                                <label>Primer Nombre</label>
-                                            </div>
-                                            <div id="first_name"  name="Primer Apellido" class="col-md-6 editarcampo">
-                                                <p>{{Auth::user()->first_name}}</p>
+                                                <p>Kshiti Ghelani</p>
                                             </div>
                                         </div>
-
-
-
-
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Segundo Nombre</label>
-                                            </div>
-                                            <div id="last_name" name="Segundo Apellido" class="col-md-6 editarcampo">
-                                                <p>{{Auth::user()->last_name}}</p>
-                                            </div>
-                                        </div>
-
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label>Email</label>
                                             </div>
-                                            <div id="email" name="Correo" class="col-md-6 editarcampo">
-                                                <p>{{Auth::user()->email}}</p>
+                                            <div class="col-md-6">
+                                                <p>kshitighelani@gmail.com</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Teléfono</label>
+                                                <label>Phone</label>
                                             </div>
-                                            <div  id="telephone_number" name="Numero De Teléfono" class="col-md-6 editarcampo">
-
-
-
-                                            @if( Auth::user()->telephone_number=="")
-                                            <p>Introduce tu número</p>
-
-                                            @else
-                                            <p>{{Auth::user()->telephone_number}}</p>
-                                                @endif
+                                            <div class="col-md-6">
+                                                <p>123 456 7890</p>
                                             </div>
                                         </div>
-
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Fecha De Nacimiento</label>
+                                                <label>Profession</label>
                                             </div>
-                                            <div  id="date_birth"  name="Fecha De Nacimiento" class="col-md-6 editarcampo" >
-
-
-
-                                            @if( Auth::user()->date_birth=="0000-00-00")
-                                            <p>Introduce tu fecha</p>
-
-                                            @else
-                                            <p>{{Auth::user()->date_birth}}</p>
-                                                @endif
-                                            </div>
-                                        </div>
-
-
-
-                                        <div class="row">
                                             <div class="col-md-6">
-                                                <label>DNI</label>
-                                            </div>
-                                            <div id="nif"  name="DNI" class="col-md-6 editarcampo">
-
-
-
-                                            <p>{{Auth::user()->nif}}</p>
-                                           
+                                                <p>Web Developer and Designer</p>
                                             </div>
                                         </div>
-
-
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Provincia</label>
-                                            </div>
-                                            <div  id="province"  name="Provincia" class="col-md-6 editarcampo">
-
-
-
-                                            @if( Auth::user()->province=="")
-                                            <p>Introduce tu Provincia</p>
-
-                                            @else
-                                            <p>{{Auth::user()->province}}</p>
-                                                @endif
-                                            </div>
-                                        </div>
-
-
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Localización</label>
-                                            </div>
-                                            <div id="location" name="Localización" class="col-md-6 editarcampo">
-
-
-
-                                            @if( Auth::user()->location=="")
-                                            <p>Introduce tu Provincia</p>
-
-                                            @else
-                                            <p>{{Auth::user()->location}}</p>
-                                                @endif
-                                            </div>
-                                        </div>
-
-
-                           
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                         <div class="row">

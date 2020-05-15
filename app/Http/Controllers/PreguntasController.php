@@ -117,25 +117,9 @@ return view('animalDetalles')->with('animales', json_decode($animales));
     public static function getthread($id){
         $hilo = self::getidthread(1,10,$id);
         $pregunta = self::getidpregunta($id);
-        $likespregunta= self::getlikespregunta($id);
-        $likesrespuesta= self::getlikesrespuesta($id);
-
-        echo "<pre>";
-       var_dump(json_decode($hilo));
-        echo "</pre>";
-        die;
-        
-        
         $data =  array();
-        $data['hilo']  =   json_decode($hilo, true);
-        $data['pregunta']     =   json_decode($pregunta, true);
-        $data['likespregunta'] = $likespregunta;
-        $data['likesrespuesta'] =  json_decode($likesrespuesta, true);
-
-
-
-
-
+        $data['hilo']  =   $hilo;
+        $data['pregunta']     =   $pregunta;
         return view('thread',compact("data"));
     }
 
@@ -146,25 +130,6 @@ return view('animalDetalles')->with('animales', json_decode($animales));
 
 
 
-public static function getlikespregunta($id){
-    $column_id = like_question::select('id_user', 'id_question')
-    ->where('id_question', '=', $id)
-    ->where('id_user' , '=', Auth::user()->id)
-->get()
-->toJson();
-
-
-
-if( ( strlen($column_id))==2 ){
-
-    return "notliked";
-
-}
-else{
-    return "liked";
-} 
-
-}
 
 
 
@@ -181,10 +146,46 @@ else{
         ->join('users', 'users.id', 'questions.id_user')
         ->get()
         ->toJson();
-  
+
+        $preguntas= json_decode($preguntas);
+
+//$arraythread[$cont1]->liked=true;
+
+
+        $column_id = like_question::select('id_user', 'id_question')
+        ->where('id_question', '=', $id)
+        ->where('id_user' , '=', Auth::user()->id)
+    ->get()
+    ->toJson();
+    
+    
+    
+    if( ( strlen($column_id))==2 ){
+        $preguntas[0]->liked=false;
+
+
+
+
+    
+    }
+    else{
+        $preguntas[0]->liked=true;
+
+    } 
+
+
+
     return $preguntas;
     }
     
+
+
+    public static function getlikespregunta($id){
+   
+    
+    }
+
+
 
 
     public static function likequestion($id){
@@ -285,60 +286,28 @@ $column_id = like_answer::select('id_answer AS answerliked')
 $arraylikes= json_decode($column_id);
 
 
-
-
 $encontrado=false;
-
-
 for ($cont1=0; $cont1 < count($arraythread) ; $cont1++) {
-    
-
     $encontrado=false;
 for ($cont2=0; $cont2 < count($arraylikes) ; $cont2++) { 
- 
     if($arraythread[$cont1]->answer_id==$arraylikes[$cont2]->answerliked){
 $arraythread[$cont1]->liked=true;
 
 $encontrado=true;
-
-
     }
-
-
-
-
-
 }
 
 
 if($encontrado==false){
- 
     $arraythread[$cont1]->liked=false;
 
 }
-
-
 }
 
-echo "<pre>";
-echo var_dump($arraythread);
-echo "</pre>";
-die; 
-
-
-/*
-$arraymalo= json_decode($threads);
-
-$arraymalo[0]->idpreguntaliked =
-echo "<pre>";
-echo var_dump($arraymalo[0]->answer_id);
-echo "</pre>";
-die;
-*/
 
 
 
-return $threads;
+return $arraythread;
 
 
 }

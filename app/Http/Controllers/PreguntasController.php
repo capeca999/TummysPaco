@@ -112,6 +112,7 @@ return view('animalDetalles')->with('animales', json_decode($animales));
 
 
 */
+//Question::count();
 
 
     public static function getthread($id){
@@ -259,62 +260,6 @@ return view('animalDetalles')->with('animales', json_decode($animales));
 
 
 
-public static function getidthread($pagina=1, $cantidad=10,$id){
-
-
-    if($cantidad<=0){
-        $cantidad=10;
-            }
-        
-            if($pagina<1){
-                $pagina=1;
-            }
-        $pagina--;
-$saltar = $pagina*10;
-
-$threads = Answer::select('answers.id AS answer_id','answers.id_question', 'answers.id_user', 'answers.fecha', 'answers.title', 'answers.description', 'answers.likes' , 'answers.views','users.created_at', 'users.first_name',  'users.id AS user_id','users.last_name')
-->join('users', 'users.id', 'answers.id_user')
-->where('answers.id_question', '=', $id)
-->get()
-->toJson();
-$arraythread= json_decode($threads);
-
-
-
-$column_id = like_answer::select('id_answer AS answerliked')
-    ->where('id_user' , '=', Auth::user()->id)
-    ->where('id_question', '=', $id)
-->get()
-->toJson();
-$arraylikes= json_decode($column_id);
-
-
-$encontrado=false;
-for ($cont1=0; $cont1 < count($arraythread) ; $cont1++) {
-    $encontrado=false;
-for ($cont2=0; $cont2 < count($arraylikes) ; $cont2++) { 
-    if($arraythread[$cont1]->answer_id==$arraylikes[$cont2]->answerliked){
-$arraythread[$cont1]->liked=true;
-
-$encontrado=true;
-    }
-}
-
-
-if($encontrado==false){
-    $arraythread[$cont1]->liked=false;
-
-}
-}
-
-
-
-
-return $arraythread;
-
-
-}
-
 
 
 public static function getlikesrespuesta($id){
@@ -335,8 +280,11 @@ return $column_id;
 
 
 public function preguntas(){
-    $preguntas = $this::listarPreguntas(1,10);
-    return view('forum')->with('preguntas', json_decode($preguntas, true));
+    $preguntas = $this::listarPreguntas(1,5);
+    $data =  array();
+    $data['cantidad']  =  Question::count();
+    $data['preguntas']     =   $preguntas;
+    return view('forum',compact("data"));
 }
 
 
@@ -349,25 +297,80 @@ public static function listarPreguntas($pagina=1, $cantidad=10){
                 $pagina=1;
             }
         $pagina--;
-$saltar = $pagina*10;
+$saltar = $pagina*$cantidad;
 
 
 $preguntas = Question::select('questions.id AS question_id' ,
 'questions.date',
  'questions.id_user', 'questions.title', 'questions.description', 'questions.views',
- 'users.id AS user_id', 'users.first_name', 'users.last_name')
+ 'users.id AS user_id', 'users.first_name', 'users.last_name', 'users.avatar')
 ->join('users', 'users.id', 'questions.id_user')
 ->get()
 ->skip($saltar)
 ->take($cantidad)
 ->toJson();
 
+$count = Answer::where('status','=','1')->count();$replies = Answer::select()
 
 
+
+
+
+
+
+$preguntas = json_decode($preguntas);
 return $preguntas;
+}
 
+public static function getidthread($pagina=1, $cantidad=10,$id){
+    if($cantidad<=0){
+        $cantidad=10;
+            }
+        
+            if($pagina<1){
+                $pagina=1;
+            }
+        $pagina--;
+$saltar = $pagina*10;
+$threads = Answer::select('answers.id AS answer_id','answers.id_question', 'answers.id_user', 'answers.fecha', 'answers.title', 'answers.description', 'answers.likes' , 'answers.views','users.created_at', 'users.first_name',  'users.id AS user_id','users.last_name')
+->join('users', 'users.id', 'answers.id_user')
+->where('answers.id_question', '=', $id)
+->get()
+->toJson();
+$arraythread= json_decode($threads);
+$column_id = like_answer::select('id_answer AS answerliked')
+    ->where('id_user' , '=', Auth::user()->id)
+    ->where('id_question', '=', $id)
+->get()
+->toJson();
+$arraylikes= json_decode($column_id);
+$encontrado=false;
+for ($cont1=0; $cont1 < count($arraythread) ; $cont1++) {
+    $encontrado=false;
+for ($cont2=0; $cont2 < count($arraylikes) ; $cont2++) { 
+    if($arraythread[$cont1]->answer_id==$arraylikes[$cont2]->answerliked){
+$arraythread[$cont1]->liked=true;
+$encontrado=true;
+    }
+}
+if($encontrado==false){
+    $arraythread[$cont1]->liked=false;
 
 }
+}
+return $arraythread;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

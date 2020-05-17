@@ -180,6 +180,8 @@ Route::get('animales/', function() {
                 Route::middleware('auth')->post('/forum/', 'PreguntasController@crearquestion');
                 Route::get('/forum/', 'PreguntasController@preguntas');
 
+                
+
                 Route::get('/darLike/{id}', 'PreguntasController@likequestion');
                 Route::get('/quitarLike/{id}', 'PreguntasController@quitarlikequestion');
 

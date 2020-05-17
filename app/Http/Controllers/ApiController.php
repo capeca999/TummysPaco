@@ -14,6 +14,7 @@ use Auth;
 use App\Order;
 use App\Line;
 use App\Petitions;
+use App\Question;
 
 class ApiController extends Controller
 
@@ -427,6 +428,35 @@ return response()->json(
   );
     }
 
+
+
+
+
+    public static function  getPreguntas($pagina=1, $cantidad=5 ){
+        if($cantidad<=0){
+            $cantidad=10;
+                }
+            
+                if($pagina<1){
+                    $pagina=1;
+                }
+            $pagina--;
+    $saltar = $pagina*5;
+  $preguntas = Question::select('questions.id AS question_id' ,
+'questions.date',
+ 'questions.id_user', 'questions.title', 'questions.description', 'questions.views',
+ 'users.id AS user_id', 'users.first_name', 'users.last_name', 'users.avatar')
+->join('users', 'users.id', 'questions.id_user')
+->get()
+->skip($saltar)
+->take($cantidad)
+->toJson();
+
+
+
+return $preguntas;
+
+    }
 
 
     public static function postDireccion(Request $request){

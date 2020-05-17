@@ -19,6 +19,9 @@ Route::middleware('auth:api')->get('/productos/{id?}', 'ApiController@getProduct
 //Route::middleware('auth:api')->get('/usuarios/perfil/getHistorial/{id?}', 'ApiController@getHistorialUsuario');
 
 
+Route::get('/forum/{pagina}/{cantidad?}', 'ApiController@getPreguntas');
+
+
 
 Route::get('/productos/{id?}', 'ApiController@getProductById');
 Route::get('/productosCupon/{id?}', 'ApiController@getCouponById');

@@ -4,6 +4,9 @@
 
 $(function () {
  
+
+var pagina=0;
+
     function formatDate(date) {
         var d = new Date(date),
             month = '' + (d.getMonth() + 1),
@@ -39,7 +42,8 @@ $.ajax({
 
  .done(function(response){
 
-alert("hola");
+
+
 
  })
 .fail(function(response){ 
@@ -58,6 +62,97 @@ alert("hola");
 
 $(".likesnumeroanswer").click(function(){
     $(this).toggleClass("heart");
+});
+
+
+    
+
+$(".page-item").click(function(){
+    var fin=false;
+var numeroarray=0;
+var estepage = $(this);
+
+if($(this).hasClass("disabled") || $(this).hasClass("active")){
+
+}
+else{
+
+
+
+
+
+    $.ajax({
+        type: 'GET',
+         dataType: "json",
+         url: '/api/forum/'+$(this).find("a").text(),
+     })
+    
+     .done(function(response){
+
+ var arraypreguntas =Object.values(response);
+
+
+
+
+
+ var activo = $(".active");
+ $(".active").removeClass("active");
+
+ $(estepage).addClass("active");
+
+    $("#preguntastodas").empty();
+    
+
+    for (let index = 0; index < arraypreguntas.length; index++) {
+ 
+
+        $("<hr>").attr("class", "m-0").appendTo($("#preguntastodas"));
+      var divbody=   $("<div>").attr("class", "card-body py-3").appendTo($("#preguntastodas"));
+      var divgutters=   $("<div>").attr("class", "row no-gutters align-items-center").appendTo(divbody);
+      var divcol = $("<div>").attr("class", "col").appendTo(divgutters);
+      var ahref =  $("<a>"+arraypreguntas[index].title+"</a>").attr("class", "text-big").attr("data-abc", "true").attr("href", "/forum/thread/"+arraypreguntas[index].question_id).appendTo(divcol);
+
+      var spanbadge = $("<span>"+"solved"+"</span>").attr("class", "badge badge-success align-text-bottom ml-1").appendTo(divcol);
+
+      var divfecha = $("<div>"+arraypreguntas[index].date+ "</div>").attr("class", "text-muted small mt-1").appendTo(divcol);
+
+      var afirstnamelastname = $("<a>"+arraypreguntas[index].first_name + arraypreguntas[index].last_name + "</a>").attr("href", "javascript:void(0)").attr("class", "text-muted").attr("data-abc", "true").appendTo(divfecha);
+      
+      var divnone = $("<div>").attr("class", "d-none d-md-block col-4").appendTo(divgutters);   
+        var  divguttersdos=   $("<div>").attr("class", "row no-gutters align-items-center").appendTo(divnone);
+        var divcol2 = $("<div>"+43+"</div>").attr("class", "col-4").appendTo(divguttersdos);
+        var divmedia =$("<div>").attr("class", "media col-8 align-items-center").appendTo(divguttersdos);
+        var imgusuario = $("<img>").attr("src", "/uploads/avatars/"+arraypreguntas[index].avatar).attr("alt", "avatarUsuario").attr("class", "  imagenpregunta d-block ui-w-30 rounded-circle").appendTo(divmedia);
+        var divtruncate = $("<div>").attr("class", "media-body flex-truncate ml-2").appendTo(divmedia);
+        var divtextruncate = $("<div>"+"1 day ago" + "</div>").attr("class", "line-height-1 text-truncate").appendTo(divtruncate);
+        var aby=$("<a>" + "by Steve smith" + "</a>").attr("href", "javascript:void(0)").attr("class", "text-muted small text-truncate").attr("data-abc", "true").appendTo(divtruncate);
+
+
+
+
+
+    }
+
+
+    
+     })
+    .fail(function(response){ 
+    
+        console.log(response);
+    
+    });
+
+
+
+
+
+
+
+
+
+}
+
+
 });
 
 

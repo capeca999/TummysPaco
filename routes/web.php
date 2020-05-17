@@ -124,12 +124,15 @@ Route::get('/paginaComprar/', function() {
     return view('Checkout');
     });
     
+    Route::middleware('auth')->get('/listar/selectBadge/{id}', 'UserController@changeBadge');
     Route::middleware('auth')->get('/usuario/perfil', 'UserController@getperfil');
 
 
     Route::middleware('auth')->get('/animales/formularioAdoptar/{id}', 'AnimalController@getAnimalIDFormulario');
 
         Route::post('/usuario/perfil', 'UserController@update_avatar');
+
+
 
 Route::get('registro/', function () {
     return view('auth.register');
@@ -174,9 +177,9 @@ Route::get('animales/', function() {
                 });
 
 
-         
+                Route::middleware('auth')->post('/forum/', 'PreguntasController@crearquestion');
+                Route::get('/forum/', 'PreguntasController@preguntas');
 
-    
                 Route::get('/darLike/{id}', 'PreguntasController@likequestion');
                 Route::get('/quitarLike/{id}', 'PreguntasController@quitarlikequestion');
 
@@ -185,8 +188,12 @@ Route::get('animales/', function() {
 
 
                 Route::get('/forum/thread/{id}', 'PreguntasController@getthread');
-                Route::get('/forum/', 'PreguntasController@preguntas');
+
+
+
                 
+
+
 
 Route::get('/animales/casosEspeciales/', 'ApiController@getAnimalsEspeciales');
 

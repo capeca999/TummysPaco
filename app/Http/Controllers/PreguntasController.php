@@ -371,6 +371,15 @@ return $preguntas;
 
 
 
+public  function crearquestion(Request $request){
+    $input = $request->all();
+    DB::table('questions')->insert([
+        ['id_user' => Auth::user()->id,  'title' => $_POST['title'], 'description' => $_POST['description'], 'date' => $_POST['date']]
+     
+    ]);
+    return response()->json(['success'=>'Got Simple Ajax Request.']);
+}
+
 
 public static function listarPreguntasHoy($pagina=1, $cantidad=10){
 

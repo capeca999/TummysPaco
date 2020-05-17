@@ -17,11 +17,10 @@ class Questions extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('id_user')->unsigned();
-            $table->date('date');
             $table->string('title');
-            $table->Integer('likes');
-            $table->Integer('views');
-
+            $table->Integer('likes')->default(0);
+            $table->Integer('views')->default(0);
+            $table->date('date');
             $table->string('description');
             $table->timestamps();
         });

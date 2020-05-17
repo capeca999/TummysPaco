@@ -4,7 +4,57 @@
 
 $(function () {
  
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+    
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+    
+        return [year, month, day].join('-');
+    }
 
+
+    $(document).on('click','#submit' , function(){
+        var today = new Date();
+
+var titulo = $("#titulo").val();
+var descripcion = $("#descripcion").val();
+alert(titulo);
+alert(descripcion);
+
+$.ajax({
+    type: 'POST',
+     dataType: "json",
+     url: '/forum/',
+     headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
+    data:{"_token": $('#token').val(), title:$("#titulo").val(), description: $("#descripcion").val(), date:formatDate(today)},
+ })
+
+ .done(function(response){
+
+alert("hola");
+
+ })
+.fail(function(response){ 
+
+    console.log(response);
+
+});
+
+
+
+       }
+    );
+
+
+    
 
 $(".likesnumeroanswer").click(function(){
     $(this).toggleClass("heart");

@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->date('date_birth');
             $table->string('email')->unique();
+            $table->bigInteger('badge_selected')->unsigned()->nullable();
             $table->string('province');
             $table->string('location');
             $table->string('telephone_number');

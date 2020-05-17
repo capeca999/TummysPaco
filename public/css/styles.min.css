@@ -6,6 +6,33 @@
  */
 
 /* HIDE RADIO */
+
+
+
+
+.contenedorsobre {
+    border: 1px solid #DDDDDD;
+    width: 100%;
+    height: 100%;
+    position:relative;
+}
+.floating {
+    float: left;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background-color: grey;
+}
+
+
+
+
+
+.badgeiconusuario{
+    width: 1.5em;
+}
+
+
 .radioimage { 
     position: absolute;
     opacity: 0;
@@ -13,6 +40,10 @@
     height: 0;
   }
   
+#badgeimg{
+    width: 10em;
+}
+
   /* IMAGE STYLES */
   .radioimage + img {
     cursor: pointer;
@@ -368,8 +399,27 @@ a.likes:hover{
     content: "\f00c"
 }
 
+.selectedbadge{
+    border: 10px solid;
+    border-image-source: linear-gradient(45deg, rgb(0,143,104), rgb(250,224,66));
+    border-image-slice: 1;
+}
 .icon {
     width: 60px;
+    height: 60px;
+    margin-right: 15px
+}
+
+.selectbadge:first-child{
+    font-weight: bolder;
+    font-size: large;
+}
+
+
+
+
+.iconperfil {
+    width: 400px;
     height: 60px;
     margin-right: 15px
 }

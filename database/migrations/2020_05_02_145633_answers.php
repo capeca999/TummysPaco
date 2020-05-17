@@ -19,7 +19,6 @@ class Answers extends Migration
             $table->bigInteger('id_user')->unsigned();
             $table->Integer('likes');
             $table->Integer('views');
-
             $table->date('fecha');
             $table->string('title');
             $table->string('description');

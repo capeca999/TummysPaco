@@ -24,10 +24,11 @@
                     </form>
 
                     <div class="col-md-6">
-                    <form method="post">  
+             
                         <div class="profile-head">
                                     <h5 class="editarPerfil">
-                                    {{Auth::user()->name}} {{Auth::user()->first_name}} {{Auth::user()->last_name}}
+                                    {{Auth::user()->name}} {{Auth::user()->first_name}} {{Auth::user()->last_name}} 
+                                    <img  id="badgeiconusuario "src="{{$data['awardseleccionado']->icon}}" class="badgeiconusuario">
                                     </h5>
                                     <h6>
                                        Usuario De Tummys!
@@ -39,6 +40,9 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab2" data-toggle="tab" href="#profile2" role="tab" aria-controls="profile" aria-selected="false">Insignias</a>
                                 </li>
                             </ul>
                         </div>
@@ -58,6 +62,7 @@
                             <a href="">WordPress</a><br/>
                             <a href="">WooCommerce</a><br/>
                             <a href="">PHP, .Net</a><br/>
+
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -185,8 +190,7 @@
                                             </div>
                                         </div>
 
-
-                           
+          
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                         <div class="row">
@@ -236,11 +240,63 @@
                                     </div>
                                 </div>
                             </div>
+
+
+
+
+
+
+                            <div class="tab-pane fade" id="profile2" role="tabpanel" aria-labelledby="profile-tab2">
+
+
+@foreach($data['award'] as $awards)
+
+
+
+<div class="container">
+	<div class="row">
+        <div class="span12">
+    
+                  <div class="thumbnail clearfix">
+                  @if($awards->selected=="true")
+                    <img src="{{$awards->icon}}" id="badgeimg" alt="{{$awards->name}}" class="pull-left span2 clearfix selectedbadge" style='margin-right:10px'>
+                    <div class="caption" class="pull-left">
+                      <a  class="btn btn-primary iconperfil  pull-right selectbadge selectedbadge" id="{{$awards->id}}">  Select </a>
+                   @else
+                   <img src="{{$awards->icon}}" id="badgeimg" alt="{{$awards->name}}" class="pull-left span2 clearfix unselected" style='margin-right:10px' >
+                   <div class="caption" class="pull-left">
+                      <a  class="btn btn-primary iconperfil  pull-right unselected selectbadge" id="{{$awards->id}}">  Select </a>
+@endif
+                      <h4>      
+                      <a href="#" >{{$awards->name}}</a>
+                      </h4>
+                      <small><b>Descripción: </b>{{$awards->description}}</small>  
+                    </div>
+                  </div>
+                </li>
+                <br>
+@endforeach
+        </div>
+	</div>
+</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </form>           
         </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+        
         <script src="/js/perfil-usuario.js"></script>
 
-@endsection
+       
+        @endsection

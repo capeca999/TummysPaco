@@ -10,6 +10,7 @@ $(function(){
 
 
     //HISTORIAL crear el a apartado de historiales
+  //  <?php dd($data); ?>
 
 
     //GENERA HISOTIRIALES a partir de lo que traer la consulta ajax
@@ -107,11 +108,6 @@ else if($(this).attr('id')=="nif"){
         $(this).append(input);
         input.focus();
     });
-
-
-
-
-
 /*
 
 
@@ -143,6 +139,43 @@ $(document).on('blur','#dato-anyadir',function(){
 
 
 */
+
+$(document).on("click", ".unselected",function () { 
+  alert("hola");
+    
+    var id = $(this).attr("id");
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $ ('meta[name="csrf-token"]').attr ('content')
+        },
+        url: "/listar/selectBadge/"+id,
+        method: "GET",
+    })
+    
+    .done(function(response){
+
+        if($("#top").length == 1) {
+
+            $("#top").remove();
+            }
+            var diverror = $("<div> Tu insignia se ha cambiado  </div>").attr("class" , "alert alert-warning beautifulcorrect").attr("role",  "alert").attr("id", "top").appendTo($(".container"));
+            var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
+            var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
+    
+    })
+    .fail(function(response){
+
+    });
+    $(".selectedbadge").removeClass("selectedbadge").addClass("unselected")
+$(this).removeClass("unselected").addClass("selectedbadge");
+
+
+
+
+
+});
+
     //BLUR en los INPUT PERFIL: Al hacer blur sobre un input se debe comporbar los datos introducidos por el ususario
     $(document).on('blur', '.editarcampo',function(){
 

@@ -4,8 +4,31 @@
    - Animales
 @endsection
 @section('contenido')
+
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+
 <div class="container-fluid mt-100">
+
+
+
+
+        <h2 class="text-center">Creación de Pregunta</h2>
+        <div class="form-group"><label for="text-input">Titulo</label><input class="form-control" type="text" id="titulo" name="text-input"></div>
+
+        <div class="form-group"><label for="textarea-input">Descripción </label><textarea class="form-control" id="descripcion" name="textarea"></textarea></div>
+        <div class="form-group"><button  id="submit" class="btn btn-primary" >Button</button></div>
+ 
+
+
+
+
+
+
+
     <div class="d-flex flex-wrap justify-content-between">
+
+  
+
         <div> <button type="button" class="btn btn-shadow btn-wide btn-primary"> <span class="btn-icon-wrapper pr-2 opacity-7"> <i class="fa fa-plus fa-w-20"></i> </span> New thread </button> </div>
         <div class="col-12 col-md-3 p-0 mb-3"> <input type="text" class="form-control" placeholder="Search..."> </div>
     </div>

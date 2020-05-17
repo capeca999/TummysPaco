@@ -12,6 +12,8 @@ use App\Line;
 use App\Product;
 use DB;
 use Image;
+use App\Badge;
+use App\Award;
 
 class UserController extends Controller
 {
@@ -127,6 +129,11 @@ class UserController extends Controller
         $usuario->$atributo = $valor;
         $usuario->save(); 
     }
+    public static function changeBadge($id){
+        $usuario = User::find(Auth::user()->id);
+        $usuario->badge_selected = $id;
+        $usuario->save(); 
+    }
 
 
 
@@ -200,7 +207,9 @@ class UserController extends Controller
         return view ('adminUsuarios')->with('usuarios', json_decode($usuarios));
     }
     
-    public static function getperfil(){
+
+
+public static function gethistorial(){
         $historiales = User::select('lines.id_order','orders.payment_method','orders.total_price',
         'products.price','orders.date_order','lines.quantity','products.name')
         ->join('orders','users.id','=','orders.id_user')
@@ -211,8 +220,71 @@ class UserController extends Controller
         ->get()
         ->toJson();
 
-        return view ('perfil')->with('historiales', json_decode($historiales));
+
+$historial = json_decode($historiales);
+
+
+return $historial;
+}
+
+    public static function getperfil(){
+$historial= self::gethistorial();
+$awards= self::getawards();
+$awardseleccionado = self::getawardseleccionado();
+$data = array();
+$data['historial'] = $historial;
+$data['award']=$awards;
+$data['awardseleccionado']=$awardseleccionado;
+return view ('perfil', compact("data"));
     }
+
+
+    public static function getawards(){
+        $awards = Award::select('awards.id','awards.id_user','awards.id_badge',
+        'badges.id','badges.icon','badges.name','badges.description')
+        ->join('badges','awards.id_badge','=','badges.id')
+        ->where('awards.id_user', '=' , Auth::user()->id)
+        ->get()
+        ->toJson();
+$awardss = json_decode($awards);
+for($cont1=0; $cont1 < count($awardss); $cont1++){
+if($awardss[$cont1]->id_badge==Auth::user()->badge_selected){
+    $awardss[$cont1]->selected=true;
+}
+else {
+   $awardss[$cont1]->selected=false;
+}
+}
+return $awardss;
+    }
+
+
+
+    public static function getawardseleccionado(){
+        $awards = Award::select('awards.id','awards.id_user','awards.id_badge',
+        'badges.id','badges.icon','badges.name','badges.description')
+        ->join('badges','awards.id_badge','=','badges.id')
+        ->where('awards.id_user', '=' , Auth::user()->id)
+        ->get()
+        ->toJson();
+$awardss = json_decode($awards);
+for($cont1=0; $cont1 < count($awardss); $cont1++){
+if($awardss[$cont1]->id_badge==Auth::user()->badge_selected){
+    $awardss[$cont1]->selected=true;
+    return $awardss[$cont1];
+
+}
+
+}
+
+return "ninguno";
+    }
+
+
+
+
+
+
 
 
 
@@ -229,19 +301,14 @@ class UserController extends Controller
     		$user->save();
         }
         
-        $historiales = User::select('lines.id_order','orders.payment_method','orders.total_price',
-        'products.price','orders.date_order','lines.quantity','products.name')
-        ->join('orders','users.id','=','orders.id_user')
-        ->join('lines','orders.id','=','lines.id_order')
-        ->join('products','lines.id_product','=','products.id')
-        ->where('orders.id_user', '=' , Auth::user()->id)
-        ->orderBy('id_order')
-        ->get()
-        ->toJson();
-
-
-        return view ('perfil')->with('historiales', json_decode($historiales));
-
+        $historial= self::gethistorial();
+        $awards= self::getawards();
+        $awardseleccionado = self::getawardseleccionado();
+        $data = array();
+        $data['historial'] = $historial;
+        $data['award']=$awards;
+        $data['awardseleccionado']=$awardseleccionado;
+        return view ('perfil', compact("data"));
     }
 
 

@@ -41,7 +41,7 @@
                         <div class="col-12">
                             <p class="product-description">Una bola de pelo que te dará amor y compañia siempre! </p>
                             <div class="row">
-                                <div class="col-6"><a href="/animales/Felina"><button class="btn btn-light" type="button">Mirar todos los Gatos!</button> </a> </div>
+                                <div class="col-6"><a href="/animales/Gato"><button class="btn btn-light" type="button">Mirar todos los Gatos!</button> </a> </div>
                             </div>
                         </div>
                     </div>

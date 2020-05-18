@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\Badge;
+use App\Award;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -81,5 +83,10 @@ class RegisterController extends Controller
             'first_name' =>$data['first_name'],
             'last_name' =>$data['last_name'],
         ]);
+
+  
+ 
+
+
     }
 }

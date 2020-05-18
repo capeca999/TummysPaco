@@ -6,7 +6,6 @@
 @endsection
 @section('contenido')
 
-
 <div class="container emp-profile">
 <form id="formimagen" enctype="multipart/form-data" action="/usuario/perfil" method="POST">
 
@@ -28,7 +27,14 @@
                         <div class="profile-head">
                                     <h5 class="editarPerfil">
                                     {{Auth::user()->name}} {{Auth::user()->first_name}} {{Auth::user()->last_name}} 
-                                    <img  id="badgeiconusuario "src="{{$data['awardseleccionado']->icon}}" class="badgeiconusuario">
+
+@if( $data['awardseleccionado']=="new")
+
+<img name="badgeiconusuario" src="/img/medallas/new.png" class="badgeiconusuario">
+@else 
+<img name="badgeiconusuario" src="{{$data['awardseleccionado']->icon}}" class="badgeiconusuario">
+@endif
+
                                     </h5>
                                     <h6>
                                        Usuario De Tummys!

@@ -1,6 +1,10 @@
 $(function(){
 
 
+//Route::post('/crearInsignia/', 'ApiController@postInsignia');
+
+
+
 
     $(document).on('change','#fotousuario' , function(){
         $('#formimagen').submit();
@@ -141,7 +145,7 @@ $(document).on('blur','#dato-anyadir',function(){
 */
 
 $(document).on("click", ".unselected",function () { 
-  alert("hola");
+
     
     var id = $(this).attr("id");
 
@@ -154,6 +158,7 @@ $(document).on("click", ".unselected",function () {
     })
     
     .done(function(response){
+  
 
         if($("#top").length == 1) {
 
@@ -163,6 +168,9 @@ $(document).on("click", ".unselected",function () {
             var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
             var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
     
+
+$('img[name ="badgeiconusuario"]').attr("src", response[0].icon);
+
     })
     .fail(function(response){
 

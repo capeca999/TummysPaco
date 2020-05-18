@@ -133,6 +133,14 @@ class UserController extends Controller
         $usuario = User::find(Auth::user()->id);
         $usuario->badge_selected = $id;
         $usuario->save(); 
+
+        $awards = Badge::select('badges.icon', 'badges.id')
+        ->where('badges.id', '=' ,$id)
+        ->get()
+        ->toJson();
+$awardss = json_decode($awards);
+
+return $awardss;
     }
 
 
@@ -277,7 +285,13 @@ if($awardss[$cont1]->id_badge==Auth::user()->badge_selected){
 
 }
 
-return "ninguno";
+$column_id =DB::table('awards')->insertGetId([
+    'id_user'=>Auth::user()->id,
+    'id_badge'=>10,
+]);
+
+
+return "new";
     }
 
 

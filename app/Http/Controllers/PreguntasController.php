@@ -8,6 +8,7 @@ use App\Question;
 use App\Answer;
 use Auth;
 use DB;
+use App\Badge;
 use App\like_question;
 use App\like_answer;
 class PreguntasController extends Controller
@@ -279,6 +280,7 @@ return $column_id;
 
 
 
+
 public function preguntas(){
     $preguntas = $this::listarPreguntas(1,5);
     $data =  array();
@@ -303,23 +305,41 @@ $saltar = $pagina*$cantidad;
 $preguntas = Question::select('questions.id AS question_id' ,
 'questions.date',
  'questions.id_user', 'questions.title', 'questions.description', 'questions.views',
- 'users.id AS user_id', 'users.first_name', 'users.last_name', 'users.avatar')
+ 'users.id AS user_id', 'users.first_name', 'users.last_name', 'users.avatar', 'users.badge_selected')
 ->join('users', 'users.id', 'questions.id_user')
 ->get()
 ->skip($saltar)
 ->take($cantidad)
 ->toJson();
 
-$count = Answer::where('status','=','1')->count();$replies = Answer::select()
+//$count = Answer::where('id_question','=','1')->count();
+
+
+$pregunta= json_decode($preguntas);
+
+
+for ($i=0; $i < count($pregunta); $i++) { 
+
+    
+    $count = Answer::where('id_question','=',$pregunta[$i]->question_id)->count();
+  
+$pregunta[$i]->respuestas=$count;
+}
 
 
 
+/*
+
+$badges = Badge::select('badges.id', 'badges.name', 'badges.description')
+->get()
+->skip($saltar)
+->take($cantidad)
+->toJson();
+
+*/
 
 
-
-
-$preguntas = json_decode($preguntas);
-return $preguntas;
+return $pregunta;
 }
 
 public static function getidthread($pagina=1, $cantidad=10,$id){

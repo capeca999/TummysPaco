@@ -4,11 +4,9 @@
    - Animales
 @endsection
 @section('contenido')
-
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 
 <div class="container-fluid mt-100">
-
 
 
         <h2 class="text-center">Creación de Pregunta</h2>
@@ -37,7 +35,7 @@
                 <div class="col ml-3">Preguntas</div>
                 <div class="col-4 text-muted">
                     <div class="row no-gutters align-items-center">
-                        <div class="col-4">Replies</div>
+                        <div class="col-4">Respuestas</div>
                         <div class="col-8">Autor</div>
                     </div>
                 </div>
@@ -51,15 +49,16 @@
         <div class="card-body py-3">
             <div class="row no-gutters align-items-center">
                 <div class="col">
-                 <a href="/forum/thread/{{$pregunta->question_id}}" class="text-big" data-abc="true">{{ $pregunta->title }}</a>                           
-                  <span class="badge badge-success align-text-bottom ml-1">Solved</span>
+                 <a href="/forum/thread/{{$pregunta->question_id}}" class="text-big" data-abc="true">{{ $pregunta->title }}</a>    
+
+                  
                     <div class="text-muted small mt-1">{{ $pregunta->date }} 
                     <a href="javascript:void(0)" class="text-muted" data-abc="true"> {{$pregunta->first_name}} {{$pregunta->last_name}}</a>
                     </div>
                 </div>
                 <div class="d-none d-md-block col-4">
                     <div class="row no-gutters align-items-center">
-                        <div class="col-4">43</div>
+                        <div class="col-4"> {{$pregunta ->respuestas}}  </div>
                         <div class="media col-8 align-items-center">                                                       
                          <img src="/uploads/avatars/{{ $pregunta->avatar}}" alt="" class="imagenpregunta d-block ui-w-30 rounded-circle">
                             <div class="media-body flex-truncate ml-2">                          

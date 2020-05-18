@@ -77,10 +77,6 @@ if($(this).hasClass("disabled") || $(this).hasClass("active")){
 }
 else{
 
-
-
-
-
     $.ajax({
         type: 'GET',
          dataType: "json",

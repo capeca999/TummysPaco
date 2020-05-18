@@ -21,6 +21,8 @@ Route::middleware('auth:api')->get('/productos/{id?}', 'ApiController@getProduct
 
 Route::get('/forum/{pagina}/{cantidad?}', 'ApiController@getPreguntas');
 
+Route::get('/animales/{especie}/{pagina}/{cantidad?}', 'ApiController@getAnimalsSpecieListPagina');
+
 
 
 Route::get('/productos/{id?}', 'ApiController@getProductById');

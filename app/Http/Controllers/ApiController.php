@@ -52,79 +52,195 @@ public static function getProductById($id){
         }
 
 
+
+            
+//Accede por web
+
 public function getAnimalsSpecie($especie){
-    $animales = $this::getAnimalsSpecieList(1, $especie, 20);
-/*
-    echo '<pre>';
-    echo var_dump(json_decode($animales));
-    echo '</pre>';
-die;
-*/
-    return view ('animales')->with('animales', json_decode($animales));
+
+    $data =  array();
+    $data['animales']  =  json_decode($this::getAnimalsSpecieList(1, $especie, 2));
+    $data['cantidad']  =  Animal::where('id_user', '=', null)->count();
+    $data['especie'] = $especie;
+    return view('animales',compact("data"));
+
 
 }
-//getAnimalsEspeciales
 
 
-public  function getAnimalsEspeciales($pagina=1,  $cantidad=20){
-    $animales = $this::getAnimalsEspecialesList(1,20);
+public static function getAnimalsSpecieList($pagina=1, $especie, $cantidad=9){
+    if($cantidad<=0){
+        $cantidad=9;
+            }
+        
+            if($pagina<1){
+                $pagina=1;
+            }
+        $pagina--;
+$saltar = $pagina*9;
+    
+    if($especie=="Todos"){
 
 
 
-    return view ('animalesEspeciales')->with('animales', json_decode($animales));
-}
+        return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition' , 'animals.id_user','images_animals.url')
+        ->where('animals.id_user', '=', null)
+    ->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
+    ->groupBy('animals.id')
+    ->get()
+    ->skip($saltar)
+    ->take($cantidad)
+    ->toJson();
+
+
+    }
+    else{
+
+        return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition' , 'images_animals.url')
+    ->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
+    ->where('species', 'like', $especie)
+    ->groupBy('animals.id')
+    ->get()
+    ->skip($saltar)
+    ->take($cantidad)
+    ->toJson();
+    }
+    }
+
+//Accede por web
+
+
+
+
+public static function getAnimalsSpecieListPagina($pagina, $especie, $cantidad=2){
+
+    $num = $pagina;
+    $int = (int)$num;
+
+
+
+
+    if($cantidad<=0){
+        $cantidad=2;
+            }
+        
+            if($int<1){
+                $int=1;
+            }
+        $int--;
+$saltar = $int*2;
+    
+
+    if($especie=="Todos"){
+        return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition' , 'images_animals.url')
+    ->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
+    ->groupBy('animals.id')
+    ->get()
+    ->skip($saltar)
+    ->take($cantidad)
+    ->toJson();
+    }
+    else{
+        return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition' , 'images_animals.url')
+    ->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
+    ->where('species', 'like', $especie)
+    ->groupBy('animals.id')
+    ->get()
+    ->skip($saltar)
+    ->take($cantidad)
+    ->toJson();
+    }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 public static function getAnimalsEspecialesList($pagina=1,  $cantidad=20){
     if($cantidad<=0){
-        $cantidad=20;
-    }
-    if($pagina<1){
-        $pagina=1;
-    }
-    $pagina--;
+        $cantidad=9;
+            }
+        
+            if($pagina<1){
+                $pagina=1;
+            }
+        $pagina--;
+$saltar = $pagina*9;
     return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'images_animals.url')
     ->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
     ->whereNotNull('condition')
     ->groupBy('animals.id')
     ->get()
-    ->splice(($cantidad*$pagina), $cantidad)
+    ->skip($saltar)
+    ->take($cantidad)
     ->toJson();
     }
     
 
-public static function getAnimalsSpecieList($pagina=1, $especie, $cantidad=20){
-if($cantidad<=0){
-    $cantidad=20;
+
+
+public  function getAnimalsEspeciales($pagina=1,  $cantidad=9){
+    $animales = $this::getAnimalsEspecialesList(1,9);
+    return view ('animalesEspeciales')->with('animales', json_decode($animales));
 }
 
-if($pagina<1){
-    $pagina=1;
-}
-
-$pagina--;
 
 
-if($especie=="Todos"){
-    return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition' , 'images_animals.url')
-->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
-->groupBy('animals.id')
+
+
+
+public static function  getPreguntas($pagina=1, $cantidad=5 ){
+    if($cantidad<=0){
+        $cantidad=10;
+            }
+        
+            if($pagina<1){
+                $pagina=1;
+            }
+        $pagina--;
+$saltar = $pagina*5;
+$preguntas = Question::select('questions.id AS question_id' ,
+'questions.date',
+'questions.id_user', 'questions.title', 'questions.description', 'questions.views',
+'users.id AS user_id', 'users.first_name', 'users.last_name', 'users.avatar')
+->join('users', 'users.id', 'questions.id_user')
 ->get()
-->splice(($cantidad*$pagina), $cantidad)
+->skip($saltar)
+->take($cantidad)
 ->toJson();
+
+
+
+return $preguntas;
+
 }
-else{
-    return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition' , 'images_animals.url')
-->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
-->where('species', 'like', $especie)
-->groupBy('animals.id')
-->get()
-->splice(($cantidad*$pagina), $cantidad)
-->toJson();
-}
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -432,31 +548,15 @@ return response()->json(
 
 
 
-    public static function  getPreguntas($pagina=1, $cantidad=5 ){
-        if($cantidad<=0){
-            $cantidad=10;
-                }
-            
-                if($pagina<1){
-                    $pagina=1;
-                }
-            $pagina--;
-    $saltar = $pagina*5;
-  $preguntas = Question::select('questions.id AS question_id' ,
-'questions.date',
- 'questions.id_user', 'questions.title', 'questions.description', 'questions.views',
- 'users.id AS user_id', 'users.first_name', 'users.last_name', 'users.avatar')
-->join('users', 'users.id', 'questions.id_user')
-->get()
-->skip($saltar)
-->take($cantidad)
-->toJson();
 
 
 
-return $preguntas;
 
-    }
+
+
+
+
+
 
 
     public static function postDireccion(Request $request){

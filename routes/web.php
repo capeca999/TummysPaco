@@ -178,7 +178,7 @@ Route::get('animales/', function() {
 
 
                 Route::middleware('auth')->post('/forum/', 'PreguntasController@crearquestion');
-                Route::get('/forum/', 'PreguntasController@preguntas');
+             
 
                 
 
@@ -195,11 +195,15 @@ Route::get('animales/', function() {
 
                 
 
-
+                Route::get('/forum/', 'PreguntasController@preguntas');
 
 Route::get('/animales/casosEspeciales/', 'ApiController@getAnimalsEspeciales');
 
     Route::get('/animales/{especie}', 'ApiController@getAnimalsSpecie');
+    Route::get('/animales/{especie}/{pagina}', 'ApiController@getAnimalsSpecieListPagina');
+
+
+
     Route::get('/animal/{id}', 'AnimalController@getAnimalID');
 
 Auth::routes();

@@ -1191,6 +1191,12 @@ body {
     height: 100%;
 }
 
+.imagenes_animalestodos{
+    width: 75%;
+    height: 100%;
+}
+
+
 .login,
 .image {
     min-height: 100vh;

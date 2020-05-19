@@ -184,7 +184,8 @@ Route::get('animales/', function() {
 
 
                 Route::middleware('auth')->post('/forum/', 'PreguntasController@crearquestion');
-             
+                Route::get('/forum/thread/{id}', 'PreguntasController@getthread');
+
 
                 
 
@@ -195,7 +196,6 @@ Route::get('animales/', function() {
                 Route::get('/quitarLikeAnswer/{idquestion}/{idanswer}', 'PreguntasController@quitarlikeanswer');
 
 
-                Route::get('/forum/thread/{id}', 'PreguntasController@getthread');
 
 
 

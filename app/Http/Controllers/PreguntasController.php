@@ -127,62 +127,103 @@ return view('animalDetalles')->with('animales', json_decode($animales));
 
 //    return $view->with('persons', $persons)->with('ms', $ms);
 
+/*
+public static function getlikesrespuesta($id){
+    $column_id = like_answer::select('id_answer AS answerliked')
+    ->where('id_user' , '=', Auth::user()->id)
+    ->where('id_question', '=', $id)
+->get()
+->toJson();
+
+return $column_id;
+}
+
+*/
+
+public static function getidpregunta($id){
+
+    $views = new Question;
+    $views->where('id', '=', $id)->increment('views', 1);
+
+    $preguntas = Question::select('questions.id AS question_id' ,
+    'questions.date',
+     'questions.id_user', 'questions.title', 'questions.description', 'questions.likes', 'questions.views',
+     'users.id AS user_id', 'users.first_name', 'users.last_name', 'users.created_at' )
+     ->where('questions.id', '=', $id)
+    ->join('users', 'users.id', 'questions.id_user')
+    ->get()
+    ->toJson();
 
 
 
 
-
-
-
-
-    public static function getidpregunta($id){
-
-        $views = new Question;
-        $views->where('id', '=', $id)->increment('views', 1);
-    
-        $preguntas = Question::select('questions.id AS question_id' ,
-        'questions.date',
-         'questions.id_user', 'questions.title', 'questions.description', 'questions.likes', 'questions.views',
-         'users.id AS user_id', 'users.first_name', 'users.last_name', 'users.created_at' )
-         ->where('questions.id', '=', $id)
-        ->join('users', 'users.id', 'questions.id_user')
-        ->get()
-        ->toJson();
-
-   
-
-
-        $preguntas= json_decode($preguntas);
+    $preguntas= json_decode($preguntas);
 
 //$arraythread[$cont1]->liked=true;
 
 
-        $column_id = like_question::select('id_user', 'id_question')
-        ->where('id_question', '=', $id)
-        ->where('id_user' , '=', Auth::user()->id)
-    ->get()
-    ->toJson();
-    
-    
-    
-    if( ( strlen($column_id))==2 ){
-        $preguntas[0]->liked=false;
+    $column_id = like_question::select('id_user', 'id_question')
+    ->where('id_question', '=', $id)
+    ->where('id_user' , '=', Auth::user()->id)
+->get()
+->toJson();    
+if( ( strlen($column_id))==2 ){
+    $preguntas[0]->liked=false;
+   }
+else{
+    $preguntas[0]->liked=true;
+
+} 
+return $preguntas;
+}
+
+
+public static function getidthread($id, $pagina=1, $cantidad=10){
 
 
 
-
-    
+    if($cantidad<=0){
+        $cantidad=10;
+            }
+        
+            if($pagina<1){
+                $pagina=1;
+            }
+        $pagina--;
+$saltar = $pagina*10;
+$threads = Answer::select('answers.id AS answer_id','answers.id_question', 'answers.id_user', 'answers.fecha', 'answers.title', 'answers.description', 'answers.likes' , 'answers.views','users.created_at', 'users.first_name',  'users.id AS user_id','users.last_name')
+->join('users', 'users.id', 'answers.id_user')
+->where('answers.id_question', '=', $id)
+->get()
+->toJson();
+$arraythread= json_decode($threads);
+$column_id = like_answer::select('id_answer AS answerliked')
+    ->where('id_user' , '=', Auth::user()->id)
+->get()
+->toJson();
+$arraylikes= json_decode($column_id);
+$encontrado=false;
+for ($cont1=0; $cont1 < count($arraythread) ; $cont1++) {
+    $encontrado=false;
+for ($cont2=0; $cont2 < count($arraylikes) ; $cont2++) { 
+    if($arraythread[$cont1]->answer_id==$arraylikes[$cont2]->answerliked){
+$arraythread[$cont1]->liked=true;
+$encontrado=true;
     }
-    else{
-        $preguntas[0]->liked=true;
+}
+if($encontrado==false){
+    $arraythread[$cont1]->liked=false;
 
-    } 
+}
+}
+return $arraythread;
+}
 
 
 
-    return $preguntas;
-    }
-    
+
+
+  
 
 
     public static function getlikespregunta($id){
@@ -230,13 +271,8 @@ return view('animalDetalles')->with('animales', json_decode($animales));
 
 
     public static function likeanswer($idquestion,$idanswer){
-
-
-
-
         $column_id =DB::table('like_answers')->insertGetId([
             'id_user' =>Auth::user()->id,
-            'id_question'=>$idquestion,  
             'id_answer'=>$idanswer      
                     ]);
 
@@ -251,7 +287,7 @@ return view('animalDetalles')->with('animales', json_decode($animales));
 
 
     public static function quitarlikeanswer($idquestion,$idanswer){
-        like_answer::where('id_user', Auth::user()->id)->where('id_question', $idquestion)->where('id_answer', $idanswer)->delete();
+        like_answer::where('id_user', Auth::user()->id)->where('id_answer', $idanswer)->delete();
         $like = new Answer;
         $like->where('id', '=', $idanswer)->decrement('likes', 1);
     return $like;
@@ -263,17 +299,7 @@ return view('animalDetalles')->with('animales', json_decode($animales));
 
 
 
-public static function getlikesrespuesta($id){
-    $column_id = like_answer::select('id_answer AS answerliked')
-    ->where('id_user' , '=', Auth::user()->id)
-    ->where('id_question', '=', $id)
-->get()
-->toJson();
 
-return $column_id;
-
-
-}
 
 
 
@@ -340,45 +366,6 @@ $badges = Badge::select('badges.id', 'badges.name', 'badges.description')
 
 
 return $pregunta;
-}
-
-public static function getidthread($pagina=1, $cantidad=10,$id){
-    if($cantidad<=0){
-        $cantidad=10;
-            }
-        
-            if($pagina<1){
-                $pagina=1;
-            }
-        $pagina--;
-$saltar = $pagina*10;
-$threads = Answer::select('answers.id AS answer_id','answers.id_question', 'answers.id_user', 'answers.fecha', 'answers.title', 'answers.description', 'answers.likes' , 'answers.views','users.created_at', 'users.first_name',  'users.id AS user_id','users.last_name')
-->join('users', 'users.id', 'answers.id_user')
-->where('answers.id_question', '=', $id)
-->get()
-->toJson();
-$arraythread= json_decode($threads);
-$column_id = like_answer::select('id_answer AS answerliked')
-    ->where('id_user' , '=', Auth::user()->id)
-    ->where('id_question', '=', $id)
-->get()
-->toJson();
-$arraylikes= json_decode($column_id);
-$encontrado=false;
-for ($cont1=0; $cont1 < count($arraythread) ; $cont1++) {
-    $encontrado=false;
-for ($cont2=0; $cont2 < count($arraylikes) ; $cont2++) { 
-    if($arraythread[$cont1]->answer_id==$arraylikes[$cont2]->answerliked){
-$arraythread[$cont1]->liked=true;
-$encontrado=true;
-    }
-}
-if($encontrado==false){
-    $arraythread[$cont1]->liked=false;
-
-}
-}
-return $arraythread;
 }
 
 

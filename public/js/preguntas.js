@@ -268,15 +268,6 @@ else{
 
 $(".likesnumeroanswer").click(function(event){
 
-
-
-
-
-
-
-
-
-
     var elemento = $(this);
     console.log($(elemento).attr("id"));
 

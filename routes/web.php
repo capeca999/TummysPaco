@@ -124,6 +124,12 @@ Route::get('/paginaComprar/', function() {
     return view('Checkout');
     });
     
+
+    Route::get('/donacion/', function() {
+        return view('donardinero');
+        });
+
+
     Route::middleware('auth')->get('/listar/selectBadge/{id}', 'UserController@changeBadge');
     Route::middleware('auth')->get('/usuario/perfil', 'UserController@getperfil');
 

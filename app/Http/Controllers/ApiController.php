@@ -15,6 +15,7 @@ use App\Order;
 use App\Line;
 use App\Petitions;
 use App\Question;
+use App\Award;
 
 class ApiController extends Controller
 
@@ -596,6 +597,90 @@ return response()->json(
     
     //crearDireccion
 }
+
+
+public static function postDonacion(Request $request){
+
+if($request->anonimo=="Si"){
+    $column_id =DB::table('donations')->insertGetId([
+   
+        'reason'=>$request->reason,
+        'ammount'=>$request->dinerodonar,
+        'payment_method'=>$request->paymentmethod,
+]);
+}
+
+else{
+    $column_id =DB::table('donations')->insertGetId([
+        'id_user'=>$request->userid,
+        'reason'=>$request->reason,
+        'ammount'=>$request->dinerodonar,
+        'payment_method'=>$request->paymentmethod,
+]);
+}
+
+
+
+
+
+$premiocomprobar = Award::select('awards.id', 'awards.id_user', 'awards.id_badge')
+->where('awards.id_badge', '=' , 2)
+->where('id_user', '=',$request->userid )
+->get();
+
+$awardsarray = json_decode($premiocomprobar);
+
+
+if(count($awardsarray)==1){
+    
+    return response()->json(
+        [  
+        'success'=>true,
+        'message'=>'Data inserted successfully',
+        'id'=> $column_id
+        ]
+        );
+
+
+}
+else{
+    $column_id =DB::table('awards')->insertGetId([
+        'id_user'=>$request->userid,
+        'id_badge'=>2,
+    ]);
+       
+    return response()->json(
+        [  
+        'success'=>true,
+        'message'=>'Data inserted successfully',
+        'id'=> $column_id
+        ]
+        );
+    
+}
+
+
+
+
+
+
+
+
+//crearDireccion
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 ///api/products()

@@ -51,10 +51,10 @@
                         <td name="image">
                             
                         
-@if($usuario->image=="")
-<img src="/img/avatar.png" class="iconoUsuariosAdmin">
+@if($usuario->avatar=="")
+<img src="/uploads/avatars/avatar.png" class="iconoUsuariosAdmin">
 @else
-<img src="{{$usuario->image}}" class="iconoUsuariosAdmin">
+<img src="/uploads/avatars/{{$usuario->avatar}}" class="iconoUsuariosAdmin">
 @endif
 
 

@@ -7,6 +7,290 @@
 
 /* HIDE RADIO */
 
+
+#listahistorial{
+margin-top: 2em;
+
+}
+.card2 {
+    margin: auto;
+    width: 100%;
+    max-width: 600px;
+    padding: 4vh 0;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-top: 3px solid rgb(252, 103, 49);
+    border-bottom: 3px solid rgb(252, 103, 49);
+    border-left: none;
+    border-right: none
+}
+
+@media(max-width:768px) {
+    .card2 {
+        width: 90%
+    }
+}
+
+.title2 {
+    color: rgb(252, 103, 49);
+    font-weight: 600;
+    margin-bottom: 2vh;
+    padding: 0 8%;
+    font-size: initial
+}
+
+#details {
+    font-weight: 400
+}
+
+.info {
+    padding: 5% 8%
+}
+
+.info .col-5 {
+    padding: 0
+}
+
+#heading {
+    color: grey;
+    line-height: 6vh
+}
+
+.pricing {
+    background-color: #ddd3;
+    padding: 2vh 8%;
+    font-weight: 400;
+    line-height: 2.5
+}
+
+.pricing .col-3 {
+    padding: 0
+}
+
+.total {
+    padding: 2vh 8%;
+    color: rgb(252, 103, 49);
+    font-weight: bold
+}
+
+.total .col-3 {
+    padding: 0
+}
+
+.footer {
+    padding: 0 8%;
+    font-size: x-small;
+    color: black
+}
+
+.footer img {
+    height: 5vh;
+    opacity: 0.2
+}
+
+.footer a {
+    color: rgb(252, 103, 49)
+}
+
+.footer .col-10,
+.col-2 {
+    display: flex;
+    padding: 3vh 0 0;
+    align-items: center
+}
+
+.footer .row {
+    margin: 0
+}
+
+#progressbar2 {
+    margin-bottom: 3vh;
+    overflow: hidden;
+    color: rgb(252, 103, 49);
+    padding-left: 0px;
+    margin-top: 3vh
+}
+
+#progressbar2 li {
+    list-style-type: none;
+    font-size: x-small;
+    width: 25%;
+    float: left;
+    position: relative;
+    font-weight: 400;
+    color: rgb(160, 159, 159)
+}
+
+#progressbar2 #step1:before {
+    content: "";
+    color: rgb(252, 103, 49);
+    width: 5px;
+    height: 5px;
+    margin-left: 0px !important
+}
+
+#progressbar2 #step2:before {
+    content: "";
+    color: #fff;
+    width: 5px;
+    height: 5px;
+    margin-left: 32%
+}
+
+#progressbar2 #step3:before {
+    content: "";
+    color: #fff;
+    width: 5px;
+    height: 5px;
+    margin-right: 32%
+}
+
+#progressbar2 #step4:before {
+    content: "";
+    color: #fff;
+    width: 5px;
+    height: 5px;
+    margin-right: 0px !important
+}
+
+#progressbar2 li:before {
+    line-height: 29px;
+    display: block;
+    font-size: 12px;
+    background: #ddd;
+    border-radius: 50%;
+    margin: auto;
+    z-index: -1;
+    margin-bottom: 1vh
+}
+
+#progressbar2 li:after {
+    content: '';
+    height: 2px;
+    background: #ddd;
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    margin-bottom: 2vh;
+    top: 1px;
+    z-index: 1
+}
+
+.progress-track {
+    padding: 0 8%
+}
+
+#progressbar2 li:nth-child(2):after {
+    margin-right: auto
+}
+
+#progressbar2 li:nth-child(1):after {
+    margin: auto
+}
+
+#progressbar2 li:nth-child(3):after {
+    float: left;
+    width: 68%
+}
+
+#progressbar2 li:nth-child(4):after {
+    margin-left: auto;
+    width: 132%
+}
+
+#progressbar2 li.active {
+    color: black
+}
+
+#progressbar2 li.active:before,
+#progressbar2 li.active:after {
+    background: rgb(252, 103, 49)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.tablavacunas{
+    margin-top: 2em;
+ }
+.centrartabla{
+    text-align: center;
+}
+.graficapesos{
+   margin-top: 2em;
+}
+
+.morris-hover {
+    position:absolute;
+    z-index:1000;
+  }
+  
+  .morris-hover.morris-default-style {     border-radius:10px;
+    padding:6px;
+    color:#666;
+    background:rgba(255, 255, 255, 0.8);
+    border:solid 2px rgba(230, 230, 230, 0.8);
+    font-family:sans-serif;
+    font-size:12px;
+    text-align:center;
+  }
+  
+  .morris-hover.morris-default-style .morris-hover-row-label {
+    font-weight:bold;
+    margin:0.25em 0;
+  }
+  
+  .morris-hover.morris-default-style .morris-hover-point {
+    white-space:nowrap;
+    margin:0.1em 0;
+  }
+  
+  svg { width: 100%; }
+
+
+
+
+
+
+
+
+
+
+
+
+.middlepregunta{
+    text-align: center;
+    font-size: 3em;
+    padding-bottom: 1em;
+}
+
+.middlerespuesta{
+    text-align: center;
+    font-size: 2.5em;
+    padding-bottom: 1em;
+}
+.borderpregunta{
+    border-style: solid;
+    border-radius: 1.5em;
+
+}
+
 .submit-button {
     margin-top: 10px;
   }

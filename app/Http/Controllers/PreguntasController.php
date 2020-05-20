@@ -147,10 +147,11 @@ public static function getidpregunta($id){
 
     $preguntas = Question::select('questions.id AS question_id' ,
     'questions.date',
-     'questions.id_user', 'questions.title', 'questions.description', 'questions.likes', 'questions.views',
-     'users.id AS user_id', 'users.first_name', 'users.last_name', 'users.created_at' )
+     'questions.id_user', 'questions.title', 'questions.description AS question_description', 'questions.likes', 'questions.views',
+     'users.id AS user_id', 'users.first_name', 'users.last_name', 'users.created_at', 'users.avatar', 'users.badge_selected','badges.id', 'badges.icon', 'badges.description'  )
      ->where('questions.id', '=', $id)
     ->join('users', 'users.id', 'questions.id_user')
+    ->join('badges', 'badges.id', 'users.badge_selected')
     ->get()
     ->toJson();
 
@@ -191,8 +192,12 @@ public static function getidthread($id, $pagina=1, $cantidad=10){
             }
         $pagina--;
 $saltar = $pagina*10;
-$threads = Answer::select('answers.id AS answer_id','answers.id_question', 'answers.id_user', 'answers.fecha', 'answers.title', 'answers.description', 'answers.likes' , 'answers.views','users.created_at', 'users.first_name',  'users.id AS user_id','users.last_name')
+$threads = Answer::select('answers.id AS answer_id','answers.id_question', 'answers.id_user', 'answers.fecha', 'answers.title', 
+'answers.description AS answer_description', 'answers.likes' , 'answers.views','users.created_at', 'users.first_name', 'users.avatar', 'users.id AS user_id','users.last_name',
+ 'users.badge_selected','badges.id', 'badges.icon', 'badges.description')
 ->join('users', 'users.id', 'answers.id_user')
+->join('badges', 'badges.id', 'users.badge_selected')
+->orderBy('answers.fecha', 'DESC')
 ->where('answers.id_question', '=', $id)
 ->get()
 ->toJson();
@@ -371,6 +376,14 @@ return $pregunta;
 
 
 
+public  function crearrespuesta(Request $request){
+    $input = $request->all();
+    DB::table('answers')->insert([
+        ['id_user' => Auth::user()->id,  'id_question' => $_POST['id_question'], 'description' => $_POST['description'], 'fecha' => $_POST['date'] , 'title' => $_POST['title'], 'description' => $_POST['description']]
+     
+    ]);
+    return response()->json(['success'=>'Got Simple Ajax Request.']);
+}
 
 
 

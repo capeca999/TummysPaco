@@ -4,17 +4,11 @@
    - Animales
 @endsection
 @section('contenido')
+<div id="diventero">
 <meta name="csrf-token" content="{{ csrf_token() }}" />
-
 <div class="container-fluid mt-100">
 
 
-        <h2 class="text-center">Creación de Pregunta</h2>
-        <div class="form-group"><label for="text-input">Titulo</label><input class="form-control" type="text" id="titulo" name="text-input"></div>
-
-        <div class="form-group"><label for="textarea-input">Descripción </label><textarea class="form-control" id="descripcion" name="textarea"></textarea></div>
-        <div class="form-group"><button  id="submit" class="btn btn-primary" >Button</button></div>
- 
 
 
 
@@ -26,7 +20,7 @@
 
   
 
-        <div> <button type="button" class="btn btn-shadow btn-wide btn-primary"> <span class="btn-icon-wrapper pr-2 opacity-7"> <i class="fa fa-plus fa-w-20"></i> </span> New thread </button> </div>
+        <div> <button type="button" id="newthread" class="btn btn-shadow btn-wide btn-primary"> <span class="btn-icon-wrapper pr-2 opacity-7"> <i class="fa fa-plus fa-w-20"></i> </span> New thread </button> </div>
         <div class="col-12 col-md-3 p-0 mb-3"> <input type="text" class="form-control" placeholder="Search..."> </div>
     </div>
     <div class="card mb-3">
@@ -73,7 +67,8 @@
         </div>
         @endforeach
 
-
+         
+{{$data['cantidad']/5,0}}
 </div>
     </div>
     <nav>
@@ -84,11 +79,20 @@
 
             @for ($i = 2; $i <= round($data['cantidad']/5,0); $i++)
             <li class="page-item "><a class="page-link" href="javascript:void(0)" data-abc="true"> {{$i}}  </a></li>
+
+@if($i==round($data['cantidad']/5,0))
+
+@if(is_float($data['cantidad']/5)==true)
+<li class="page-item "><a class="page-link" href="javascript:void(0)" data-abc="true"> {{$i+1}}  </a></li>
+
+@endif
+@endif
+
     @endfor
             <li class="page-item"><a class="page-link" href="javascript:void(0)" data-abc="true">»</a></li>
         </ul>
     </nav>
 </div>
-
+</div>
     <script src="/js/preguntas.js"></script>
     @endsection

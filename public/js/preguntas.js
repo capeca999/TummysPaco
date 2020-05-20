@@ -22,7 +22,7 @@ var pagina=0;
     }
 
 
-    $(document).on('click','#submit' , function(){
+    $(document).on('click','#submitpregunta' , function(){
         var today = new Date();
 
 var titulo = $("#titulo").val();
@@ -42,7 +42,7 @@ $.ajax({
 
  .done(function(response){
 
-
+    $("#divform").empty();
 
 
  })
@@ -56,6 +56,86 @@ $.ajax({
 
        }
     );
+
+
+
+    $(document).on('click', '#newthread', function(){
+        if( $("#divform").length==0){
+        var diventero = $("#diventero");
+        var divform=$("<div>").attr("id", "divform").insertBefore(diventero);
+        var tituloh2=$("<h2>Creación de Pregunta</h2>").attr("class", "text-center").appendTo(divform);
+        var div1= $("<div>").attr("class", "form-group").appendTo(divform);
+        var label1=$("<label>Titulo</label>").attr("for", "text-input").appendTo(div1);
+        var input1=$("<input>").attr("class", "form-control").attr("type", "text").attr("id", "titulo").attr("name", "text-input").appendTo(div1);
+        var div2= $("<div>").attr("class", "form-group").appendTo(divform);
+        var label1=$("<label>Descripción</label>").attr("for", "textarea-input").appendTo(div2);
+        var textarea=$("<textarea>").attr("class", "form-control").attr("id", "descripcion").attr("name", "textarea").appendTo(div2);
+        var div3= $("<div>").attr("class", "form-group").appendTo(divform);
+        var button=$("<button>Crear Pregunta</button>").attr("id", "submitpregunta").attr("class", "btn btn-primary").appendTo(div3);
+        }
+    
+    });
+        
+
+
+$(document).on('click', '#replybutton', function(){
+
+    if( $("#divform").length==0){
+
+    var diventero = $("#diventero");
+    var divform=$("<div>").attr("id", "divform").insertBefore(diventero);
+    var tituloh2=$("<h2>Creación de Respuesta</h2>").attr("class", "text-center").appendTo(divform);
+    var div1= $("<div>").attr("class", "form-group").appendTo(divform);
+    var label1=$("<label>Titulo</label>").attr("for", "text-input").appendTo(div1);
+    var input1=$("<input>").attr("class", "form-control").attr("type", "text").attr("id", "titulo").attr("name", "text-input").appendTo(div1);
+    var div2= $("<div>").attr("class", "form-group").appendTo(divform);
+    var label1=$("<label>Descripción</label>").attr("for", "textarea-input").appendTo(div2);
+    var textarea=$("<textarea>").attr("class", "form-control").attr("id", "descripcion").attr("name", "textarea").appendTo(div2);
+    var div3= $("<div>").attr("class", "form-group").appendTo(divform);
+    var button=$("<button>Crear Respuesta</button>").attr("id", "submitrespuesta").attr("class", "btn btn-primary").appendTo(div3);
+}
+
+
+});
+
+    $(document).on('click', '#submitrespuesta', function(){
+
+        var today = new Date();
+
+        var titulo = $("#titulo").val();
+        var descripcion = $("#descripcion").val();
+        var hiddenquestion = $("#hiddenquestion").val();
+
+
+
+        $.ajax({
+            type: 'POST',
+             dataType: "json",
+             url: '/forum/thread',
+             headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data:{"_token": $('#token').val(), title:$("#titulo").val(), description: $("#descripcion").val(), date:formatDate(today), id_question:hiddenquestion},
+         })
+        
+         .done(function(response){
+        $("#divform").empty();
+
+            console.log(response);
+
+        
+        
+         })
+        .fail(function(response){ 
+        
+            console.log(response);
+        
+        });
+        
+
+
+
+    });
 
 
     

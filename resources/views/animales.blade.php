@@ -95,8 +95,20 @@
             <li class="page-item active"><a class="page-link" href="javascript:void(0)" data-abc="true">1</a></li>
             
 
+
+
+
+
             @for ($i = 2; $i <= round($data['cantidad']/2,0); $i++)
             <li class="page-item "><a class="page-link" href="javascript:void(0)" data-abc="true"> {{$i}}  </a></li>
+
+            @if($i==round($data['cantidad']/2,0))
+
+            @if(is_float($data['cantidad']/2)==true)
+            <li class="page-item "><a class="page-link" href="javascript:void(0)" data-abc="true"> {{$i+1}}  </a></li>
+
+@endif
+@endif
     @endfor
             <li class="page-item"><a class="page-link" href="javascript:void(0)" data-abc="true">»</a></li>
         </ul>

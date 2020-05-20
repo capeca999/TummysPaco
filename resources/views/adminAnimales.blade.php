@@ -5,10 +5,17 @@
     - Admin Animales
 @endsection
 @section('contenido')    
+
+<div id="contenedorprincipalpagina">
+
+
     <div class="col-md-12 search-table-col">
         <div class="form-group pull-right col-lg-4"><input type="text" class="search form-control" placeholder="Search by typing here.."></div><span class="counter pull-right"></span>
         <div class="table-responsive table-bordered table table-hover table-bordered results">
-     
+
+        <button class="btn btn-primary"  id="botonAñadir" data-toggle="modal" data-target="#modal1" type="button"> <i class="fa fa-plus" aria-hidden="true"></i>
+ Añadir Animal</button>
+
             <table class="table table-bordered table-hover">
                 <thead class="bill-header cs">
                     <tr>
@@ -37,9 +44,7 @@
                   
               
                     @foreach($animales as $animal)
-                    <tr id ="{{$animal->id}}">
-                 
-
+                    <tr id ="{{$animal->id}}">        
                         <td name="id">{{$animal->id}}</td>
                         <td name="race">{{$animal->race}}</td>
                         <td name="species">{{$animal->species}}</td>
@@ -52,7 +57,13 @@
                         <td name="size">{{$animal->size}}</td>
                         <td name="date_found">{{$animal->date_found}}</td>
                         <td name="condition">{{$animal->condition}}</td>
-                        <td><button class="btn btn-success" style="margin-left: 5px;" type="submit"><i class="fa fa-check" style="font-size: 15px;"></i></button><button class="btn btn-danger" style="margin-left: 5px;" type="submit"><i class="fa fa-trash" style="font-size: 15px;"></i></button></td>
+                        <td>
+                            <button class="btn btn-success" style="margin-left: 5px;" type="submit">
+                            <i class="fa fa-check" style="font-size: 15px;"></i>
+                        </button>
+                        
+                        <button class="btn btn-danger" style="margin-left: 5px;" type="submit">
+                        <i class="fa fa-trash" style="font-size: 15px;"></i></button></td>
                      
                     </tr>
                    
@@ -63,7 +74,7 @@
         
         </div>
     </div>
- 
+</div>
     <script src="/js/adminanimales.js"></script>
   
     @endsection

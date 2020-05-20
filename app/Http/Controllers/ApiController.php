@@ -16,7 +16,9 @@ use App\Line;
 use App\Petitions;
 use App\Question;
 use App\Award;
-
+use App\Weight;
+use App\Vaccines;
+use App\Vaccination;
 class ApiController extends Controller
 
 {
@@ -34,6 +36,104 @@ public static function getProductById($id){
     ->get()
     ->toJson();
     }
+
+
+
+    public static function getpesos($id){
+        $pesos= Weight::select ( 'weights.kg')
+        ->where('weights.id_animal', '=', $id)
+        ->selectRaw('YEAR(weights.date) as anyo')
+        ->get()
+        ->toJson();
+
+
+$arraypesos= json_decode($pesos);
+
+
+
+for ($cont2=0; $cont2 < count($arraypesos) ; $cont2++) { 
+
+$arraypesos[$cont2]->y=strval($arraypesos[$cont2]->anyo);
+$arraypesos[$cont2]->a=$arraypesos[$cont2]->kg;
+unset($arraypesos[$cont2]->kg);
+unset($arraypesos[$cont2]->anyo);
+}
+
+return $arraypesos;
+
+}
+
+
+//    ->join('images_animals','images_animals.id_animal','animals.id')
+//->join('users', 'users.id', 'questions.id_user')
+
+public static function getvacunas($id){ 
+    $vacunas= Vaccination::select ('vaccinations.id', 'vaccinations.id_vaccine  AS vaccinations.vaccine', 'vaccinations.id_animal', 'vaccinations.date', 'vaccines.id', 'vaccines.name')
+    ->where('vaccinations.id_animal', '=', $id)
+    ->join('vaccines', 'vaccines.id', 'vaccinations.id')
+    ->get()
+    ->toJson();
+//        ->join('images_animals','images_animals.id_animal','animals.id')
+
+$arrayvacunas= json_decode($vacunas);
+
+return $arrayvacunas;
+
+}
+
+public static function gethistorialusuario($id){ 
+
+
+    
+    $pedidos= Order::select ('orders.date_order', 'orders.id','orders.id_user', 'orders.total_price', 'orders.payment_method', 'orders.expected_arrival', 'orders.status','orders.USPS', 'orders.street','orders.number','orders.postal_code','orders.location','orders.province','orders.country'
+    ,'orders.way','lines.id_order','lines.id_product','lines.price','lines.quantity','products.id','products.price','products.name','products.description','products.image')
+    ->where('orders.id_user', '=', $id)
+    ->join('lines', 'lines.id_order', 'orders.id')
+    ->join('products', 'products.id', 'lines.id_product')
+    ->get()
+    ->toJson();
+//        ->join('images_animals','images_animals.id_animal','animals.id')
+
+$arraypedidos= json_decode($pedidos);
+
+
+
+
+/*
+
+
+$pregunta= json_decode($preguntas);
+
+for ($i=0; $i < count($pregunta); $i++) { 
+ 
+    $count = Answer::where('id_question','=',$pregunta[$i]->question_id)->count();
+  
+$pregunta[$i]->respuestas=$count;
+}
+
+/*
+$badges = Badge::select('badges.id', 'badges.name', 'badges.description')
+->get()
+->skip($saltar)
+->take($cantidad)
+->toJson();
+*/
+
+
+
+return $arraypedidos;
+
+}
+
+
+
+
+
+
+
+
+    
+
 
  
     public static function getAnimalById($id){
@@ -69,16 +169,16 @@ public function getAnimalsSpecie($especie){
 }
 
 
-public static function getAnimalsSpecieList($pagina=1, $especie, $cantidad=9){
+public static function getAnimalsSpecieList($pagina=1, $especie, $cantidad=3){
     if($cantidad<=0){
-        $cantidad=9;
+        $cantidad=3;
             }
         
             if($pagina<1){
                 $pagina=1;
             }
         $pagina--;
-$saltar = $pagina*9;
+$saltar = $pagina*3;
     
     if($especie=="Todos"){
 
@@ -278,34 +378,10 @@ return Product::all()->where('name', 'like', '%'.$nombreToy.'%')->splice(($canti
 }
 
 
-public static function  getToys($pagina, $cantidad=21 ){
-    if($cantidad<=0){
-        $cantidad=21;
-    }
-    if ($pagina < 1){
-        $pagina=1;
-    }
-    $pagina--;
-        return Product::all()->splice(($cantidad*$pagina), $cantidad)->toJson();
+
+
+
  
-    //      return json_encode(Product::all()->take(($pagina*21)));
-}
-
-
-
-    public static function  getCategory($categoria=0, $pagina=1, $cantidad=21){
-        if($cantidad<=0){
-            $cantidad=21;
-        }
-        if ($pagina < 1){
-            $pagina=1;
-        }
-
-        $pagina--;
-        //      return json_encode(Product::all()->take(($pagina*21)));
-        return Product::all()->where('id_category', '=', $categoria)->splice(($cantidad*$pagina), $cantidad)->toJson();
-        
-    }
 
     public static function  getAllCategory(){
         return Category::all();
@@ -545,12 +621,62 @@ return response()->json(
   );
     }
 
+    
+
+
+
+
+
+    public static function postAnimal(Request $request){
+
+
+
+$valorcondition="";
+
+if($request->condition==""){
+$valorcondition=null;
+}
+else{
+
+    $valorcondition=$request->condition;
+}
+
+
+        $column_id =DB::table('animals')->insertGetId([
+'race' =>$request->race,
+'species'=>$request->species,
+'gender'=>$request->gender,
+'date_of_birth'=>$request->date_of_birth,
+'description'=>$request->description,
+'health'=>$request->health,
+'nickname'=>$request->nickname,
+'place_found'=>$request->place_found,
+'size'=>$request->size,
+'date_found'=>$request->date_found,
+'condition'=>$request->valorcondition,
+        ]);
+
+
+
+        $column_id2 =DB::table('images_animals')->insertGetId([          
+            'id_animal' =>$column_id,
+            'url'=>$request->imagen,                         
+                    ]);
 
 
 
 
 
 
+
+return response()->json(
+  [  
+    'success'=>true,
+    'message'=>'Data inserted successfully',
+    'id'=> $column_id
+  ]
+  );
+    }
 
 
 

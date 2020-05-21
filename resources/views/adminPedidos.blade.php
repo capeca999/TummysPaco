@@ -10,6 +10,7 @@ $(document).ready(function(){
 	$('[data-toggle="tooltip"]').tooltip();
 });
 </script>
+<iframe id="txtArea1" style="display:none"></iframe>
     <div class="container">
         <div class="table-wrapper">
             <div class="table-title">
@@ -18,7 +19,7 @@ $(document).ready(function(){
 						<h2>Detalles <b>Pedidos</b></h2>
 					</div>
 					<div class="col-sm-8">						
-						<a href="#" class="btn btn-info"><i class="fa fa-file-excel-o" aria-hidden="true"></i>
+						<a href="#" id="btnExport" class="btn btn-info"><i class="fa fa-file-excel-o" aria-hidden="true"></i>
  <span>Exportar a Excel</span></a>
 					</div>
                 </div>
@@ -69,12 +70,12 @@ $(document).ready(function(){
                     </div>
                 </div>
 			</div>
-            <table class="table table-striped table-hover">
+            <table id="tablapedidos" class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Nombre Usuario</th>
-						<th>Localización</th>
+						<th>Localizacion</th>
 						<th>Fecha Pedido</th>						
                         <th>Estado</th>						
 						<th>Precio Total</th>
@@ -93,12 +94,12 @@ $(document).ready(function(){
 						<td>{{$pedido->location}}</td>
                         <td>{{$pedido->date_order}}</td>                        
 						<td>
-                            <span class="status text-success">&bull;</span>
+                            <span class="status text-success"></span>
                             
                              {{$pedido->status}}
                             
                             </td>
-						<td>€{{$pedido->total_price}}</td>
+						<td>{{$pedido->total_price}} euros</td>
 						<td>
                             
                         <a href="#" class="view" title="View Details" data-toggle="tooltip">
@@ -110,6 +111,7 @@ $(document).ready(function(){
 
                 </tbody>
             </table>
+
 			<div class="clearfix">
                 <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
                 <ul class="pagination">
@@ -125,7 +127,9 @@ $(document).ready(function(){
                 </ul>
             </div>
         </div>
-    </div>     
+    </div>   
+
+    <script src="/js/jquery.table2excel.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="/js/adminpedidos.js"></script>

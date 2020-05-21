@@ -4,8 +4,7 @@
 @endsection
 @section('contenido')
 
-
-<input type="hidden"  id="especienombre" value={{ $data['especie'] }}>
+<input type="hidden"  id="especienombre" value={{ $data['especie'] ?? "Sin Especie" }}>
 
 <div id="diventero"  class="row product-list dev">
 
@@ -99,12 +98,12 @@
 
 
 
-            @for ($i = 2; $i <= round($data['cantidad']/2,0); $i++)
+            @for ($i = 2; $i <= round($data['cantidad']/9,0); $i++)
             <li class="page-item "><a class="page-link" href="javascript:void(0)" data-abc="true"> {{$i}}  </a></li>
 
-            @if($i==round($data['cantidad']/2,0))
+            @if($i==round($data['cantidad']/9,0))
 
-            @if(is_float($data['cantidad']/2)==true)
+            @if(is_float($data['cantidad']/9)==true)
             <li class="page-item "><a class="page-link" href="javascript:void(0)" data-abc="true"> {{$i+1}}  </a></li>
 
 @endif
@@ -114,6 +113,8 @@
         </ul>
     </nav>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="/js/animalespecie.js"></script>
     <script src="/js/scriptAnimales.js"></script>
     @endsection

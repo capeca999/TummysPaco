@@ -1,21 +1,89 @@
 $(document).ready(function() {
     
-    var cantidad = $("<td>").length
-    $(".search").keyup(function() {
-        var t = $(".search").val(),
-            e = ($(".results tbody").children("tr"), t.replace(/ /g, "'):containsi('"));
-        $.extend($.expr[":"], {
-            containsi: function(t, e, n, r) {
-                return (t.textContent || t.innerText || "").toLowerCase().indexOf((n[3] || "").toLowerCase()) >= 0
-            }
-        }), $(".results tbody tr").not(":containsi('" + e + "')").each(function(t) {
-            $(this).attr("visible", "false")
-        }), $(".results tbody tr:containsi('" + e + "')").each(function(t) {
-            $(this).attr("visible", "true")
-        });
-        var n = $('.results tbody tr[visible="true"]').length;
-        $(".counter").text(n + " item"), "0" == n ? $(".no-result").show() : $(".no-result").hide()
-    })
+    
+
+
+
+
+
+    $(document).on('change','#cantidad',function(){
+
+
+
+
+        $.ajax({
+            type: 'GET',
+             dataType: "json",
+             url: '/api/pedidos/'+$(".active").find("a").text() + '/' + $( "#cantidad option:selected" ).text(),
+         })
+        
+         .done(function(response){
+            $("#tbodyprincipal").empty();
+
+
+console.log(response);
+
+
+for (let index = 0; index < response.length; index++) {
+ var trprincipal = $( "<tr>" ).appendTo( $("#tbodyprincipal"));
+var pedidotd =$("<td>" + response[index].id +"</td>").appendTo(trprincipal);
+var avatartd =$("<td>").appendTo(trprincipal);
+var hrefname =$("<a>" ).appendTo(avatartd);
+
+var imgavatar =$("<img>").attr("src", "/uploads/avatars/"+response[index].avatar).attr("class", "imagenpregunta avatar").attr("alt", "Avatar").appendTo(hrefname);
+
+$(hrefname).append(response[index].name + response[index].first_name);
+
+
+var locationtd =$("<td>" +response[index].location+ "</td>").appendTo(trprincipal);
+var dateorder =$("<td>" +response[index].date_order+ "</td>").appendTo(trprincipal);
+var statustd =$("<td>" +response[index].status+ "</td>").appendTo(trprincipal);
+var spanstatus =$("<span>" +"&SVGFEGaussianBlurElement;"+ "</span").attr("class", "status text-success").appendTo(statustd);
+var preciototaltd =$("<td>" +response[index].total_price+ "</td>").appendTo(trprincipal);
+var detalledtd =$("<td>").appendTo(trprincipal);
+var ahrefdetalles =$("<a>").attr("href", "#").attr("class", "view").attr("data-toggle", "tooltip").appendTo(detalledtd);
+var ahrefdetalles =$("<i>" +"&#xE5C8;"+ "</i>").attr("class", "material-icons").appendTo(ahrefdetalles);
+}
+
+
+         })
+        .fail(function(response){ 
+        
+            console.log(response);
+        
+        });  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   });
+
+
+
+
+
+
+
+
+    
 /*MODIFICAR PRODUCTO (Añadir input)- Al hacer doble click creara un input en el td cliqueado*/
 $('button.btn-success ,button.btn-danger').click(function(event) {
 var id=$(this).attr("value");

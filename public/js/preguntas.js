@@ -165,8 +165,9 @@ else{
     
      .done(function(response){
 
- var arraypreguntas =Object.values(response);
 
+
+ var arraypreguntas =Object.values(response);
 
 
 
@@ -188,23 +189,40 @@ else{
       var divcol = $("<div>").attr("class", "col").appendTo(divgutters);
       var ahref =  $("<a>"+arraypreguntas[index].title+"</a>").attr("class", "text-big").attr("data-abc", "true").attr("href", "/forum/thread/"+arraypreguntas[index].question_id).appendTo(divcol);
 
-      var spanbadge = $("<span>"+"solved"+"</span>").attr("class", "badge badge-success align-text-bottom ml-1").appendTo(divcol);
+      var divfecha = $("<div>"+ "</div>").attr("class", "text-muted small mt-1").appendTo(divcol);
 
-      var divfecha = $("<div>"+arraypreguntas[index].date+ "</div>").attr("class", "text-muted small mt-1").appendTo(divcol);
-
-      var afirstnamelastname = $("<a>"+arraypreguntas[index].first_name + arraypreguntas[index].last_name + "</a>").attr("href", "javascript:void(0)").attr("class", "text-muted").attr("data-abc", "true").appendTo(divfecha);
+      var afirstnamelastname = $("<a>"+"</a>").attr("href", "javascript:void(0)").attr("class", "text-muted").attr("data-abc", "true").appendTo(divfecha);
       
       var divnone = $("<div>").attr("class", "d-none d-md-block col-4").appendTo(divgutters);   
         var  divguttersdos=   $("<div>").attr("class", "row no-gutters align-items-center").appendTo(divnone);
-        var divcol2 = $("<div>"+43+"</div>").attr("class", "col-4").appendTo(divguttersdos);
+
+
+        var divcol2 = $("<div>"+arraypreguntas[index].respuestas+"</div>").attr("class", "col-4").appendTo(divguttersdos);
+
+        
         var divmedia =$("<div>").attr("class", "media col-8 align-items-center").appendTo(divguttersdos);
         var imgusuario = $("<img>").attr("src", "/uploads/avatars/"+arraypreguntas[index].avatar).attr("alt", "avatarUsuario").attr("class", "  imagenpregunta d-block ui-w-30 rounded-circle").appendTo(divmedia);
+       
+       var badgeicon =$("<img>").attr("src", arraypreguntas[index].icon).attr("alt", arraypreguntas[index].textobadge).attr("class", "badgeiconusuario").appendTo(divmedia);
         var divtruncate = $("<div>").attr("class", "media-body flex-truncate ml-2").appendTo(divmedia);
-        var divtextruncate = $("<div>"+"1 day ago" + "</div>").attr("class", "line-height-1 text-truncate").appendTo(divtruncate);
-        var aby=$("<a>" + "by Steve smith" + "</a>").attr("href", "javascript:void(0)").attr("class", "text-muted small text-truncate").attr("data-abc", "true").appendTo(divtruncate);
+       
+       
+       
+        var fechaini = new Date();
+
+        var fechafin = new Date(arraypreguntas[index].date);
+    
+        var diasdif= fechafin.getTime()-fechaini.getTime();
+    
+        var contdias = Math.round(diasdif/(1000*60*60*24));
 
 
+contdias = contdias*-1;
 
+       
+       
+        var divtextruncate = $("<div>"+" Hace " + contdias + " Días" + "</div>").attr("class", "line-height-1 text-truncate").appendTo(divtruncate);
+        var aby=$("<a>"  + arraypreguntas[index].date + arraypreguntas[index].first_name + arraypreguntas[index].last_name +  "</a>").attr("href", "javascript:void(0)").attr("class", "text-muted small text-truncate").attr("data-abc", "true").appendTo(divtruncate);
 
 
     }

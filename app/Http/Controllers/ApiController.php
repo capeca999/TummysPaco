@@ -19,6 +19,7 @@ use App\Award;
 use App\Weight;
 use App\Vaccines;
 use App\Vaccination;
+use App\Answer;
 class ApiController extends Controller
 
 {
@@ -126,9 +127,75 @@ return $arraypedidos;
 }
 
 
+public static function MostrarAnimalesAdoptadosPagina($pagina,  $cantidad=9){
+
+    $num = $pagina;
+    $int = (int)$num;
 
 
 
+
+    if($cantidad<=0){
+        $cantidad=9;
+            }
+        
+            if($int<1){
+                $int=1;
+            }
+        $int--;
+$saltar = $int*9;
+    
+
+  
+   
+        return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition' , 'images_animals.url')
+    ->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
+    ->whereNotNull('animals.id_user')
+    ->groupBy('animals.id')
+    ->get()
+    ->skip($saltar)
+    ->take($cantidad)
+    ->toJson();
+ 
+    }
+
+
+
+
+
+public function MostrarAnimalesAdoptados(){
+
+    $data =  array();
+    $data['animales']  =  json_decode($this::getAnimalsAdoptadosList(1,9));
+    $data['cantidad']  =  Animal::whereNotNull('id_user')->count();
+    return view('animales',compact("data"));
+}
+
+
+
+public static function getAnimalsAdoptadosList($pagina=1, $cantidad=9){
+    if($cantidad<=0){
+        $cantidad=9;
+            }
+        
+            if($pagina<1){
+                $pagina=1;
+            }
+        $pagina--;
+$saltar = $pagina*9;
+    
+  
+
+        return Animal::select('animals.id','animals.id_user', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition' , 'images_animals.url')
+    ->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
+    ->whereNotNull('animals.id_user')
+    ->groupBy('animals.id')
+    ->get()
+    ->skip($saltar)
+    ->take($cantidad)
+    ->toJson();
+    }
+    
 
 
 
@@ -160,7 +227,7 @@ return $arraypedidos;
 public function getAnimalsSpecie($especie){
 
     $data =  array();
-    $data['animales']  =  json_decode($this::getAnimalsSpecieList(1, $especie, 2));
+    $data['animales']  =  json_decode($this::getAnimalsSpecieList(1, $especie, 9));
     $data['cantidad']  =  Animal::where('id_user', '=', null)->count();
     $data['especie'] = $especie;
     return view('animales',compact("data"));
@@ -169,16 +236,16 @@ public function getAnimalsSpecie($especie){
 }
 
 
-public static function getAnimalsSpecieList($pagina=1, $especie, $cantidad=3){
+public static function getAnimalsSpecieList($pagina=1, $especie, $cantidad=9){
     if($cantidad<=0){
-        $cantidad=3;
+        $cantidad=9;
             }
         
             if($pagina<1){
                 $pagina=1;
             }
         $pagina--;
-$saltar = $pagina*3;
+$saltar = $pagina*9;
     
     if($especie=="Todos"){
 
@@ -210,10 +277,7 @@ $saltar = $pagina*3;
 
 //Accede por web
 
-
-
-
-public static function getAnimalsSpecieListPagina($pagina, $especie, $cantidad=2){
+public static function getPedidosListPagina($pagina, $cantidad){
 
     $num = $pagina;
     $int = (int)$num;
@@ -222,19 +286,57 @@ public static function getAnimalsSpecieListPagina($pagina, $especie, $cantidad=2
 
 
     if($cantidad<=0){
-        $cantidad=2;
+        $cantidad=9;
             }
         
             if($int<1){
                 $int=1;
             }
         $int--;
-$saltar = $int*2;
+$saltar = $int*$cantidad;
+    
+
+ 
+  
+$historiales = User::select('users.id', 'users.avatar','users.name', 'users.first_name', 'orders.payment_method','orders.total_price',
+'orders.date_order','orders.descuento', 'orders.expected_arrival','orders.status', 'orders.USPS', 'orders.location', 'orders.street', 'orders.number')
+  ->join('orders','users.id','=','orders.id_user')
+  ->orderBy('orders.id')
+  ->get()
+  ->skip($saltar)
+  ->take($cantidad)
+  ->toJson();
+ 
+  return $historiales;
+  
+    }
+
+
+
+
+public static function getAnimalsSpecieListPagina($pagina, $especie, $cantidad=9){
+
+    $num = $pagina;
+    $int = (int)$num;
+
+
+
+
+    if($cantidad<=0){
+        $cantidad=9;
+            }
+        
+            if($int<1){
+                $int=1;
+            }
+        $int--;
+$saltar = $int*9;
     
 
     if($especie=="Todos"){
         return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition' , 'images_animals.url')
     ->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
+    ->where('animals.id_user', '=', null)
     ->groupBy('animals.id')
     ->get()
     ->skip($saltar)
@@ -245,6 +347,7 @@ $saltar = $int*2;
         return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition' , 'images_animals.url')
     ->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
     ->where('species', 'like', $especie)
+    ->where('animals.id_user', '=', null)
     ->groupBy('animals.id')
     ->get()
     ->skip($saltar)
@@ -279,9 +382,10 @@ public static function getAnimalsEspecialesList($pagina=1,  $cantidad=20){
             }
         $pagina--;
 $saltar = $pagina*9;
-    return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'images_animals.url')
+    return Animal::select('animals.id', 'animals.condition', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'images_animals.url')
     ->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
     ->whereNotNull('condition')
+    ->where('animals.id_user', '=', null)
     ->groupBy('animals.id')
     ->get()
     ->skip($saltar)
@@ -294,29 +398,38 @@ $saltar = $pagina*9;
 
 public  function getAnimalsEspeciales($pagina=1,  $cantidad=9){
     $animales = $this::getAnimalsEspecialesList(1,9);
+
+
+
     return view ('animalesEspeciales')->with('animales', json_decode($animales));
 }
 
 
 
-
+public static function aceptarPeticion($id,$atributo,$valor){
+    $animal = Animal::find($id);
+    $animal->$atributo = $valor;
+    $animal->save(); 
+}
 
 
 public static function  getPreguntas($pagina=1, $cantidad=5 ){
     if($cantidad<=0){
-        $cantidad=10;
+        $cantidad=5;
             }
         
             if($pagina<1){
                 $pagina=1;
             }
         $pagina--;
+
 $saltar = $pagina*5;
 $preguntas = Question::select('questions.id AS question_id' ,
 'questions.date',
 'questions.id_user', 'questions.title', 'questions.description', 'questions.views',
-'users.id AS user_id', 'users.first_name', 'users.last_name', 'users.avatar')
+'users.id AS user_id', 'users.first_name', 'users.last_name', 'users.avatar' , 'users.badge_selected', 'badges.id', 'badges.icon', 'badges.description AS textobadge')
 ->join('users', 'users.id', 'questions.id_user')
+->join('badges', 'users.badge_selected', 'badges.id')
 ->get()
 ->skip($saltar)
 ->take($cantidad)
@@ -324,7 +437,36 @@ $preguntas = Question::select('questions.id AS question_id' ,
 
 
 
-return $preguntas;
+
+$pregunta= json_decode($preguntas);
+
+$array = (array) $pregunta;
+
+
+
+
+
+$iZero = array_values($array);
+
+
+
+for ($i=0; $i < count($iZero); $i++) { 
+
+
+    $count = Answer::where('id_question','=',$iZero[$i]->question_id)->count();
+  
+$iZero[$i]->respuestas=$count;
+}
+
+
+
+
+
+
+
+
+
+return $iZero;
 
 }
 
@@ -677,6 +819,35 @@ return response()->json(
   ]
   );
     }
+
+
+ 
+            public static function postProducto(Request $request){
+
+
+
+        
+                
+                
+                        $column_id =DB::table('products')->insertGetId([
+                'stock' =>$request->stock,
+                'price'=>$request->price,
+                'name'=>$request->name,
+                'description'=>$request->description,
+                'image'=>$request->valorinput,
+                        ]);
+                
+      return response()->json(
+                  [  
+                    'success'=>true,
+                    'message'=>'Data inserted successfully',
+                    'id'=> $column_id
+                  ]
+                  );
+                    }
+                
+
+
 
 
 

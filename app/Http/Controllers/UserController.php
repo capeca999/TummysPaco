@@ -353,4 +353,61 @@ return "new";
 
 
 
+
+public function getPedidosAdmin(){
+
+    $data =  array();
+    $data['pedidos']  =  json_decode($this::getPedidosList(1, 5));
+    $data['cantidad']  =  Order::count();
+
+    return view('adminPedidos',compact("data"));
+
+
+}
+
+
+
+public function getPedidosList($pagina=1,  $cantidad=5){
+  
+    if($cantidad<=0){
+        $cantidad=5;
+            }
+        
+            if($pagina<1){
+                $pagina=1;
+            }
+        $pagina--;
+$saltar = $pagina*$cantidad;
+
+
+
+    
+        $historiales = User::select('users.id', 'users.avatar','users.name', 'users.first_name', 'orders.payment_method','orders.total_price',
+      'orders.date_order','orders.descuento', 'orders.expected_arrival','orders.status', 'orders.USPS', 'orders.location', 'orders.street', 'orders.number')
+        ->join('orders','users.id','=','orders.id_user')
+        ->orderBy('orders.id')
+        ->get()
+        ->skip($saltar)
+        ->take($cantidad)
+        ->toJson();
+
+
+
+
+
+return $historiales;
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
 }

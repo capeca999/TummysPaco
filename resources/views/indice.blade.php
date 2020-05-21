@@ -2,8 +2,9 @@
 @section('titulo')
    - Página Principal
 @endsection
+@section('scripts')
+@endsection
 @section('contenido')
-
 <link rel="icon" href="{{ URL::asset('/css/icon.png') }}" type="image/x-icon"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <section id="carousel">

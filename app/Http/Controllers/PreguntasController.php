@@ -117,7 +117,7 @@ return view('animalDetalles')->with('animales', json_decode($animales));
 
 
     public static function getthread($id){
-        $hilo = self::getidthread(1,10,$id);
+        $hilo = self::getidthread($id);
         $pregunta = self::getidpregunta($id);
         $data =  array();
         $data['hilo']  =   $hilo;
@@ -179,19 +179,11 @@ return $preguntas;
 }
 
 
-public static function getidthread($id, $pagina=1, $cantidad=10){
+public static function getidthread($id){
 
 
 
-    if($cantidad<=0){
-        $cantidad=10;
-            }
-        
-            if($pagina<1){
-                $pagina=1;
-            }
-        $pagina--;
-$saltar = $pagina*10;
+  
 $threads = Answer::select('answers.id AS answer_id','answers.id_question', 'answers.id_user', 'answers.fecha', 'answers.title', 
 'answers.description AS answer_description', 'answers.likes' , 'answers.views','users.created_at', 'users.first_name', 'users.avatar', 'users.id AS user_id','users.last_name',
  'users.badge_selected','badges.id', 'badges.icon', 'badges.description')
@@ -313,7 +305,7 @@ return $arraythread;
 
 
 public function preguntas(){
-    $preguntas = $this::listarPreguntas(1,5);
+    $preguntas = $this::listarPreguntas(0,5);
     $data =  array();
     $data['cantidad']  =  Question::count();
     $data['preguntas']     =   $preguntas;
@@ -321,23 +313,25 @@ public function preguntas(){
 }
 
 
-public static function listarPreguntas($pagina=1, $cantidad=10){
+public static function listarPreguntas($pagina=1, $cantidad=5){
     if($cantidad<=0){
-        $cantidad=10;
+        $cantidad=5;
             }
         
             if($pagina<1){
                 $pagina=1;
             }
         $pagina--;
+
+
+
 $saltar = $pagina*$cantidad;
-
-
 $preguntas = Question::select('questions.id AS question_id' ,
 'questions.date',
  'questions.id_user', 'questions.title', 'questions.description', 'questions.views',
- 'users.id AS user_id', 'users.first_name', 'users.last_name', 'users.avatar', 'users.badge_selected')
+ 'users.id AS user_id', 'users.first_name', 'users.last_name', 'users.avatar', 'users.badge_selected', 'badges.id', 'badges.icon')
 ->join('users', 'users.id', 'questions.id_user')
+->join('badges', 'users.badge_selected', 'badges.id')
 ->get()
 ->skip($saltar)
 ->take($cantidad)
@@ -351,7 +345,16 @@ $pregunta= json_decode($preguntas);
 
 for ($i=0; $i < count($pregunta); $i++) { 
 
+
+
+    $now = time(); // or your date as well
+    $your_date = strtotime($pregunta[$i]->date);
+    $datediff = $now - $your_date;
     
+    $fechadiferencia = round($datediff / (60 * 60 * 24));
+    
+    $pregunta[$i]->fechadiferencia =  $fechadiferencia;
+
     $count = Answer::where('id_question','=',$pregunta[$i]->question_id)->count();
   
 $pregunta[$i]->respuestas=$count;

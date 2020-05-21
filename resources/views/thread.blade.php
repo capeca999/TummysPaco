@@ -25,7 +25,10 @@
              
                      <div class="media flex-wrap w-100 align-items-center">
                       <img src="/uploads/avatars/{{$preguntas->avatar}}" class=" imagenpregunta d-block ui-w-40 rounded-circle" alt="">
-                         <div class="media-body ml-3"> <a href="javascript:void(0)" data-abc="true">{{$preguntas->first_name}} </a>
+                         <div class="media-body ml-3"> <img src="{{$preguntas->icon}}" title="{{$preguntas->description}}" class="badgeiconusuario" alt="{{$preguntas->description}}">
+                         
+                         
+                         <a href="javascript:void(0)" data-abc="true">{{$preguntas->first_name}} </a>
                          
                              <div class="text-muted small">{{$preguntas->date}}</div>
                    
@@ -33,7 +36,7 @@
 
 
                          <div class="text-muted small ml-3">
-                             <div>Member since <strong>{{$preguntas->created_at}}</strong></div>
+                             <div>Fecha Respuesta: <strong>{{$preguntas->created_at}}</strong></div>
                          </div>
                      </div>
                  </div>
@@ -86,10 +89,11 @@
         <div class="card-header">
             <div class="media flex-wrap w-100 align-items-center"> <img src="/uploads/avatars/{{$preguntas->avatar}}" class=" imagenpregunta d-block ui-w-40 rounded-circle" alt="">
                 <div class="media-body ml-3"> <a href="javascript:void(0)" data-abc="true">{{$hilos->first_name}}</a>
+                <img src="{{$hilos->icon}}" title="{{$hilos->description}}" class="badgeiconusuario" alt="{{$hilos->description}}">
                     <div class="text-muted small">{{$hilos->fecha}}</div>
                 </div>
                 <div class="text-muted small ml-3">
-                    <div>Member since <strong>{{$hilos->created_at}}</strong></div>
+                    <div>Fecha Respuesta: <strong>{{$hilos->created_at}}</strong></div>
                 </div>
             </div>
         </div>
@@ -138,4 +142,7 @@
 
     <script src="/js/preguntas.js"></script>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
     @endsection

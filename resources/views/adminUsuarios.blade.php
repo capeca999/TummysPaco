@@ -46,19 +46,12 @@
                         <td name="name">{{$usuario->name}}</td>
                         <td name="first_name">{{$usuario->first_name}}</td>
                         <td name="last_name">{{$usuario->last_name}}</td>
-
-
-                        <td name="image">
-                            
-                        
+                        <td name="image">                      
 @if($usuario->avatar=="")
 <img src="/uploads/avatars/avatar.png" class="iconoUsuariosAdmin">
 @else
 <img src="/uploads/avatars/{{$usuario->avatar}}" class="iconoUsuariosAdmin">
 @endif
-
-
-
                     </td>
                         <td name="date_birth">{{$usuario->date_birth}}</td>
                         <td name="email">{{$usuario->email}}</td>
@@ -77,6 +70,8 @@
         
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="/js/adminusuarios.js"></script>
 
     @endsection

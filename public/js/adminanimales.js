@@ -77,6 +77,22 @@ else{
    /*Añadir Animal (Añadir input)- Al hacer doble click creara un input en el td cliqueado*/
    $(document).on( "click", "#botonAñadir", function() {
 
+if(  $("#animalesañadirtr").length==1 ){
+
+    if($("#top").length == 1) {
+
+        $("#top").remove();
+        }
+    
+    
+            var diverror = $("<div>" + "Ya has pulsado el boton"  + "</div>" ).attr("class" , "alert alert-warning beautifulerror").attr("role",  "alert").attr("id", "top").appendTo($("#contenedorprincipalpagina"));
+            var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
+            var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
+
+}
+else{
+
+
 
 var animaltr=$("<tr>").attr("id", "animalesañadirtr").insertBefore($("#animalesAdmin"));
 var animalidtd =$("<td>").attr("name", "id").appendTo(animaltr);
@@ -154,13 +170,24 @@ valorinput = "/img/animals/"+valor;
 var botoned =$("<td>").appendTo(animaltr);
 var botonsuccess=$("<button>").attr("id", "anyadiranimal").attr("class", "btn btn-success").attr("style", "margin-left: 5px;").attr("type", "submit").appendTo(botoned);
 var icheck =$("<i>").attr("class", " fa fa-check").attr("style", "font-size: 15px;").appendTo(botonsuccess);
-var botonserror=$("<button>").attr("class", "btn btn-danger").attr("style", "margin-left: 5px;").attr("type", "submit").appendTo(botoned);
+var botonserror=$("<button>").attr("id", "borrartr").attr("class", "btn btn-danger").attr("style", "margin-left: 5px;").attr("type", "submit").appendTo(botoned);
 var icheck =$("<i>").attr("class", "fa fa-trash").attr("style", "font-size: 15px;").appendTo(botonserror);
 
+}
 
 
 
     });
+
+$(document).on("click", "#borrartr", function(){
+
+    $("#animalesañadirtr").empty();
+    $("#animalesañadirtr").remove();
+
+});
+
+
+
 
 
     $(document).on( "click", "#anyadiranimal", function() {
@@ -384,6 +411,8 @@ else{
                      .done(function(response){
 console.log(response);
 $("#animalesañadirtr").empty();
+$("#animalesañadirtr").remove();
+
 
                      })
                     

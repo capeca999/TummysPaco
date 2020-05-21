@@ -91,6 +91,7 @@ public static function getNewerAnimals()
 {
     $animales = Animal::select('animals.id','animals.id_user','animals.race','animals.species','animals.date_of_birth','animals.description','animals.health','animals.nickname','animals.place_found','animals.size','animals.date_found','animals.condition','animals.gender', 'images_animals.url')
     ->orderBy('date_found', 'DESC')
+    ->where('animals.id_user', '=' ,null)
     ->join('images_animals', 'images_animals.id_animal', 'animals.id')
     ->groupBy('animals.id')
     ->limit(6)
@@ -110,6 +111,7 @@ public static function getAnimalCategory()
 {
     $animales = DB::select('animals')
     ->orderBy('date_found')
+    ->where('animals.id_user', '=' ,null)
     ->limit(6)
     ->get();
 return $animales;
@@ -132,14 +134,12 @@ return view('animalDetalles')->with('animales', json_decode($animales));
 
 
 public static function getAnimalIDFormulario($id){
-
     $animales = Animal::select('animals.id','animals.id_user','animals.race','animals.species','animals.date_of_birth','animals.description','animals.health','animals.nickname','animals.place_found','animals.size','animals.date_found','animals.condition','animals.gender', 'images_animals.url')
     ->join('images_animals','images_animals.id_animal','animals.id')
     ->where('animals.id', '=', $id)
     ->get()
     ->toJson();
     return view('formularioAdoptar')->with('animales', json_decode($animales));
-    
     }
     
     
@@ -165,7 +165,7 @@ public  function getAnimalesAdmin(){
 public static function getAnimalesAdminList(){
 
   
-    return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition', 'animals.gender', 'animals.health', 'animals.size','images_animals.url')
+    return Animal::select('animals.id', 'animals.id_user', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition', 'animals.gender', 'animals.health', 'animals.size','images_animals.url')
     ->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
     ->groupBy('animals.id')
     ->get()
@@ -189,6 +189,13 @@ public static function getAnimalesAdminList(){
         $animal->$atributo = $valor;
         $animal->save(); 
     }
+
+    public static function modificarAnimalEstado($id,$atributo){
+        $animal = Animal::find($atributo);
+        $animal->id_user = $id;
+        $animal->save(); 
+    }
+
 
 
 }

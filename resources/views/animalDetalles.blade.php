@@ -73,7 +73,17 @@ $diff = date_diff(date_create($dateOfBirth), date_create($today));
 						
 						@if(Auth::user()!=null)
 						<div class="action">
-							<button id="adoptar" name="{{$animales[0]->id}}" class="add-to-cart btn btn-default" type="button">Adoptar Gordin</button>						
+
+						@if($animales[0]->id_user == null)
+							<button id="adoptar" name="{{$animales[0]->id}}" class="add-to-cart btn btn-default" type="button">Adoptar Gordin</button>	
+
+
+@else
+<button  class="add-to-cart btn btn-default" type="button">Este Animal Fue Adoptado!</button>	
+
+
+							@endif
+							
 							<button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
 							<button class="like btn btn-default graficapesos" id="graficapesos" type="button"> Ver gráfica de pesos<span class="fa fa-area-chart"></span></button>
 							<button class="like btn btn-default tablavacunas" id="tablavacunas" type="button"> Ver tabla de vacunas<span class="fa fa-user-md"></span></button>
@@ -115,7 +125,8 @@ $diff = date_diff(date_create($dateOfBirth), date_create($today));
 </div>
 
 </div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
 	<script src="/js/animaldetalles.js"></script>
 

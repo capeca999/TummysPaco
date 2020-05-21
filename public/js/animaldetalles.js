@@ -226,6 +226,7 @@ for (let index = 0; index < data.length; index++) {
 
 
     $("#adoptar").click(function() {
+    
         var idanimal = $("#hiddenid").attr("value");
         $.ajax({
             type: "post",
@@ -235,6 +236,7 @@ for (let index = 0; index < data.length; index++) {
             },
             data:{"_token": $('#token').val(), idanimal:idanimal},
             success:function(data) {
+              
                 window.location.href = "/animales/formularioAdoptar/"+$("#adoptar").attr("name");
                 },
             error:function(data){

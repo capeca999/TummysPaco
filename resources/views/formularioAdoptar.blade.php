@@ -50,7 +50,7 @@
                         <div class="form-row">
                             <div class="col-12">
                                 <div id="map" class="static-map"><a rel="noopener" href="https://www.google.com/maps/place/Daytona+International+Speedway/@29.1815062,-81.0744275,15z/data=!4m13!1m7!3m6!1s0x88e6d935da1cced3:0xa6b3e1bc0f2fc83a!2s1801+W+International+Speedway+Blvd,+Daytona+Beach,+FL+32114!3b1!8m2!3d29.187028!4d-81.0703076!3m4!1s0x88e6d949a4cb8593:0x1387c6c0b5c8cc97!8m2!3d29.1851681!4d-81.0705292"
-                                        target="_blank"> <img class="img-fluid"  src="{{$animales[0]->url}}"></a></div>
+                                        target="_blank"> <img class=" imagenformulario "  src="{{$animales[0]->url}}"></a></div>
                             </div>
                             <div class="col-sm-6 col-md-12 col-lg-6">
                                 <h2 class="h4">Nuestra Información<i class="fa fa-user"></i> </h2>
@@ -151,5 +151,7 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="/js/formularioAdoptar.js"></script>
     @endsection

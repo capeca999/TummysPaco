@@ -40,4 +40,38 @@ return view('donarProductos')->with('productos', json_decode($Productos));
         }
 
 
+        public function getProductosAdmin(){
+
+            $Productos = $this::getProductosAgrupadosListAdmin();
+            return view('adminProductos')->with('productos', json_decode($Productos));
+                }
+              
+                public static function getProductosAgrupadosListAdmin(){           
+                 return Product::select('products.id',  'products.stock','products.name','products.description', 'products.price', 'products.image')
+                ->groupBy('products.id')
+                 ->get()
+                 ->toJson();
+                    }
+
+
+
+    /**
+         * Modifica el valor con el $valor pasado del atributo pasado con el valor $atributo del animal con ese id 
+         *
+         * @param  int $id
+         * @param  string $atributo
+         * @param  string $valor
+         *
+         * @return array Animales
+         */
+        public static function modificarProducto($id,$atributo,$valor){
+            $petition = Product::find($id);
+            $petition->$atributo = $valor;
+            $petition->save(); 
+        }
+ 
+
+
+
+
 }

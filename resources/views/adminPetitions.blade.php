@@ -6,10 +6,17 @@
 @endsection
 @section('contenido')    
     <div id="divprincipal" class="col-md-12 search-table-col">
+    <button class="btn btn-primary"  id="ExportarExcel" data-toggle="modal" data-target="#modal1" type="button"> <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+ Exportar A Excel</button>
+
+
+ <button class="btn btn-primary"  id="ExportarPDF" data-toggle="modal" data-target="#modal1" type="button"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+ Exportar A PDF</button>
+
         <div class="form-group pull-right col-lg-4"><input type="text" class="search form-control" placeholder="Search by typing here.."></div><span class="counter pull-right"></span>
         <div class="table-responsive table-bordered table table-hover table-bordered results">
      
-            <table class="table table-bordered table-hover">
+            <table id="tablapetitions" class="table table-bordered table-hover">
                 <thead class="bill-header cs">
                     <tr>
                         <th id="trs-hd" class="col-lg-1">ID.</th>
@@ -58,6 +65,8 @@
         
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="/js/adminpetitions.js"></script>

@@ -17,12 +17,11 @@ class Orders extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('id_user')->unsigned();
-            $table->date('date_order');
+            $table->timestamp('date_order')->useCurrent();
             $table->bigInteger('coupon_id')->unsigned()->nullable();
             $table->integer('descuento')->nullable();
             $table->double('total_price',8,2);
             $table->enum('payment_method', ['Credit card', 'Debit Card', 'Paypal']);
-            $table->date('expected_arrival');
             $table->enum('status', ['Order Processed', 'Order Shipped', 'Order En Route', 'Order Arrived']);
             $table->string('USPS');
             $table->string('street');

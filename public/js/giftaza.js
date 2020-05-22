@@ -1,17 +1,6 @@
 //Cargamos la página completamente antes de empezar
 $(function(){
 
-/*
-$("img").attr("").hover(function(){
-$(this).attr("src", "/img/products/TazaTummys/gif2.gif");
-});
-
-
-$("#1").mouseout(function(){
-    $(this).attr("src", "/img/products/TazaTummys/taza.jpg");
-    });
-  */  
-  
 
                             (function ($) {
                                 $.fn.serializeFormJSON = function () {
@@ -35,6 +24,9 @@ $("#1").mouseout(function(){
 
                             $('#formDonar').submit(function (e) {
                            
+
+
+                                
                                 e.preventDefault();
                                 var data = $(this).serializeFormJSON();
                                 

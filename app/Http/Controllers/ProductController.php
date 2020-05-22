@@ -26,7 +26,6 @@ echo "</pre>";
     }
     
     public function getProductosAgrupados(){
-
 $Productos = $this::getProductosAgrupadosList();
 return view('donarProductos')->with('productos', json_decode($Productos));
     }

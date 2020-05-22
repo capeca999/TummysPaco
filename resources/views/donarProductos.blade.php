@@ -26,12 +26,20 @@
         <!-- Custom content-->
         <div class="media align-items-lg-center flex-column flex-lg-row p-3">
           <div class="media-body order-2 order-lg-1">
-            <h5 class="mt-0 font-weight-bold mb-2">{{$producto->name}}</h5>
+            <h5 class="mt-0 font-weight-bold mb-2">{{$producto->name}} 
+              @if($producto->stock<=0)
+<span style="color:red;">No tenemos suficiente stock! </span>
+
+              @endif
+
+
+
+            </h5>
             <p class="font-italic text-muted mb-0 small">{{$producto->description}}</p>
             <div class="d-flex align-items-center justify-content-between mt-1">
               <h6 class="font-weight-bold my-2">{{$producto->price}}€</h6>
               <ul class="list-inline small">
-              <input type="number" id="{{$producto->id}}" name="{{$producto->id}}" min="0">
+              <input type="number" min=0 max={{$producto->stock}} id="{{$producto->id}}" name="{{$producto->id}}" min="0">
               </ul>
             </div>
           </div>

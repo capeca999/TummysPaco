@@ -65,6 +65,13 @@ Route::group(['middleware' => 'checkAdmin'], function () {
         Route::get('/UsuariosAdmin/', 'UserController@getUsuariosAdmin');
         Route::get('/PeticionesAdmin/', 'PetitionController@getPetitionsAdmin');
         Route::get('/PedidosAdmin/', 'UserController@getPedidosAdmin');
+        Route::get('/PesosVacunasAdmin/', 'AnimalController@getAnimalesVacunarPesar');
+
+        Route::get('/GraficasAdmin/', function() {
+            return view('adminDiagramas');
+            });
+    
+
 });
 
 
@@ -94,12 +101,18 @@ Route::get('/', 'PrincipalController@index');
     Route::get('/donarProductos/', 'ProductController@getProductosAgrupados');    
     Route::middleware('auth')->post('anydadirpeticion', 'HomeController@ProcesoAdopciónPost');    
     Route::middleware('auth')->post('comprobarPeticion', 'HomeController@ProcesoAdopciónConsultar');    
-
+/*
    
     Route::middleware('auth')->get('/paginaComprar/', function() {
     return view('Checkout');
     });
-    
+
+
+    */
+
+
+    Route::middleware('auth')->get('/paginaComprar/', 'UserController@getDirecciones');    
+
 
     Route::middleware('auth')->get('/donacion/', function() {
         return view('donardinero');

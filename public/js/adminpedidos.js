@@ -76,10 +76,236 @@ function fnExcelReport()
 
 
 
-   $("#btnExport").click(function(){
+
+$(".view").click(function(){
+
+
+    var myStr = $(this).parent().prev().prev().text();
+    var trimStr = $.trim(myStr);
   
-    fnExcelReport();
+  if(trimStr=="Order Processed"){
+  
+      $(this).parent().prev().prev().text("Order Shipped");
+
+      $.ajax({
+        type: 'GET',
+         dataType: "json",
+         url: '/api/pedidosCambiarEstado/'+$(this).attr("id") + '/' + $(this).parent().prev().prev().text(),            
+        })
+    
+        .done(function(response){
+      
+            
+            $(this).parent().prev().prev().removeClass( "negrostatus" ).addClass( "amarillostatus" );
+
+
+            })
+           .fail(function(response){ 
+           
+               console.log(response);
+           
+           });  
+
+  }
+  
+  
+  else if(trimStr=="Order Shipped"){
+  
+      $(this).parent().prev().prev().text("Order En Route");
+
+      $.ajax({
+        type: 'GET',
+         dataType: "json",
+         url: '/api/pedidosCambiarEstado/'+$(this).attr("id") + '/' + $(this).parent().prev().prev().text(),            
+        })
+    
+        .done(function(response){
+
+
+            $(this).parent().prev().prev().removeClass( "amarillostatus" ).addClass( "naranjastatus" );
+
+
+            })
+           .fail(function(response){ 
+           
+               console.log(response);
+           
+           });  
+  }
+  
+  if(trimStr=="Order En Route"){
+  
+      $(this).parent().prev().prev().text("Order Arrived");
+
+
+      $.ajax({
+        type: 'GET',
+         dataType: "json",
+         url: '/api/pedidosCambiarEstado/'+$(this).attr("id") + '/' + $(this).parent().prev().prev().text(),            
+        })
+    
+        .done(function(response){
+
+            $(this).parent().prev().prev().removeClass( "naranjastatus" ).addClass( "verdestatus" );
+
+
+            })
+           .fail(function(response){ 
+           
+               console.log(response);
+           
+           });  
+
+  }
+  
+  
+  
+  
+    
+  
+  
+              });
+  
+
+         
+
+
+
+
+            $("#btnExport").click(function(){
+  
+                fnExcelReport();
+                        });
+            
+
+
+
+            
+            $(document).on('keyup', '#searchbyname', function(){
+
+
+
+                $.ajax({
+                    type: 'GET',
+                     dataType: "json",
+                     url: '/api/pedidos/'+$(".active").find("a").text() + '/' + $( "#cantidad option:selected" ).text()+'/'+$("#statuspedido option:selected").text()+'/'+$("#searchbyname").val(),            
+                    })
+                
+                 .done(function(response){
+                    $("#tbodyprincipal").empty();
+            
+            console.log(response);
+            
+            
+            for (let index = 0; index < response.length; index++) {
+            var trprincipal = $( "<tr>" ).appendTo( $("#tbodyprincipal"));
+            var pedidotd =$("<td>" + response[index].id +"</td>").appendTo(trprincipal);
+            var avatartd =$("<td>").appendTo(trprincipal);
+            var hrefname =$("<a>" ).appendTo(avatartd);
+            
+            var imgavatar =$("<img>").attr("src", "/uploads/avatars/"+response[index].avatar).attr("class", "imagenpregunta avatar").attr("alt", "Avatar").appendTo(hrefname);
+            
+            $(hrefname).append(response[index].name + response[index].first_name);
+            
+            
+            var locationtd =$("<td>" +response[index].location+ "</td>").appendTo(trprincipal);
+            var dateorder =$("<td>" +response[index].date_order+ "</td>").appendTo(trprincipal);
+            var statustd =$("<td>" +response[index].status+ "</td>").appendTo(trprincipal);
+            var spanstatus =$("<span>" +"&SVGFEGaussianBlurElement;"+ "</span").attr("class", "status text-success").appendTo(statustd);
+            var preciototaltd =$("<td>" +response[index].total_price+ "</td>").appendTo(trprincipal);
+            var detalledtd =$("<td>").appendTo(trprincipal);
+            var ahrefdetalles =$("<a>").attr("href", "#").attr("class", "view").attr("data-toggle", "tooltip").appendTo(detalledtd);
+            var ahrefdetalles =$("<i>" +"&#xE5C8;"+ "</i>").attr("class", "material-icons").appendTo(ahrefdetalles);
+            }
+                 })
+                .fail(function(response){ 
+                
+                    console.log(response);
+                
+                });  
+            
+            
+            
+            
+            
+            
+            
             });
+            
+            
+
+
+
+
+
+$(document).on('change', '#statuspedido', function(){
+
+    $.ajax({
+        type: 'GET',
+         dataType: "json",
+         url: '/api/pedidos/'+$(".active").find("a").text() + '/' + $( "#cantidad option:selected" ).text()+'/'+$("#statuspedido option:selected").text(),            
+        })
+    
+     .done(function(response){
+        $("#tbodyprincipal").empty();
+
+console.log(response);
+
+
+for (let index = 0; index < response.length; index++) {
+var trprincipal = $( "<tr>" ).appendTo( $("#tbodyprincipal"));
+var pedidotd =$("<td>" + response[index].id +"</td>").appendTo(trprincipal);
+var avatartd =$("<td>").appendTo(trprincipal);
+var hrefname =$("<a>" ).appendTo(avatartd);
+
+var imgavatar =$("<img>").attr("src", "/uploads/avatars/"+response[index].avatar).attr("class", "imagenpregunta avatar").attr("alt", "Avatar").appendTo(hrefname);
+
+$(hrefname).append(response[index].name + response[index].first_name);
+
+
+var locationtd =$("<td>" +response[index].location+ "</td>").appendTo(trprincipal);
+var dateorder =$("<td>" +response[index].date_order+ "</td>").appendTo(trprincipal);
+var statustd =$("<td>" +response[index].status+ "</td>").appendTo(trprincipal);
+
+
+if(response[index].status=="Order Processed"){
+    $(statustd).addClass("negrostatus")
+}
+
+else if(response[index].status=="Order Shipped"){
+    $(statustd).addClass("amarillostatus")
+}
+
+else if(response[index].status=="Order En Route"){
+    $(statustd).addClass("naranjastatus")
+}
+
+else if(response[index].status=="Order Arrived"){
+    $(statustd).addClass("verdestatus")
+}
+
+
+var spanstatus =$("<span>" +"&SVGFEGaussianBlurElement;"+ "</span").attr("class", "status text-success").appendTo(statustd);
+var preciototaltd =$("<td>" +response[index].total_price+ "</td>").appendTo(trprincipal);
+var detalledtd =$("<td>").appendTo(trprincipal);
+var ahrefdetalles =$("<a> fa fa-arrow-right + </a>").attr("href", "#").attr("class", "view").attr("data-toggle", "tooltip").appendTo(detalledtd);
+var ahrefdetalles2 =$("<i>" +"&#xE5C8;"+ "</i>").attr("class", "material-icons").appendTo(ahrefdetalles);
+}
+     })
+    .fail(function(response){ 
+    
+        console.log(response);
+    
+    });  
+
+
+
+
+
+
+
+});
+
 
 
     $(document).on('change','#cantidad',function(){
@@ -90,7 +316,7 @@ function fnExcelReport()
         $.ajax({
             type: 'GET',
              dataType: "json",
-             url: '/api/pedidos/'+$(".active").find("a").text() + '/' + $( "#cantidad option:selected" ).text(),
+             url: '/api/pedidos/'+$(".active").find("a").text() + '/' + $( "#cantidad option:selected" ).text()+'/'+$("#statuspedido option:selected").text(),            
          })
         
          .done(function(response){
@@ -120,36 +346,12 @@ var detalledtd =$("<td>").appendTo(trprincipal);
 var ahrefdetalles =$("<a>").attr("href", "#").attr("class", "view").attr("data-toggle", "tooltip").appendTo(detalledtd);
 var ahrefdetalles =$("<i>" +"&#xE5C8;"+ "</i>").attr("class", "material-icons").appendTo(ahrefdetalles);
 }
-
-
          })
         .fail(function(response){ 
         
             console.log(response);
         
         });  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
    });
 
 

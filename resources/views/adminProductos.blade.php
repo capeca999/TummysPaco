@@ -12,7 +12,15 @@
         <button class="btn btn-primary"  id="botonAñadir" data-toggle="modal" data-target="#modal1" type="button"> <i class="fa fa-plus" aria-hidden="true"></i>
  Añadir Producto</button>
 
-            <table class="table table-bordered table-hover">
+ <button class="btn btn-primary"  id="ExportarExcel" data-toggle="modal" data-target="#modal1" type="button"> <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+ Exportar A Excel</button>
+
+
+ <button class="btn btn-primary"  id="ExportarPDF" data-toggle="modal" data-target="#modal1" type="button"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+ Exportar A PDF</button>
+
+
+            <table id="tablaproductos" class="table table-bordered table-hover">
                 <thead class="bill-header cs">
                     <tr>
                         <th id="trs-hd" class="col-lg-1">ID</th>
@@ -58,7 +66,8 @@
         
         </div>
     </div>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="/js/adminproductos.js"></script>

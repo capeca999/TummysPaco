@@ -27,13 +27,18 @@ var idquantity=[];
 
               })
               .done(function(response) {
+
+
                 setarrays(response[0].id, response[0].price, cantidades[0]);
                   var li = $("<li>").attr("class", "list-group-item d-flex justify-content-between lh-condensed").appendTo($("#productosComprando"));
                   var div = $("<div>").appendTo(li);
                   var titulo = $("<h6>" + response[0].name + " x" + cantidades[0] + "</h6>").attr("class", "my-0").appendTo(div);
                   var descripcion = $("<small>" + response[0].description + "</small>").attr("class", "text-muted").appendTo(div);
+                  
                   var spanPrecio = $("<span>" + response[0].price * cantidades[0] + "€" + "</span>").attr("class", "text-muted").appendTo(li);
-                  $("#cantidadProductos").text = parseInt($("#cantidadProductos").text + 1);
+                 
+                  $("#cantidadProductos").text(parseInt($("#cantidadProductos").text() + 1));
+                 
                   preciototal = preciototal + parseInt(response[0].price * cantidades[0]);
                   cantidades.shift();
                   if ($("#liprecioid").length == 0) {
@@ -61,7 +66,42 @@ var idquantity=[];
     }
     
 
+    $('input[type=radio][name=direccion]').change(function() {
+
+
+        
+
+
+        $.ajax({
+
+            dataType: "json",
+            url: '/api/getDireccion/' + $(this).attr("id")
+        })
+        .done(function(response) {
  
+
+
+
+$("#street").val(response[0].street);
+$("#streetnumber").val(response[0].number);
+$("#location").val(response[0].location);
+$("#country").val(response[0].country);
+$("#province").val(response[0].province);
+$("#way").val(response[0].way);
+$("#postal_code").val(response[0].postal_code);
+
+
+
+
+        })
+        .fail(function(response) {
+            console.log(response);
+
+        });
+
+
+
+    });
 
   $("#submitid").click(function(e) {
 

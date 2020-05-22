@@ -14,7 +14,7 @@ use DB;
 use Image;
 use App\Badge;
 use App\Award;
-
+use App\Addresses;
 class UserController extends Controller
 {
     /**
@@ -383,7 +383,7 @@ $saltar = $pagina*$cantidad;
 
     
         $historiales = User::select('users.id', 'users.avatar','users.name', 'users.first_name', 'orders.payment_method','orders.total_price',
-      'orders.date_order','orders.descuento', 'orders.expected_arrival','orders.status', 'orders.USPS', 'orders.location', 'orders.street', 'orders.number')
+      'orders.date_order','orders.descuento', 'orders.expected_arrival','orders.status', 'orders.USPS', 'orders.location', 'orders.id AS identificadororder',  'orders.street', 'orders.number')
         ->join('orders','users.id','=','orders.id_user')
         ->orderBy('orders.id')
         ->get()
@@ -403,6 +403,19 @@ return $historiales;
 }
 
 
+
+public function getDirecciones(){ 
+        $historiales = Addresses::select('addresses.street','addresses.id',  'addresses.number','addresses.postal_code', 'addresses.location', 'addresses.province','addresses.country',
+      'addresses.way')
+   ->where('addresses.id_user', '=', Auth::user()->id)
+   ->get()
+        ->toJson();
+
+        return view ('Checkout')->with('direcciones', json_decode($historiales));
+
+
+
+}
 
 
 

@@ -20,6 +20,7 @@ use App\Weight;
 use App\Vaccines;
 use App\Vaccination;
 use App\Answer;
+use App\Addresses;
 class ApiController extends Controller
 
 {
@@ -65,6 +66,84 @@ return $arraypesos;
 }
 
 
+
+
+
+
+
+
+public static function getEstadisticaAnimales(){
+
+
+
+
+
+  $perros =   Animal::where('species' , '=' , 'Canina')->count();
+$perros= json_decode($perros);
+
+
+
+
+
+$hamsters =   Animal::where('species' , '=' , 'Hamster')->count();
+$hamsters= json_decode($hamsters);
+
+$gato =   Animal::where('species' , '=' , 'Gato')->count();
+$gato= json_decode($gato);
+
+
+
+$pesos= Weight::select ()
+->get()
+->toJson();
+
+
+$arrayanimales= json_decode($pesos);
+
+$arrayanimales[0]->label="Perros";
+$arrayanimales[0]->value=$perros;
+
+$arrayanimales[1]->label="Hamsters";
+$arrayanimales[1]->value=$hamsters;
+
+
+$arrayanimales[2]->label="Gatos";
+$arrayanimales[2]->value=$gato;
+
+
+unset($arrayanimales[0]->created_at);
+unset($arrayanimales[0]->date);
+unset($arrayanimales[0]->id);
+unset($arrayanimales[0]->id_animal);
+unset($arrayanimales[0]->kg);
+unset($arrayanimales[0]->updated_at);
+unset($arrayanimales[1]->created_at);
+unset($arrayanimales[1]->date);
+unset($arrayanimales[1]->id);
+unset($arrayanimales[1]->id_animal);
+unset($arrayanimales[1]->kg);
+unset($arrayanimales[1]->updated_at);
+unset($arrayanimales[2]->created_at);
+unset($arrayanimales[2]->date);
+unset($arrayanimales[2]->id);
+unset($arrayanimales[2]->id_animal);
+unset($arrayanimales[2]->kg);
+unset($arrayanimales[2]->updated_at);
+
+
+
+
+return $arrayanimales;
+
+}
+
+
+
+
+
+
+
+
 //    ->join('images_animals','images_animals.id_animal','animals.id')
 //->join('users', 'users.id', 'questions.id_user')
 
@@ -100,31 +179,26 @@ $arraypedidos= json_decode($pedidos);
 
 
 
-/*
-
-
-$pregunta= json_decode($preguntas);
-
-for ($i=0; $i < count($pregunta); $i++) { 
- 
-    $count = Answer::where('id_question','=',$pregunta[$i]->question_id)->count();
-  
-$pregunta[$i]->respuestas=$count;
-}
-
-/*
-$badges = Badge::select('badges.id', 'badges.name', 'badges.description')
-->get()
-->skip($saltar)
-->take($cantidad)
-->toJson();
-*/
-
 
 
 return $arraypedidos;
 
 }
+
+
+
+public static function getDireccionid($id){ 
+    $direciones= Addresses::select ('addresses.street', 'addresses.number','addresses.postal_code',  
+    'addresses.location', 'addresses.province', 'addresses.country', 'addresses.way', 'addresses.id')
+    ->where('addresses.id', '=', $id)
+    ->get()
+    ->toJson();
+$arraydirecciones= json_decode($direciones);
+return $arraydirecciones;
+
+}
+
+
 
 
 public static function MostrarAnimalesAdoptadosPagina($pagina,  $cantidad=9){
@@ -253,6 +327,7 @@ $saltar = $pagina*9;
 
         return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition' , 'animals.id_user','images_animals.url')
         ->where('animals.id_user', '=', null)
+
     ->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
     ->groupBy('animals.id')
     ->get()
@@ -267,6 +342,8 @@ $saltar = $pagina*9;
         return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition' , 'images_animals.url')
     ->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
     ->where('species', 'like', $especie)
+    ->where('animals.id_user', '=', null)
+
     ->groupBy('animals.id')
     ->get()
     ->skip($saltar)
@@ -277,12 +354,10 @@ $saltar = $pagina*9;
 
 //Accede por web
 
-public static function getPedidosListPagina($pagina, $cantidad){
+public static function getPedidosListPagina($pagina, $cantidad, $estado="Todos", $nombre=""){
 
     $num = $pagina;
     $int = (int)$num;
-
-
 
 
     if($cantidad<=0){
@@ -295,20 +370,84 @@ public static function getPedidosListPagina($pagina, $cantidad){
         $int--;
 $saltar = $int*$cantidad;
     
+//$products = Product::where('name_en', 'LIKE', '%'.$search.'%')->get();
 
- 
-  
-$historiales = User::select('users.id', 'users.avatar','users.name', 'users.first_name', 'orders.payment_method','orders.total_price',
-'orders.date_order','orders.descuento', 'orders.expected_arrival','orders.status', 'orders.USPS', 'orders.location', 'orders.street', 'orders.number')
-  ->join('orders','users.id','=','orders.id_user')
-  ->orderBy('orders.id')
-  ->get()
-  ->skip($saltar)
-  ->take($cantidad)
-  ->toJson();
- 
-  return $historiales;
-  
+if($estado=="Todos"){
+
+if($nombre==""){
+
+    $historiales = User::select('users.id', 'users.avatar','users.name', 'users.first_name', 'orders.payment_method','orders.total_price',
+    'orders.date_order','orders.descuento', 'orders.expected_arrival','orders.status', 'orders.USPS', 'orders.location', 'orders.street', 'orders.number')
+      ->join('orders','users.id','=','orders.id_user')
+      ->orderBy('orders.id')
+      ->get()
+      ->skip($saltar)
+      ->take($cantidad)
+      ->toJson();
+      return $historiales;
+    
+}
+else{
+    $historiales = User::select('users.id', 'users.avatar','users.name', 'users.first_name', 'orders.payment_method','orders.total_price',
+    'orders.date_order','orders.descuento', 'orders.expected_arrival','orders.status', 'orders.USPS', 'orders.location', 'orders.street', 'orders.number')
+      ->join('orders','users.id','=','orders.id_user')
+      ->where('users.name', 'LIKE', '%'.$nombre.'%')
+      ->orWhere('users.first_name', 'LIKE', '%'.$nombre.'%')
+      ->orWhere('users.last_name', 'LIKE', '%'.$nombre.'%')
+      ->orderBy('orders.id')
+      ->get()
+      ->skip($saltar)
+      ->take($cantidad)
+      ->toJson();
+      return $historiales;
+    
+}
+}
+
+
+else{
+
+
+
+if($nombre==""){
+    $historiales = User::select('users.id', 'users.avatar','users.name', 'users.first_name', 'orders.payment_method','orders.total_price',
+    'orders.date_order','orders.descuento', 'orders.expected_arrival','orders.status', 'orders.USPS', 'orders.location', 'orders.street', 'orders.number')
+      ->join('orders','users.id','=','orders.id_user')
+      ->where('orders.status', '=', $estado )
+      ->orderBy('orders.id')
+      ->get()
+      ->skip($saltar)
+      ->take($cantidad)
+      ->toJson();
+      return $historiales;
+
+}
+
+else{
+
+    $historiales = User::select('users.id', 'users.avatar','users.name', 'users.first_name', 'orders.payment_method','orders.total_price',
+    'orders.date_order','orders.descuento', 'orders.expected_arrival','orders.status', 'orders.USPS', 'orders.location', 'orders.street', 'orders.number')
+      ->join('orders','users.id','=','orders.id_user')
+      ->where('orders.status', '=', $estado )
+      ->where('users.name', 'LIKE', '%'.$nombre.'%')
+      ->orWhere('users.first_name', 'LIKE', '%'.$nombre.'%')
+      ->orWhere('users.last_name', 'LIKE', '%'.$nombre.'%')
+      ->orderBy('orders.id')
+      ->get()
+      ->skip($saltar)
+      ->take($cantidad)
+      ->toJson();
+      return $historiales;
+
+}
+
+
+
+
+
+
+
+}
     }
 
 
@@ -402,6 +541,15 @@ public  function getAnimalsEspeciales($pagina=1,  $cantidad=9){
 
 
     return view ('animalesEspeciales')->with('animales', json_decode($animales));
+}
+
+
+
+
+public static function CambiarEstadoPedido($id, $valor){
+    $order = Order::find($id);
+    $order->status = $valor;
+    $order->save(); 
 }
 
 
@@ -531,7 +679,8 @@ return Product::all()->where('name', 'like', '%'.$nombreToy.'%')->splice(($canti
 
 
 
-  
+    
+
 
 
     public static function historialUsuarioPedidos(){
@@ -763,10 +912,43 @@ return response()->json(
   );
     }
 
-    
+    public static function PostPeso(Request $request){
+        $column_id =DB::table('weights')->insertGetId([
+'id_animal' =>$request->idanimal,
+'kg'=>$request->cantidadpeso,
+'date'=>$request->fechapeso,
+        ]);
+
+        
+
+return response()->json(
+  [  
+    'success'=>true,
+    'message'=>'Data inserted successfully',
+    'id'=> $column_id
+  ]
+  );
+    }
 
 
 
+    public static function PostVacuna(Request $request){
+        $column_id =DB::table('vaccinations')->insertGetId([
+'id_animal' =>$request->idanimal,
+'id_vaccine'=>$request->nombre_vacuna,
+'date'=>$request->datevacuna,
+        ]);
+
+        
+
+return response()->json(
+  [  
+    'success'=>true,
+    'message'=>'Data inserted successfully',
+    'id'=> $column_id
+  ]
+  );
+    }
 
 
     public static function postAnimal(Request $request){

@@ -59,7 +59,7 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/forum/"> Preguntas Y Respuestas</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/donarProductos/"> Comprar Productos</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/donacion/"> Donar Al Refugio</a></li>
-                    
+
 
 
                     @if(Auth::user()==null)
@@ -102,11 +102,13 @@
                         <div class="dropdown-menu dropdown-menu-right" role="menu"><a class="dropdown-item" role="presentation" href="/usuario/perfil">Perfil </a><a class="dropdown-item" id="logout" role="presentation" href="{{ route('logout') }}">Logout </a>
                     
                         @if(Auth::user()->role=='Administrador')
-                        <a class="dropdown-item" role="presentation"> <b> Enlaces Administrador  </b> </a>
+                        <a class="dropdown-item" role="presentation"> <b style="font-size:20px;"> Enlaces Administrador  </b> </a>
                         <a class="dropdown-item" role="presentation" href="/AnimalesAdmin/">Modificar Y Añadir Animales </a>
                         <a class="dropdown-item" role="presentation" href="/ProductosAdmin/">Modificar Y Añadir Productos </a>
                         <a class="dropdown-item" role="presentation" href="/PeticionesAdmin/">Aceptar Y Rechazar Peticiones </a>
                         <a class="dropdown-item" role="presentation" href="/UsuariosAdmin/">Modificar Usuarios </a>
+                        <a class="dropdown-item" role="presentation" href="/PedidosAdmin/">Consultar Pedidos </a>
+                        <a class="dropdown-item" role="presentation" href="/PesosVacunasAdmin/">Vacunar Y Pesar Animales </a>
 
                         @endif
                     </div>

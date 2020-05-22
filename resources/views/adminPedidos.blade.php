@@ -30,9 +30,9 @@ $(document).ready(function(){
 						<div class="show-entries">
 							<span>Show</span>
 							<select id="cantidad" class="form-control">
-								<option>5</option>
-								<option>10</option>
-								<option>15</option>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
                                 <option>20</option>
                                 <option>Todos</option>
 							</select>
@@ -43,27 +43,17 @@ $(document).ready(function(){
 						<button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button>
 						<div class="filter-group">
 							<label>Nombre</label>
-							<input type="text" class="form-control">
+							<input type="text"  id="searchbyname" class="form-control">
 						</div>
-						<div class="filter-group">
-							<label>Location</label>
-							<select class="form-control">
-								<option>All</option>
-								<option>Berlin</option>
-								<option>London</option>
-								<option>Madrid</option>
-								<option>New York</option>
-								<option>Paris</option>								
-							</select>
-						</div>
+				
 						<div class="filter-group">
 							<label>Status</label>
-							<select class="form-control">
-								<option>Any</option>
-								<option>Delivered</option>
-								<option>Shipped</option>
-								<option>Pending</option>
-								<option>Cancelled</option>
+							<select id="statuspedido" class="form-control">
+								<option>Todos</option>
+								<option>Order Processed</option>
+								<option>Order Shipped</option>
+								<option>Order En Route</option>
+								<option>Order Arrived</option>
 							</select>
 						</div>
 						<span class="filter-icon"><i class="fa fa-filter"></i></span>
@@ -92,19 +82,72 @@ $(document).ready(function(){
                         {{$pedido->name}}{{$pedido->first_name}}</a></td>
 
 						<td>{{$pedido->location}}</td>
-                        <td>{{$pedido->date_order}}</td>                        
-						<td>
-                            <span class="status text-success"></span>
+                        <td>{{$pedido->date_order}}</td>       
+
+
+
+@if($pedido->status=="Order Processed")
+
+
+<td class="negrostatus">
+                            <span class="status text-success"> </span>
                             
-                             {{$pedido->status}}
+							{{$pedido->status}}
                             
                             </td>
+
+@elseif($pedido->status=="Order Shipped")
+
+
+<td class="amarillostatus">
+                            <span class="status text-success"> </span>
+                            
+							{{$pedido->status}}
+                            
+                            </td>
+
+
+							@elseif($pedido->status=="Order En Route")
+
+
+<td class="naranjastatus">
+                            <span class="status text-success"> </span>
+                            
+							{{$pedido->status}}
+                            
+                            </td>
+
+
+
+							@elseif($pedido->status=="Order Arrived")
+
+
+<td class="verdestatus">
+                            <span class="status text-success"> </span>
+                            
+							{{$pedido->status}}
+                            
+                            </td>
+
+@endif
+
+
+
+
+
+
 						<td>{{$pedido->total_price}} euros</td>
 						<td>
                             
-                        <a href="#" class="view" title="View Details" data-toggle="tooltip">
-                            <i class="material-icons">&#xE5C8;</i>
+			
+                        <a href="#" id="{{$pedido->identificadororder}}" value="avanzar" class="view" title="View Details" data-toggle="tooltip">
+                            <i class="  fa fa-arrow-right  material-icons"> </i>
                     </a>
+
+			
+
+
+
                 </td>
                     </tr>
 @endforeach
@@ -113,7 +156,6 @@ $(document).ready(function(){
             </table>
 
 			<div class="clearfix">
-                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
                 <ul class="pagination">
                     <li class="page-item disabled"><a href="#">Previous</a></li>
                     <li class="page-item active "><a href="#" class="page-link">1</a></li>

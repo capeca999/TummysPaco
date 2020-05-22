@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Animal;
 use DB;
+use App\Vaccines;
 
 class AnimalController extends Controller
 {
@@ -143,6 +144,45 @@ public static function getAnimalIDFormulario($id){
     }
     
     
+/*
+public function MostrarAnimalesAdoptados(){
+
+    $data =  array();
+    $data['animales']  =  json_decode($this::getAnimalsAdoptadosList(1,9));
+    $data['cantidad']  =  Animal::whereNotNull('id_user')->count();
+    return view('animales',compact("data"));
+}
+
+
+
+
+*/
+
+    public static function getvacunaslista(){
+  
+        $vacunas = Vaccines::select('vaccines.id','vaccines.name')
+            ->get()
+            ->toJson();
+        return $vacunas;
+    }
+   
+
+    public  function getAnimalesVacunarPesar(){
+        $data =  array();
+     $data['animales'] = json_decode($this::getAnimalesVacunarPesarList());
+   $data['vacunas'] = json_decode($this::getvacunaslista()); 
+   return view('adminVacunasPesos',compact("data"));
+    }
+    
+    
+
+
+
+
+
+
+
+
 
 /*
 
@@ -171,6 +211,24 @@ public static function getAnimalesAdminList(){
     ->get()
     ->toJson();
     }
+
+
+    
+    public static function getAnimalesVacunarPesarList(){
+    
+      
+        return Animal::select('animals.id',  'animals.race', 'animals.species',
+        'animals.date_of_birth','animals.nickname',  'animals.condition', 'animals.gender', 'animals.health', 'animals.size',
+        'images_animals.url')
+        ->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
+        ->groupBy('animals.id')
+        ->get()
+        ->toJson();
+        }
+    
+    
+    
+
 
 
 

@@ -7,13 +7,15 @@
 <input type="hidden" id="hiddenid" value="{{Auth::user()->id}}">
 <input type="hidden" id="hiddenemail" value="{{Auth::user()->email}}">
 
-
     <div id="diventero" class="container">
- 
+
+
+
       <div class="row">
         <div class="col-md-4 order-md-2 mb-4">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">Tus Donaciones</span>
+            
             <span id="cantidadProductos" class="badge badge-secondary badge-pill">0</span>
           </h4>
 
@@ -312,7 +314,7 @@
 
               <div class="col-md-4 mb-3">
                 <label for="province">Provincia</label>
-                <select class="custom-select d-block w-100" id="province" required>
+                <select  id="province" class="custom-select d-block w-100" name="prueba" required>
                   <option value="choose">Choose...</option>               
  <option value='alava'>Álava</option>
     <option value='albacete'>Albacete</option>
@@ -405,6 +407,18 @@
             <div id="checkboxsave" class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="save-info">
               <label class="custom-control-label" for="save-info">Save this information for next time</label>
+
+
+<ul>
+@foreach($direcciones as $direccion)
+
+<li> <b>Calle: </b> {{$direccion->street}} <br><b>Numero: </b> {{$direccion->number}} <br><b>Código Postal: </b> {{$direccion->postal_code}} <br> <b>Localización </b>   {{$direccion->location}} <br> 
+<b>Provincia: </b> {{$direccion->province}}<br> <b>Pais: </b> {{$direccion->country}}<br>  <b>Tipo: </b> {{$direccion->way}}
+<input type="radio" id="{{$direccion->id}}" name="direccion" value="{{$direccion->id}}"> </li>
+
+
+@endforeach
+</ul>
             </div>
 
             <hr class="mb-4">

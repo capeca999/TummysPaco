@@ -12,21 +12,21 @@
             <div class="carousel-inner" role="listbox">
                 <div class="carousel-item">
                     <div class="jumbotron pulse animated hero-primera carousel-hero">
-                        <h1 class="hero-title">Animales con ansias de conocerte</h1>
-                        <p class="hero-subtitle">Estos son los animales mas bonitos que conoceras</p>
+                        <h1 class="hero-title">Animales con ganas de tener hogar</h1>
+                        <p class="hero-subtitle"> Los animales más bonitos que conocerás</p>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <div class="jumbotron pulse animated hero-segunda carousel-hero">
-                        <h1 class="hero-title">Porque comprar cuando puedes adoptar?</h1>
+                        <h1 class="hero-title">¿Por qué comprar cuando puedes adoptar?</h1>
                         <p class="hero-subtitle">Dales un hogar a estos gordines</p>
 
                     </div>
                 </div>
                 <div class="carousel-item active">
                     <div class="jumbotron pulse animated hero-tercera carousel-hero">
-                        <h1 class="hero-title">Muchos animales!</h1>
-                        <p class="hero-subtitle">Tenemos muchos animales que buscan hogar!</p>
+                        <h1 class="hero-title">¡Todo tipo de animales!</h1>
+                        <p class="hero-subtitle">¡Tenemos muchos animales para ti!</p>
 
                     </div>
                 </div>

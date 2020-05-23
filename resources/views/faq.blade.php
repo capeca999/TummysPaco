@@ -9,7 +9,7 @@
         <hr class="star-dark mb-5">
         <h2 class="text-uppercase text-center" style="font-size: 48;">FAQ</h2><br >
         <div class="container">
-            <div class="faqelement"><button class="btn btn-primary faq on" type="button" style="box-shadow: none;">Como puedo colaborar con el refugio?&nbsp;</button>
+            <div class="faqelement"><button class="btn btn-primary faq on" type="button" style="box-shadow: none;">¿Como puedo colaborar con el refugio?&nbsp;</button>
                 <div class="panel">
                     <p>Puedes colaborar con el refugio haciendo una donación, siendo un voluntario o simplemente adoptando un animal </p>
                 </div>
@@ -37,7 +37,7 @@
                 </div>
             </div><br>
 
-            <div class="faqelement"><button class="btn btn-primary faq on" type="button" style="box-shadow: none;">¿Quñe requisitos hay que cumplir para adoptar?&nbsp;</button>
+            <div class="faqelement"><button class="btn btn-primary faq on" type="button" style="box-shadow: none;">¿Que requisitos hay que cumplir para adoptar?&nbsp;</button>
                 <div class="panel">
                     <p> Ser mayor de edad, tener un domicilio en el que poder tener el animal adoptado, firmar un contrato de adopción y asumir los costes veterinarios.</p>
                 </div>

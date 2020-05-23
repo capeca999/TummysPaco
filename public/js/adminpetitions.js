@@ -124,8 +124,7 @@ var id=$(this).attr("value");
    animalId=$("#"+id).attr("name");
   var emailenviar = $(this).parent();
 var idusuario= $(emailenviar).prev().prev().prev().prev().prev().prev().prev().text();
-alert(idusuario);
-    $.ajax({
+$.ajax({
         dataType:"json",
         headers: {
             'X-CSRF-TOKEN': $ ('meta[name="csrf-token"]').attr ('content')
@@ -138,8 +137,6 @@ if(valor=="Accepted"){
     var mensaje="Felicidades " + $(emailenviar).prev().prev().prev().prev().prev().text()+ "! Tu solicitud de adopción de " + data[0].nickname + " Ha sido aceptada!, el siguiente paso es ir a nuestro refugio y cojer a tu mascota";
 
 
-alert(idusuario);
-alert(animalId);
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $ ('meta[name="csrf-token"]').attr ('content')

@@ -16,7 +16,7 @@
                 </div>
                 <div class="form-row">
                     <div class="col-12 col-md-6" id="message">
-                        <h2 class="h4"><i class="fa fa-envelope"></i> Contact Us<small><small class="required-input">&nbsp;(*required)</small></small>
+                        <h2 class="h4"><i class="fa fa-envelope"></i> Contáctanos<small><small class="required-input">&nbsp;(*Requerido)</small></small>
                         </h2>
                         <div class="form-group"><label for="from-name">Nombre</label><span class="required-input">*</span>
                             <div class="input-group">
@@ -24,13 +24,13 @@
                         </div>
                         <div class="form-group"><label for="from-email">Email</label><span class="required-input">*</span>
                             <div class="input-group">
-                                <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-envelope-o"></i></span></div><input class="form-control" type="text" id="from-email" name="email" required="" value="{{Auth::user()->email}}"placeholder="Email Address"></div>
+                                <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-envelope-o"></i></span></div><input class="form-control" type="text" id="from-email" name="email" required="" value="{{Auth::user()->email}}"placeholder="Dirección Email"></div>
                         </div>
                         <div class="form-row">
                             <div class="col-12 col-sm-6 col-md-12 col-lg-6">
-                                <div class="form-group"><label for="from-phone">Phone</label><span class="required-input">*</span>
+                                <div class="form-group"><label for="from-phone">Teléfono</label><span class="required-input">*</span>
                                     <div class="input-group">
-                                        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-phone"></i></span></div><input class="form-control" type="text" id="from-phone" name="phone" required="" value="{{Auth::user()->telephone_number}}" placeholder="Primary Phone"></div>
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-phone"></i></span></div><input class="form-control" type="text" id="from-phone" name="phone" required="" value="{{Auth::user()->telephone_number}}" placeholder="Numero De Teléfono "></div>
                                 </div>
                             </div>
                         <input type="hidden" id="hidden" value="{{$animales[0]->id}}">
@@ -38,8 +38,8 @@
                         <div class="form-group"><label for="from-comments">Porque quieres adoptar a <b> {{$animales[0]->nickname}} </b></label><textarea class="form-control" id="from-comments" name="comments" placeholder="Porque es super bonito y guapo" rows="5"></textarea></div>
                         <div class="form-group">
                             <div class="form-row">
-                                <div class="col"><button class="btn btn-primary btn-block" type="reset"><i class="fa fa-undo"></i> Reset</button></div>
-                                <div class="col"><button class="btn btn-primary btn-block" id="buttonSubmit" type="submit">Submit <i class="fa fa-chevron-circle-right"></i></button></div>
+                                <div class="col"><button class="btn btn-primary btn-block" type="reset"><i class="fa fa-undo"></i> Resetear</button></div>
+                                <div class="col"><button class="btn btn-primary btn-block" id="buttonSubmit" type="submit">Enviar Petición <i class="fa fa-chevron-circle-right"></i></button></div>
                             </div>
                         </div>
 
@@ -61,10 +61,8 @@
                             </div>
                             <div class="col-sm-6 col-md-12 col-lg-6">
                                 <h2 class="h4"><i class="fa fa-paw"></i>Nuestra Dirección</h2>
-                                <div><span><strong>Office Name</strong></span></div>
-                                <div><span>55 Icannot Dr</span></div>
-                                <div><span>Daytone Beach, FL 85150</span></div>
-                                <div><abbr data-toggle="tooltip" data-placement="top" title="Office Phone: 555-867-5309">O:</abbr> 555-867-5309</div>
+                                <div><span>Polígono Industrail Fuente del Jarro</span></div>
+                                <div><span>Calle Cdad. de Elda, 2 , 46988 Paterna, Valencia</span></div>
                                 <hr class="d-sm-none">
                             </div>
                         </div>
@@ -76,7 +74,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Contact Information</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                        <h4 class="modal-title">Información Contacto</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
                     <div class="modal-body">
                         <form id="contactForm" action="javascript:void(0);" method="get"><input class="form-control" type="hidden" name="Introduction" value="This email was sent from www.awebsite.com"><input class="form-control" type="hidden" name="subject" value="Awebsite.com Contact Form"><input class="form-control"
                                 type="hidden" name="to" value="email@awebsite.com">
@@ -87,25 +85,25 @@
                             </div>
                             <div class="form-row">
                                 <div class="col-12 col-md-6" id="message">
-                                    <h2 class="h4"><i class="fa fa-envelope"></i> Contact Us<small><small class="required-input">&nbsp;(*required)</small></small>
+                                    <h2 class="h4"><i class="fa fa-envelope"></i> Contactanos <small><small class="required-input">&nbsp;(*Requerido)</small></small>
                                     </h2>
-                                    <div class="form-group"><label for="from-name">Name</label><span class="required-input">*</span>
+                                    <div class="form-group"><label for="from-name">Nombre</label><span class="required-input">*</span>
                                         <div class="input-group">
                                             <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-user-o"></i></span></div><input class="form-control" type="text" id="from-name" name="name" required="" placeholder="Full Name"></div>
                                     </div>
                                     <div class="form-group"><label for="from-email">Email</label><span class="required-input">*</span>
                                         <div class="input-group">
-                                            <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-envelope-o"></i></span></div><input class="form-control" type="text" id="from-email" name="email" required="" placeholder="Email Address"></div>
+                                            <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-envelope-o"></i></span></div><input class="form-control" type="text" id="from-email" name="email" required="" placeholder="Dirección Email"></div>
                                     </div>
                                     <div class="form-row">
                                         <div class="col-12 col-sm-6 col-md-12 col-lg-6">
-                                            <div class="form-group"><label for="from-phone">Phone</label><span class="required-input">*</span>
+                                            <div class="form-group"><label for="from-phone">Telélefono</label><span class="required-input">*</span>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-phone"></i></span></div><input class="form-control" type="text" id="from-phone" name="phone" required="" placeholder="Primary Phone"></div>
                                             </div>
                                         </div>
                                         <div class="col-12 col-sm-6 col-md-12 col-lg-6">
-                                            <div class="form-group"><label for="from-calltime">Best Time to Call</label>
+                                            <div class="form-group"><label for="from-calltime">Mejor Momento Para Llamar</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></div><select class="form-control" id="from-calltime" name="call time"><optgroup label="Best Time to Call"><option value="Morning" selected="">Morning</option><option value="Afternoon">Afternoon</option><option value="Evening">Evening</option></optgroup></select></div>
                                             </div>
@@ -114,8 +112,8 @@
                                     <div class="form-group"><label for="from-comments">Comments</label><textarea class="form-control" id="from-comments" name="comments" placeholder="Enter Comments" rows="5"></textarea></div>
                                     <div class="form-group">
                                         <div class="form-row">
-                                            <div class="col"><button class="btn btn-primary btn-block" type="reset"><i class="fa fa-undo"></i> Reset</button></div>
-                                            <div class="col"><button class="btn btn-primary btn-block"  type="submit">Submit <i class="fa fa-chevron-circle-right"></i></button></div>
+                                            <div class="col"><button class="btn btn-primary btn-block" type="reset"><i class="fa fa-undo"></i> Resetear</button></div>
+                                            <div class="col"><button class="btn btn-primary btn-block"  type="submit">Enviar Petición <i class="fa fa-chevron-circle-right"></i></button></div>
                                         </div>
                                     </div>
                                     <hr class="d-flex d-md-none">
@@ -139,7 +137,7 @@
                                             <div><span><strong>Office Name</strong></span></div>
                                             <div><span>55 Icannot Dr</span></div>
                                             <div><span>Daytone Beach, FL 85150</span></div>
-                                            <div><abbr data-toggle="tooltip" data-placement="top" title="Office Phone: 555-867-5309">O:</abbr> 555-867-5309</div>
+                                            <div><abbr data-toggle="tooltip" data-placement="top" title="Office Phone: 555-867-5309">O:</abbr> </div>
                                             <hr class="d-sm-none">
                                         </div>
                                     </div>

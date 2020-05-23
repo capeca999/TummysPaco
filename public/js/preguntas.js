@@ -27,8 +27,7 @@ var pagina=0;
 
 var titulo = $("#titulo").val();
 var descripcion = $("#descripcion").val();
-alert(titulo);
-alert(descripcion);
+
 
 $.ajax({
     type: 'POST',

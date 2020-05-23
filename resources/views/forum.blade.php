@@ -18,8 +18,7 @@
 
   
 
-        <div> <button type="button" id="newthread" class="btn btn-shadow btn-wide btn-primary"> <span class="btn-icon-wrapper pr-2 opacity-7"> <i class="fa fa-plus fa-w-20"></i> </span> New thread </button> </div>
-        <div class="col-12 col-md-3 p-0 mb-3"> <input type="text" class="form-control" placeholder="Search..."> </div>
+        <div> <button type="button" id="newthread" class="btn btn-shadow btn-wide btn-primary"> <span class="btn-icon-wrapper pr-2 opacity-7"> <i class="fa fa-plus fa-w-20"></i> </span> Nueva Pregunta </button> </div>
     </div>
     <div class="card mb-3">
         <div class="card-header pl-0 pr-0">
@@ -56,7 +55,7 @@
                          <img src="{{$pregunta->icon}}" class="badgeiconusuario">
 
                             <div class="media-body flex-truncate ml-2">                          
-                                <div class="line-height-1 text-truncate"> Hace {{$pregunta->fechadiferencia}}</div>                           
+                                <div class="line-height-1 text-truncate"> Hace {{$pregunta->fechadiferencia}} Días</div>                           
                                  <a href="javascript:void(0)" class="text-muted small text-truncate" data-abc="true"> {{ $pregunta->date }} {{$pregunta->first_name}} {{$pregunta->last_name}}</a>
                                 
                             </div>

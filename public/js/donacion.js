@@ -1,113 +1,6 @@
 $(document).ready(function () {
    
-    function comprobacionModificacion(atributo, valor) {
-
-        var expresionRegular = ""
-        var res = false;
-        
-        switch (atributo) {
-            case "race":
-                expresionRegular = new RegExp("[A-Za-z]");
-                res = expresionRegular.test(valor);
-                break;
-        
-            case "gender":
-                if (valor != "Macho" && valor != "Hembra") {
-                    res = false;
-                } else res = true;
-                break;
-        
-            case "date_of_birth":
-                var today = new Date();
-                var dd = today.getDate();
-                var mm = today.getMonth()+1; 
-                var yyyy = today.getFullYear();
-                if(mm<10) 
-                {
-                    mm='0'+mm;
-                } 
-                valor = valor.split("-");
-    
-    
-    
-                if(parseInt(valor[0])>yyyy){
-                    res=false;
-                }
-                else if(parseInt(valor[1])>mm){
-                    res=false;
-                }
-                else if (parseInt(valor[2])>dd){
-                    res=false;
-                }   else res=true;
-    
-        
-    
-                break;
-        
-            case "description":
-                
-                expresionRegular = new RegExp("[A-Za-z]");
-                res = expresionRegular.test(valor);
-                break;
-        
-        
-            case "nickname":
-                expresionRegular = new RegExp("[A-Za-z]");
-                res = expresionRegular.test(valor);
-                break;
-        
-        
-            case "place_found":
-                expresionRegular = new RegExp("[^A-Za-z0-9]+");
-                res = expresionRegular.test(valor);
-                break;
-        
-            case "size":
-                expresionRegular = new RegExp("[^A-Za-z0-9]+");
-                res = expresionRegular.test(valor);
-                break;
-        
-            case "date_found":
-                var today = new Date();
-                var dd = today.getDate();
-                var mm = today.getMonth()+1; 
-                var yyyy = today.getFullYear();
-                if(mm<10) 
-                {
-                    mm='0'+mm;
-                } 
-                valor = valor.split("-");
-    
-    
-    
-                if(parseInt(valor[0])>yyyy){
-                    res=false;
-                }
-                else if(parseInt(valor[1])>mm){
-                    res=false;
-                }
-                else if (parseInt(valor[2])>dd){
-                    res=false;
-                }   else res=true;
-    
-    
-                break;
-        
-            case "condition":
-                expresionRegular = new RegExp("[^A-Za-z0-9]+");
-                res = expresionRegular.test(valor);
-                break;
-        
-        
-            default:
-                res = false;
-        }
-    
-     
-        return res;
-    }
-
-
+  
 
 
 
@@ -162,7 +55,7 @@ else{
 
 var nombreapellidos = $("#nombreapellidos").val();
 
-expresionRegular = new RegExp("^[A-Za-z]+$");
+expresionRegular = new RegExp("^[A-Za-z ]+$");
 res = expresionRegular.test(nombreapellidos);
 
 

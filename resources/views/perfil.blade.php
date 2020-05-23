@@ -18,7 +18,7 @@
                         <div class="profile-img">
                         <img src="/uploads/avatars/{{Auth::user()->avatar}}" alt=""/>
                             <div class="file btn btn-lg btn-primary">
-                                Change Photo
+                                Cambiar Tu Avatar
                                 <input  id="fotousuario" type="file" name="avatar" value=""/>
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             </div>
@@ -68,7 +68,7 @@
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Name</label>
+                                                <label>Nombre</label>
                                             </div>
                                             <div id="name" name="Nombre" class="col-md-6 editarcampo">
                                                 <p>{{Auth::user()->name}}</p>
@@ -189,7 +189,7 @@
                                         </div>
                                         @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Has olvidado tu contraseña?') }}
+                                        {{ __('¿Has olvidado tu contraseña?') }}
                                     </a>
                                 @endif
           

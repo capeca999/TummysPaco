@@ -65,7 +65,7 @@
                      <span class="text-muted d-inline-flex align-items-center align-middle ml-4">
                           <i class="fa fa-eye text-muted fsize-3"></i>
                           &nbsp; <span class="align-middle">{{$preguntas->views}}</span> </span> </div>
-                     <div class="px-4 pt-3"> <button type="button" id="replybutton" class="btn btn-primary"><i class="ion ion-md-create"></i>&nbsp; Reply</button> </div>
+                     <div class="px-4 pt-3"> <button type="button" id="replybutton" class="btn btn-primary"><i class="ion ion-md-create"></i>&nbsp; Responder Pregunta</button> </div>
                  </div>
 
               

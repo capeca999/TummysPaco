@@ -56,7 +56,7 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/animalesAdoptados/"> Animales Ya Adoptados</a></li>
 
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/animales/casosEspeciales">Casos Especiales</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/forum/"> Preguntas Y Respuestas</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/forum/"> Foro</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/donarProductos/"> Comprar Productos</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/donacion/"> Donar Al Refugio</a></li>
 
@@ -151,9 +151,9 @@
         <div class="row">
             <div class="col-sm-6 col-md-4 footer-navigation">
                 <h3><a href="#"> <img style="width: 120px;" src ="/img/Casa.png"> <img style="width: 120px;" src ="/img/Nombre.png"></a></h3>
-                <p class="links"><a href="/">Home</a><strong>· </strong><a href="contacto/">Contacto</a><strong> · </strong><a href="/politicaPrivacidad/">Pólitica de Privacidad</a><strong> · </strong><a href="/condicionesAdoptar/">Condiciones De Adopción</a><strong> · </strong><a href="/aboutUs/">Sobre Nosotros</a><strong> · </strong><a href="/faq/">Faq</a><strong> · </strong>
+                <p class="links"><a href="/">Home</a><strong>· </strong><a href="/contacto/">Contacto</a><strong> · </strong><a href="/politicaPrivacidad/">Pólitica de Privacidad</a><strong> · </strong><a href="/condicionesAdoptar/">Condiciones De Adopción</a><strong> · </strong><a href="/aboutUs/">Sobre Nosotros</a><strong> · </strong><a href="/PreguntasFrecuentes/">Preguntas Frecuentes</a><strong> · </strong>
                     <a
-                        href="#">Información Importante&nbsp;</a>
+                        href="/informacionimportante/">Información Importante&nbsp;</a>
                 </p>
                 <p class="company-name">Tummys © 2020</p>
             </div>

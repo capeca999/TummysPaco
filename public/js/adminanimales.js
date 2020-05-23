@@ -422,7 +422,6 @@ else{
                 res = expresionRegular.test($("#place_found").val());
             
                 if(res==false){
-                    alert("holaaa");
                     añadiralert("Lugar Encontrado");
                 }
             else{
@@ -481,7 +480,7 @@ else{
 
 
                 if(res==false){
-                    alert("golaaaa");
+                
                     añadiralert("Condición");
                 }
                 else{
@@ -525,7 +524,7 @@ else{
                      })
                     
                      .done(function(response){
-console.log(response);
+
 $("#animalesañadirtr").empty();
 $("#animalesañadirtr").remove();
 
@@ -533,7 +532,7 @@ $("#animalesañadirtr").remove();
                      })
                     
                     .fail(function(response){
-                console.log(response);
+             
                         
                     if($("#top").length == 1) {
                 
@@ -644,7 +643,35 @@ $(document).on('blur','#dato-anyadir',function(){
                 },
                 url: "/listar/modificarAnimal/"+id+"/"+atributo+"/"+valor,
                 method: "GET",
-            });
+            })
+
+   
+            .done(function(response){
+            
+                if($("#top").length == 1) {
+
+                    $("#top").remove();
+                    }
+                
+                
+                        var diverror = $("<div> Has cambiado el campo " + atributo + " </div>" ).attr("class" , "alert alert-warning beautifulcorrect").attr("role",  "alert").attr("id", "top").appendTo($("#contenedorprincipalpagina"));
+                        var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
+                        var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
+
+                                     })
+                                    
+                                    .fail(function(response){
+                            
+                                
+                                
+                                    });
+
+
+
+
+
+
+
             $(this).parent().html(valor);
         }
       
@@ -709,7 +736,7 @@ function comprobacionModificacion(atributo, valor) {
     
         case "description":
             
-            expresionRegular = new RegExp("^[A-Za-z]+$");
+            expresionRegular = new RegExp("^[A-Za-z ]+$");
             res = expresionRegular.test(valor);
             break;
     

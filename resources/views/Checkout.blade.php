@@ -23,14 +23,14 @@
           </ul>
 
             <div class="input-group">
-              <input type="text" id="promocodeinput" class="form-control" placeholder="Promo code">
+              <input type="text" id="promocodeinput" class="form-control" placeholder="Código De Descuento">
               <div class="input-group-append">
-                <button id="submitid" class="btn btn-secondary">Redeem</button>
+                <button id="submitid" class="btn btn-secondary">Validar</button>
               </div>
             </div>
         </div>
         <div class="col-md-8 order-md-1">
-          <h4 class="mb-3">Detalles De Envio</h4>
+          <h1 class="mb-3">Detalles De Envio</h1>
           <form class="needs-validation" novalidate>
             <div class="row">
               <div class="col-md-6 mb-3">
@@ -49,7 +49,7 @@
               </div>
             </div>
             <div class="mb-3">
-              <label for="address">location</label>
+              <label for="address">Localidad</label>
               <input type="text" class="form-control" id="location" placeholder="Manises" required>
               <div id="locationerror" class="invalid-feedback">
              Ciudad Mal Introducida.
@@ -395,7 +395,7 @@
                 </div>
               </div>
               <div class="col-md-3 mb-3">
-                <label for="zip">Zip</label>
+                <label for="zip">Código Postal</label>
                 <input type="number" class="form-control" id="postal_code" placeholder="46940" required>
                 <div id="postal_codeerror" class="invalid-feedback">
                   Postal code required.
@@ -406,7 +406,7 @@
 
             <div id="checkboxsave" class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="save-info">
-              <label class="custom-control-label" for="save-info">Save this information for next time</label>
+              <label class="custom-control-label" for="save-info">Guardar Mi Información de envío para la siguiente vez</label>
 
 
 <ul>
@@ -423,7 +423,7 @@
 
             <hr class="mb-4">
 
-            <h4 class="mb-3">Payment</h4>
+            <h4 class="mb-3">Método de pago</h4>
 
             <div class="d-block my-3">
               <div id="paymentmethodradio" class="custom-control custom-radio">

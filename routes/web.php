@@ -129,7 +129,10 @@ Route::get('registro/', function () {
     return view('auth.register');
 });
      
-
+Route::get('/informacionimportante/', function () {
+    return view('informacionImportante');
+});
+     
 
 Route::get('login/', function () {
     return view('auth.login');
@@ -163,7 +166,7 @@ Route::get('animales/', function() {
             });
         
     
-            Route::get('/faq/', function() {
+            Route::get('/PreguntasFrecuentes/', function() {
                 return view('faq');
                 });
 

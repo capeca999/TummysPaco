@@ -249,9 +249,21 @@ public static function getAnimalesAdminList(){
     }
 
     public static function modificarAnimalEstado($id,$atributo){
+
+
+        
         $animal = Animal::find($atributo);
         $animal->id_user = $id;
         $animal->save(); 
+
+
+
+
+
+
+
+
+
     }
 
 

@@ -18,26 +18,7 @@ var valorinput="";
         var n = $('.results tbody tr[visible="true"]').length;
         $(".counter").text(n + " item"), "0" == n ? $(".no-result").show() : $(".no-result").hide()
     })
-/*
 
-    function pdfconverter() {
-        var pdf = new jsPDF('l', 'pt', 'letter');
-    
-        pdf.cellInitialize();
-        pdf.setFontSize(10);
-        $.each( $('#tablaanimales tr'), function (i, row){
-            $.each( $(row).find("td, th"), function(j, cell){
-                var txt = $(cell).text().trim() || " ";
-                var width =  70; //make 4th column smaller
-                pdf.cell(10, 50, width, 30, txt, i);
-            });
-        });
-    
-        pdf.save('sample-file.pdf');
-    }
-
-
-*/
 
 function pdfconverter() {
     var pdf = new jsPDF('l',  'pt', 'letter');

@@ -1,4 +1,19 @@
 $( document ).ready(function() {
+
+    function crearalert(campo) {
+   
+        if($("#top").length == 1) {
+
+            $("#top").remove();
+            }
+            var diverror = $("<div>Has cometido un error en el campo " +  campo +  "</div>").attr("class" , "alert alert-warning beautifulerror").attr("role",  "alert").attr("id", "top").appendTo($("#todoContenido"));
+            var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
+            var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
+
+
+
+      }
+
     $("#buttonSubmit").click(function(){
         var nombre = $("#from-name").val();
         var email = $("#from-email").val();
@@ -7,62 +22,119 @@ $( document ).ready(function() {
         var idanimal = $("#hidden").attr("value");
         var data={nombre:nombre,email:email,phone:phone,comments:comments,idanimal:idanimal};
 
+        var fin=true;
 
 
+     
+        var exp= new RegExp("^[a-zA-Z]{2,}$");     
+        var res = exp.test($("#from-name").val());
+        if(res==false){
+     
+            crearalert("nombre");
+        }
+        else{
+     
 
+var exp = new RegExp("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}");
+var res = exp.test($("#from-email").val());
 
-        $.ajax({
-            type: "post",
-            url:'/comprobarPeticion',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data:{"_token": $('#token').val(), idanimal:idanimal},
-            success:function(data) {
-                $.ajax({
-                    type: "post",
-                    url:'/anydadirpeticion',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-              
-                    data:{"_token": $('#token').val(), nombre:nombre,email:email,phone:phone,comments:comments,idanimal:idanimal},
-                   
-                    success:function(data) {
-              
-                        
-                        if($("#top").length == 1) {
+if(res==false){
+  
+    crearalert("email");
+}
 
-                            $("#top").remove();
-                            }
-                            var diverror = $("<div>Felicidades! Se le enviara un email pronto con la confirmación</div>").attr("class" , "alert alert-warning beautifulcorrect").attr("role",  "alert").attr("id", "top").appendTo($("#todoContenido"));
-                            var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
-                            var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
+else{
 
+    var exp = new RegExp("^[679]{1}[0-9]{8}$");
+    var res = exp.test($("#from-phone").val());
 
-                        },
-                    error:function(data){
-                        console.log(data); //===Show Error Message====
-                    }
-               
-                });             
+if(res==false){
+    crearalert("Teléfono");
+}
+
+else{
+
+    var exp = new RegExp("^[a-zA-Z0-9 ]+$");
+    var res = exp.test($("#from-comments").val());
+
+if(res==false){
+    crearalert("Comentario");
+}
+
+else{
+
+    
+    $.ajax({
+        type: "post",
+        url:'/comprobarPeticion',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data:{"_token": $('#token').val(), idanimal:idanimal},
+        success:function(data) {
+            $.ajax({
+                type: "post",
+                url:'/anydadirpeticion',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-            error:function(data){
-                if($("#top").length == 1) {
+          
+                data:{"_token": $('#token').val(), nombre:nombre,email:email,phone:phone,comments:comments,idanimal:idanimal},
+               
+                success:function(data) {
+          
+                    
+                    if($("#top").length == 1) {
 
-                    $("#top").remove();
-                    }
-                    var diverror = $("<div>Has realizado la petición con anterioridad</div>").attr("class" , "alert alert-warning beautiful").attr("role",  "alert").attr("id", "top").appendTo($("#todoContenido"));
-                    var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
-                    var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
-              console.log(data); //===Show Error Message====
-            }
-        });
+                        $("#top").remove();
+                        }
+                        var diverror = $("<div>Felicidades! Se le enviara un email pronto con la confirmación</div>").attr("class" , "alert alert-warning beautifulcorrect").attr("role",  "alert").attr("id", "top").appendTo($("#todoContenido"));
+                        var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
+                        var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
+
+
+                    },
+                error:function(data){
+                    console.log(data); //===Show Error Message====
+                }
+           
+            });             
+            },
+        error:function(data){
+            if($("#top").length == 1) {
+
+                $("#top").remove();
+                }
+                var diverror = $("<div>Has realizado la petición con anterioridad</div>").attr("class" , "alert alert-warning beautiful").attr("role",  "alert").attr("id", "top").appendTo($("#todoContenido"));
+                var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
+                var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
+          console.log(data); //===Show Error Message====
+        }
+    });
 
 
 
 
 
+
+
+
+
+}
+
+
+
+
+}
+
+}
+
+
+        }
+
+
+
+      
 
 
 

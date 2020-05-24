@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    
 
     function pdfconverter() {
         var pdf = new jsPDF('l',  'pt', 'letter');
@@ -123,7 +122,7 @@ var id=$(this).attr("value");
     var valor= $(this).attr("name");
    animalId=$("#"+id).attr("name");
   var emailenviar = $(this).parent();
-var idusuario= $(emailenviar).prev().prev().prev().prev().prev().prev().prev().text();
+var  iduser= $(emailenviar).prev().prev().prev().prev().prev().prev().prev().text();
 $.ajax({
         dataType:"json",
         headers: {
@@ -137,17 +136,40 @@ if(valor=="Accepted"){
     var mensaje="Felicidades " + $(emailenviar).prev().prev().prev().prev().prev().text()+ "! Tu solicitud de adopción de " + data[0].nickname + " Ha sido aceptada!, el siguiente paso es ir a nuestro refugio y cojer a tu mascota";
 
 
+
+    $.ajax({
+        type: 'post',
+         dataType: "json",
+         url: '/api/crearInsignia/',
+         headers: {
+             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         },
+         data:{"_token": $('#token').val(), iduser:$(emailenviar).prev().prev().prev().prev().prev().prev().prev().text(),idbadge:11},
+     })
+    
+     .done(function(response){
+         console.log(response);
+     })
+    
+    .fail(function(response){
+        console.log(response);
+    });
+
+    alert("holaaaaaa");
+
+
+
+
+
+
+
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $ ('meta[name="csrf-token"]').attr ('content')
         },
-        url: "/modificarAnimalAdoptar/"+idusuario+'/'+animalId,
+        url: "/modificarAnimalAdoptar/"+iduser+'/'+animalId,
         method: "GET",
     })                     .done(function(response){
-        console.log(response);
-
-        
-        
         
                              })
                             

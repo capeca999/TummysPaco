@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
 
+//Función convierte una tabla a un pdf
 
     function pdfconverter() {
         var pdf = new jsPDF('l',  'pt', 'letter');
@@ -28,7 +29,8 @@ else{
             });
             contador=0;
         });
-        
+        //Función que crea un string random para el nombre del pdf
+
         function randomStr(len, arr) { 
             var ans = ''; 
             for (var i = len; i > 0; i--) { 
@@ -44,7 +46,8 @@ else{
 
         function fnExcelReport()
         {
-           
+           //Función que crea un excel personalizado con los datos de la tabla
+
             var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
             var textRange; var j=0;
             tab = document.getElementById('tablausuarios'); // id of table
@@ -96,6 +99,9 @@ else{
 
 
 
+
+//Función que filtra el buscado por lo que queramos introducir
+//Comprueba en cada tr si la palabra buscada existe, si no existe mostrara no results
 
 
 
@@ -177,15 +183,69 @@ $(document).on('blur','#dato-anyadir',function(){
                 method: "GET",
                 
                 error:function(data){
-                    alert("error occured"); //===Show Error Message====
+                
+                    console.log(data);
+
+
+                    if($("#top").length == 1) {
+
+                        $("#top").remove();
+                        }
+                    
+              
+                            var diverror = $("<div> No puedes modificar tu rol  </div>" ).attr("class" , "alert alert-warning beautifulerror").attr("role",  "alert").attr("id", "top").appendTo($("#diventero"));
+                            var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
+                            var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
+
+
+
+                },
+                success: function(data){
+
+
+if(data.length==(5)){
+
+
+    if($("#top").length == 1) {
+
+        $("#top").remove();
+        }
+    
+
+            var diverror = $("<div> No puedes modificar tu rol  </div>" ).attr("class" , "alert alert-warning beautifulerror").attr("role",  "alert").attr("id", "top").appendTo($("#diventero"));
+            var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
+            var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
+
+}
+
+
                 }
+                
             });
+
+            if($("#top").length == 1) {
+
+                $("#top").remove();
+                }
+            
       
+                    var diverror = $("<div> Has modificado el campo " + atributo + "</div>" ).attr("class" , "alert alert-warning beautifulcorrect").attr("role",  "alert").attr("id", "top").appendTo($("#diventero"));
+                    var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
+                    var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
+           
+
+
+
+            
             $(this).parent().html(valor);
         }
         else{
+
+            if(data.length!=5){
+                $(this).parent().html($(this).attr('placeholder'));
+            }
+
 //    <div id="contenedorPrincipal">       
-$(this).parent().html($(this).attr('placeholder'));
 
 
 if($("#top").length == 1) {
@@ -198,6 +258,8 @@ if($("#top").length == 1) {
 }
     }
 });
+//Función que comprueba si la modificación esta correcta
+
 function comprobacionModificacion(atributo, valor) {
 
     var expresionRegular = ""

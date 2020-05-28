@@ -50,7 +50,7 @@
             <div class="col-sm-6 col-md-4 product-item animation-element slide-top-right">
                 <div class="product-container">
                     <div class="row">
-                        <div class="col-md-12"><a class="product-image" href="/animales/Ave"><img class="imagenes_animales"  src="/img/categoriasAnimalesFotos/pajaro.jpg"></a></div>
+                        <div class="col-md-12"><a class="product-image" href="/animales/Pajaro"><img class="imagenes_animales"  src="/img/categoriasAnimalesFotos/pajaro.jpg"></a></div>
                     </div>
                     <div class="row">
                         <div class="col-8">
@@ -62,7 +62,7 @@
                         <div class="col-12">
                             <p class="product-description">Pajaros preciosos que buscan un hogar y darte muchas alegrias!. </p>
                             <div class="row">
-                                <div class="col-6"><a href="/animales/Ave"> <button class="btn btn-light" type="button">Mirar todos los Pajaros!</button> </a> </div>
+                                <div class="col-6"><a href="/animales/Pajaro"> <button class="btn btn-light" type="button">Mirar todos los Pajaros!</button> </a> </div>
                             </div>
                         </div>
                     </div>

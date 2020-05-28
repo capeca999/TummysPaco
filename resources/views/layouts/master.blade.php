@@ -108,8 +108,6 @@
                         <a class="dropdown-item" role="presentation" href="/PeticionesAdmin/">Aceptar Y Rechazar Peticiones </a>
                         <a class="dropdown-item" role="presentation" href="/UsuariosAdmin/">Modificar Usuarios </a>
                         <a class="dropdown-item" role="presentation" href="/PedidosAdmin/">Consultar Pedidos </a>
-                        <a class="dropdown-item" role="presentation" href="/PesosVacunasAdmin/">Vacunar Y Pesar Animales </a>
-
                         @endif
                     </div>
                     </li>

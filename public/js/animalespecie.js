@@ -16,7 +16,7 @@ $(document).ready(function() {
     }
     else{
 
-    //Route::get('/animales/{especie}/{pagina}/{cantidad?}', 'ApiController@getAnimalsSpecieListPagina');
+//Función que  consigue el animal y su especie
 
     
         $.ajax({
@@ -88,40 +88,7 @@ $(document).ready(function() {
     
     
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//Función que comprueba si hemos realizado la petición del animal con anterioridad
 
 
     $("#adoptar").click(function() {
@@ -151,30 +118,6 @@ $(document).ready(function() {
             }
         });
     })
-
-
-/*
-
-
-    $petitions = DB::table('petitions')
-    ->where('id_animal' ,'=', $_POST['idanimal'])
-    ->where('id_user' ,'=',  Auth::user()->id)
-    ->limit(1)
-    ->get();
-
-    $peticion = count($petitions);
-
-    if($peticion>0){
-        return response()->json(['success'=>'Has realizado la petición']);
-
-    }
-
-
-
-
-*/
-
-
 });
 
 

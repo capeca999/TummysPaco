@@ -60,12 +60,11 @@ Route::group(['middleware' => 'checkAdmin'], function () {
 
         Route::get('/modificarAnimalAdoptar/{id}/{idanimal}', 'AnimalController@modificarAnimalEstado');
 
-        Route::get('/AnimalesAdmin/', 'AnimalController@getAnimalesAdmin');
+        Route::get('/AnimalesAdmin/', 'AnimalController@getAnimalesVacunarPesar');
         Route::get('/ProductosAdmin/','ProductController@getProductosAdmin');
         Route::get('/UsuariosAdmin/', 'UserController@getUsuariosAdmin');
         Route::get('/PeticionesAdmin/', 'PetitionController@getPetitionsAdmin');
         Route::get('/PedidosAdmin/', 'UserController@getPedidosAdmin');
-        Route::get('/PesosVacunasAdmin/', 'AnimalController@getAnimalesVacunarPesar');
 
         Route::get('/GraficasAdmin/', function() {
             return view('adminDiagramas');

@@ -171,7 +171,7 @@ public function MostrarAnimalesAdoptados(){
         $data =  array();
      $data['animales'] = json_decode($this::getAnimalesVacunarPesarList());
    $data['vacunas'] = json_decode($this::getvacunaslista()); 
-   return view('adminVacunasPesos',compact("data"));
+   return view('adminAnimales',compact("data"));
     }
     
     
@@ -217,7 +217,7 @@ public static function getAnimalesAdminList(){
     public static function getAnimalesVacunarPesarList(){
     
       
-        return Animal::select('animals.id',  'animals.race', 'animals.species',
+        return Animal::select('animals.id',  'animals.race', 'animals.species','animals.description','animals.place_found','animals.date_found',
         'animals.date_of_birth','animals.nickname',  'animals.condition', 'animals.gender', 'animals.health', 'animals.size',
         'images_animals.url')
         ->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')

@@ -1,38 +1,6 @@
 $(document).ready(function() {
-    /*
-    
-    function exportTableToExcel(tableID, filename = ''){
-        var downloadLink;
-        var dataType = 'application/vnd.ms-excel';
-        var tableSelect = document.getElementById(tableID);
-        var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
-       console.log(tableHTML);
-        // Specify file name
-        filename = filename?filename+'.xls':'excel_data.xls';
-        
-        // Create download link element
-        downloadLink = document.createElement("a");
-        
-        document.body.appendChild(downloadLink);
-        
-        if(navigator.msSaveOrOpenBlob){
-            var blob = new Blob(['\ufeff', tableHTML], {
-                type: dataType
-            });
-            navigator.msSaveOrOpenBlob( blob, filename);
-        }else{
-            
-            // Create a link to the file
-            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-        
-            // Setting the file name
-            downloadLink.download = filename;
-            
-            //triggering the function
-            downloadLink.click();
-        }
-    }
-*/
+
+    //Función que crea un excel con los datos del formulario
 
 
 function fnExcelReport()
@@ -79,6 +47,7 @@ function fnExcelReport()
 
 $(".view").click(function(){
 
+//Función que cambia el estado de los pedidos
 
     var myStr = $(this).parent().prev().prev().text();
     var trimStr = $.trim(myStr);
@@ -183,6 +152,7 @@ $(".view").click(function(){
             
             $(document).on('keyup', '#searchbyname', function(){
 
+//Función que encuentra los pedidos con el nombre de los usuarios
 
 
                 $.ajax({
@@ -236,6 +206,7 @@ $(".view").click(function(){
 
 
 
+//Función que consigue los pedidos dependiendo del estado que se encuentren
 
 
 $(document).on('change', '#statuspedido', function(){
@@ -307,6 +278,7 @@ var ahrefdetalles2 =$("<i>" +"&#xE5C8;"+ "</i>").attr("class", "material-icons")
 });
 
 
+//Función que consigue la cantidad de pedidos deseada
 
     $(document).on('change','#cantidad',function(){
 
@@ -362,7 +334,7 @@ var ahrefdetalles =$("<i>" +"&#xE5C8;"+ "</i>").attr("class", "material-icons").
 
 
     
-/*MODIFICAR PRODUCTO (Añadir input)- Al hacer doble click creara un input en el td cliqueado*/
+
 $('button.btn-success ,button.btn-danger').click(function(event) {
 var id=$(this).attr("value");
     var atributo = "Status";

@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+//Función que crea un alert personalizado
 
     function crearalert(campo) {
    
@@ -13,6 +14,9 @@ $( document ).ready(function() {
 
 
       }
+
+      //Comprobamos todos los campos para que esten correctamente formateados y lo mandamos para crear la petición
+
 
     $("#buttonSubmit").click(function(){
         var nombre = $("#from-name").val();

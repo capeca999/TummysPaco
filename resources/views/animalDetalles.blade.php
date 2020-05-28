@@ -15,10 +15,10 @@ $ruta_gender="/img/animals/Macho.png";
 else $ruta_gender="/img/animals/Hembra.png";
 
 
+
 $dateOfBirth = $animales[0]->date_of_birth;
 $today = date("Y-m-d");
 $diff = date_diff(date_create($dateOfBirth), date_create($today));
-
 ?>
 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">    <div>
 

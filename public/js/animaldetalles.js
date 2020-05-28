@@ -4,7 +4,8 @@ $(document).ready(function() {
 
 $("#area-chart").attr("display", "none");
 
- 
+ //Función que consigue los pesos del animal
+
 $("#graficapesos").click(function(){
 var data;
 if($("#grafica").length==0){
@@ -40,6 +41,7 @@ var section=$("<section>").attr("class", "container-fluid").appendTo(tabcontent)
 
 
 
+//Creamos un areachart con morris.js
 
 window.areaChart = Morris.Area({
     element: 'area-chart',
@@ -71,7 +73,7 @@ window.areaChart = Morris.Area({
 
 
 
-            console.log(data); //===Show Error Message====
+            //===Show Error Message====
         }
     });
 
@@ -95,18 +97,18 @@ else{
 
 
 
+//Función que consigue todas las vacunas del animal
 
 
 $("#tablavacunas").click(function(){
 
     if($("#containervacunas").length==0){
-      
         $.ajax({
             type: "get",
             url:'/api/getvacunas/'+$("#idanimal").val(),
             success:function(data) {
  
-     
+             
                 if(data.length==0){
     
                     if($("#top").length == 1) {
@@ -120,6 +122,7 @@ $("#tablavacunas").click(function(){
                 else{
                 
 
+//Crea una tabla a traves de los datos
 
 
 var divgrafica = $("<div>").attr("id", "vacunas").attr("class", "container").appendTo("#tablavacunaslista");
@@ -173,6 +176,7 @@ for (let index = 0; index < data.length; index++) {
     
     
                 },
+
             error:function(data){
                 if($("#top").length == 1) {
     
@@ -184,7 +188,6 @@ for (let index = 0; index < data.length; index++) {
     
     
     
-                console.log(data); //===Show Error Message====
             }
         });
     
@@ -223,6 +226,7 @@ for (let index = 0; index < data.length; index++) {
 
 
 
+//Comprueba si la peticion se ha realizado con anterioridad
 
 
     $("#adoptar").click(function() {
@@ -250,32 +254,11 @@ for (let index = 0; index < data.length; index++) {
 
 
 
-                console.log(data); //===Show Error Message====
             }
         });
     })
 
 
-/*
-
-
-    $petitions = DB::table('petitions')
-    ->where('id_animal' ,'=', $_POST['idanimal'])
-    ->where('id_user' ,'=',  Auth::user()->id)
-    ->limit(1)
-    ->get();
-
-    $peticion = count($petitions);
-
-    if($peticion>0){
-        return response()->json(['success'=>'Has realizado la petición']);
-
-    }
-
-
-
-
-*/
 
 
 });

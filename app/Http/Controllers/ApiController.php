@@ -148,9 +148,11 @@ return $arrayanimales;
 //->join('users', 'users.id', 'questions.id_user')
 
 public static function getvacunas($id){ 
+
+
     $vacunas= Vaccination::select ('vaccinations.id', 'vaccinations.id_vaccine  AS vaccinations.vaccine', 'vaccinations.id_animal', 'vaccinations.date', 'vaccines.id', 'vaccines.name')
     ->where('vaccinations.id_animal', '=', $id)
-    ->join('vaccines', 'vaccines.id', 'vaccinations.id')
+    ->join('vaccines', 'vaccines.id', 'vaccinations.id_vaccine')
     ->get()
     ->toJson();
 //        ->join('images_animals','images_animals.id_animal','animals.id')
@@ -160,6 +162,19 @@ $arrayvacunas= json_decode($vacunas);
 return $arrayvacunas;
 
 }
+
+
+
+public static function eliminarAnimal($id){ 
+    $animaleliminar = Animal::find($id);
+    $animaleliminar->delete();        
+
+return "Se ha eliminado el animal";
+
+}
+
+
+
 
 public static function gethistorialusuario($id){ 
 

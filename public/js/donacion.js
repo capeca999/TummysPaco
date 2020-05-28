@@ -4,6 +4,7 @@ $(document).ready(function () {
 
 
 
+//Función que crea un alert personalizado
 
     function añadiralert(atributo){
 
@@ -97,6 +98,7 @@ if(res==false){
 }
 
 else{
+//Comprobamos que la tarjeta no esta caducada
 
     var mes=$("#mes").val();
     var anyo=$("#anyo").val();
@@ -148,6 +150,7 @@ if(correcto==true){
 
 
 
+//Conseguimos todos los valores despues de validarlos y los mandamos por ajax
 
 
                 $.ajax({

@@ -2,6 +2,7 @@ $(document).ready(function() {
 
 
 
+//Función que crea un pdf con un formulario
 
 
     function pdfconverter() {
@@ -27,7 +28,8 @@ $(document).ready(function() {
             });
             contador=0;
         });
-        
+        //Función que crea un string random
+
         function randomStr(len, arr) { 
             var ans = ''; 
             for (var i = len; i > 0; i--) { 
@@ -43,7 +45,8 @@ $(document).ready(function() {
     
     
     
-    
+    //Función que crea un excel con un formulario, es personalizable y lo exporta a un nombre random
+
     
         function fnExcelReport()
         {
@@ -109,6 +112,7 @@ $(document).ready(function() {
 
 
 
+//Función que filtra la palabra buscada por cada tr, si no la encuentra mostrara no results
 
 
 
@@ -131,6 +135,7 @@ var valorinput="";
         $(".counter").text(n + " item"), "0" == n ? $(".no-result").show() : $(".no-result").hide()
     })
 
+//Función que añade un alert personalizado
 
 
     function añadiralert(atributo){
@@ -307,7 +312,7 @@ if(valorinput==""){
 }
 
 else{
-
+//Función para crear un producto con los datos del formulario
                     $.ajax({
                         type: 'post',
                          dataType: "json",
@@ -324,7 +329,6 @@ else{
                      })
                     
                      .done(function(response){
-console.log(response);
 $("#productosañadirtr").empty();
 $("#productosañadirtr").remove();
 
@@ -386,12 +390,28 @@ $(document).on('blur','#dato-anyadir',function(){
 
       
             .done(function(response){
-                console.log(response);
+
      
                 
+                if($("#top").length == 1) {
+
+                    $("#top").remove();
+                    }
                 
+                    if($(this).attr("title")=="Cancelled"){
+                        var diverror = $("<div>Has " + $(this).attr("title")+" Has modificado el campo " + atributo + "</div>" ).attr("class" , "alert alert-warning beautifulerror").attr("role",  "alert").attr("id", "top").appendTo($("#divprincipal"));
+                        var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
+                        var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
+                    }
+       
                 
                                      })
+
+
+
+
+
+
                                     
                                     .fail(function(response){
                                 console.log(response);
@@ -416,9 +436,11 @@ $(document).on('blur','#dato-anyadir',function(){
 
 
 
-//^[0-9]+$
+
 
 });
+//Función comprueba que los campos estan bien introducidos
+
 function comprobacionModificacion(atributo, valor) {
 
     var expresionRegular = ""

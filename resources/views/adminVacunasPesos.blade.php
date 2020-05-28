@@ -59,7 +59,7 @@
                         <td name="nickname">{{$animal->nickname}}</td>
                         <td name="size">{{$animal->size}}</td>
                         <td name="condition">{{$animal->condition}}</td>
-                        <td name="condition"><img  class=" iconoProductoAdmin" src="{{$animal->url}}"></td>
+                        <td name="image"><img  class=" iconoProductoAdmin" src="{{$animal->url}}"></td>
       
                         <td>
                         <button type="button" value="{{$animal->id}}" class="vacunabotonadir btn btn-primary mybtn " data-toggle="modal" data-target="#vacunasmodal">
@@ -67,7 +67,7 @@
                             <i class="fa fa-user-md" style="font-size: 15px;"></i>
                         </button>
                         
-                        <button class=" pesosbotonanadir btn btn-success"   value="{{$animal->id}}"   data-toggle="modal" data-target="#pesosmodal" style="margin-left: 5px;" type="submit">
+                        <button class="pesosbotonanadir btn btn-success"   value="{{$animal->id}}"   data-toggle="modal" data-target="#pesosmodal" style="margin-left: 5px;" type="submit">
                         <i class="fa fa-cubes" style="font-size: 15px;"></i></button></td>
                      
                     </tr>

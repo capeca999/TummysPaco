@@ -21,6 +21,7 @@ $(function(){
                                 };
                             })(jQuery);
 
+//Conseguimos el formulario a json y lo mandamos a la página de compra
 
                             $('#formDonar').submit(function (e) {
                            

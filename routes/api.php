@@ -39,6 +39,7 @@ Route::get('/productosCupon/{id?}', 'ApiController@getCouponById');
 Route::get('/getPesos/{id?}', 'ApiController@getpesos');
 Route::get('/getvacunas/{id?}', 'ApiController@getvacunas');
 
+Route::get('/eliminarAnimal/{id}', 'ApiController@eliminarAnimal');
 
 
 Route::get('/getEstadisticaAnimales/', 'ApiController@getEstadisticaAnimales');

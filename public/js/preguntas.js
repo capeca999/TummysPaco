@@ -1,12 +1,8 @@
-
-
-
-
 $(function () {
  
 
 var pagina=0;
-
+//Funcion para formatear la fecha adecuadamente
     function formatDate(date) {
         var d = new Date(date),
             month = '' + (d.getMonth() + 1),
@@ -28,7 +24,7 @@ var pagina=0;
 var titulo = $("#titulo").val();
 var descripcion = $("#descripcion").val();
 
-
+//Ajax para crear una pregunta
 $.ajax({
     type: 'POST',
      dataType: "json",
@@ -57,7 +53,7 @@ $.ajax({
     );
 
 
-
+//Creamos el formulario par añadir preguntas
     $(document).on('click', '#newthread', function(){
         if( $("#divform").length==0){
         var diventero = $("#diventero");
@@ -76,7 +72,7 @@ $.ajax({
     });
         
 
-
+//Creamos el formulario para crear la respuesta
 $(document).on('click', '#replybutton', function(){
 
     if( $("#divform").length==0){
@@ -96,7 +92,7 @@ $(document).on('click', '#replybutton', function(){
 
 
 });
-
+//Creamos la respuesta
     $(document).on('click', '#submitrespuesta', function(){
 
         var today = new Date();
@@ -138,13 +134,13 @@ $(document).on('click', '#replybutton', function(){
 
 
     
-
+//Cambiamos el icono del corazon al darle like
 $(".likesnumeroanswer").click(function(){
     $(this).toggleClass("heart");
 });
 
 
-    
+    //Conseguimos las preguntas dependiendo de que página
 
 $(".page-item").click(function(){
     var fin=false;
@@ -178,7 +174,7 @@ else{
 
     $("#preguntastodas").empty();
     
-
+//Creamos las preguntas encontradas
     for (let index = 0; index < arraypreguntas.length; index++) {
  
 
@@ -253,7 +249,7 @@ contdias = contdias*-1;
 
 
 
-    
+    //Quitamos los likes y hacemos una peticion en ajas para quitarlos en la bdd
 
 $(".likes").click(function(event){
     $(this).toggleClass("heart");

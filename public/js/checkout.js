@@ -12,6 +12,7 @@ var idproduct=[];
 var idprice=[];
 var idquantity=[];
   for (property in compras) {
+//Función que por cada producto que hemos comprado obtenemos sus atrbituso por ajax
 
 
       if (compras[property] != "" && compras[property] != undefined && compras[property] != null && compras[property] != 0 && compras[property] != "0") {
@@ -37,7 +38,7 @@ var idquantity=[];
                   
                   var spanPrecio = $("<span>" + response[0].price * cantidades[0] + "€" + "</span>").attr("class", "text-muted").appendTo(li);
                  
-                  $("#cantidadProductos").text(parseInt($("#cantidadProductos").text() + 1));
+                  $("#cantidadProductos").text( parseInt($("#cantidadProductos").text())+ 1);
                  
                   preciototal = preciototal + parseInt(response[0].price * cantidades[0]);
                   cantidades.shift();
@@ -58,6 +59,7 @@ var idquantity=[];
               });
       }
   }
+//Función que setea arrays para despues usarlos en otras funciones
 
   function setarrays(id, precio, cantidad){
     idproduct.push(id);
@@ -70,6 +72,7 @@ var idquantity=[];
 
 
         
+//Función qué consigue las diferentes direcciones del usuario
 
 
         $.ajax({
@@ -102,12 +105,12 @@ $("#postal_code").val(response[0].postal_code);
 
 
     });
+//Función que comprobamos si el cupon es valido o no
 
   $("#submitid").click(function(e) {
 
 
       if ($("#promocodeinput").val().length > 0) {
-          //System.out.println(loginToken.substring(1, loginToken.length()-1));
           $.ajax({
 
                   dataType: "json",
@@ -263,6 +266,8 @@ var paymentmethod=$('input[name=paymentMethod]:checked').val();
 if(  typeof codigoDescuentoCantidad==="undefined"){
     codigoDescuentoCantidad="";
 }
+//Función que crea un pedido con los diferentes datos del formulario
+
 $.ajax({
    type: 'post',
     dataType: "json",
@@ -310,6 +315,7 @@ for (var cont = 0; cont < idproduct.length; cont++) {
 }
 
 
+//Función que guarda la dirección del usuario y lo sube a la base de datos
 
 if ($('#save-info').is(':checked')) {
     $.ajax({
@@ -343,6 +349,7 @@ if ($('#save-info').is(':checked')) {
     });
     
 }
+//Función que crea una insignia al comprar
 
 $.ajax({
     type: 'post',

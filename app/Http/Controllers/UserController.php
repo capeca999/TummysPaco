@@ -117,10 +117,20 @@ class UserController extends Controller
      * @return array usuario
      */
     public static function modificarUsuario($id,$atributo,$valor){
-        $usuario = User::find(Auth::user()->id);
+
+
+if($id==Auth::user()->id){
+    return 1;
+}
+
+
+        $usuario = User::find($id);
         $usuario->$atributo = $valor;
         $usuario->save(); 
     }
+
+
+
     public static function modificarUsuarioperfil($atributo,$valor){
 
  

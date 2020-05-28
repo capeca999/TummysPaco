@@ -178,15 +178,13 @@ var nombrepdf=randomStr(7, '12345abcde');
      })
     
      .done(function(response){
+         console.log(response);
         if($("#top").length == 1) {
-
             $("#top").remove();
             }
-            var diverror = $("<div>  Has Insertado Una Vacuna Al Animal!  </div>").attr("class" , "alert alert-warning beautifulcorrect").attr("role",  "alert").attr("id", "top").appendTo($("#diventero"));
+            var diverror = $("<div>  Has Insertado Una Vacuna Al Animal!  </div>").attr("class" , "alert alert-warning beautifulcorrect").attr("role",  "alert").attr("id", "top").appendTo($("#contenedorprincipalpagina"));
             var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
             var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
-
-
 
      })
     
@@ -196,7 +194,7 @@ var nombrepdf=randomStr(7, '12345abcde');
 
         $("#top").remove();
         }
-        var diverror = $("<div>  Has tenido un error en un campo, comprueba tus datos</div>").attr("class" , "alert alert-warning beautiful").attr("role",  "alert").attr("id", "top").appendTo($("#diventero"));
+        var diverror = $("<div>  Has tenido un error en un campo, comprueba tus datos</div>").attr("class" , "alert alert-warning beautiful").attr("role",  "alert").attr("id", "top").appendTo($("#contenedorprincipalpagina"));
         var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
         var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
 
@@ -227,7 +225,7 @@ alert($("#cantidadpeso").val());
 
             $("#top").remove();
             }
-            var diverror = $("<div>  Has Insertado Un peso Al Animal!  </div>").attr("class" , "alert alert-warning beautifulcorrect").attr("role",  "alert").attr("id", "top").appendTo($("#diventero"));
+            var diverror = $("<div>  Has Insertado Un peso Al Animal!  </div>").attr("class" , "alert alert-warning beautifulcorrect").attr("role",  "alert").attr("id", "top").appendTo($("#contenedorprincipalpagina"));
             var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
             var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
 
@@ -235,12 +233,12 @@ alert($("#cantidadpeso").val());
      })
     
     .fail(function(response){
-        
+        console.log(response);
     if($("#top").length == 1) {
 
         $("#top").remove();
         }
-        var diverror = $("<div>  Has tenido un error en un campo, comprueba tus datos</div>").attr("class" , "alert alert-warning beautiful").attr("role",  "alert").attr("id", "top").appendTo($("#diventero"));
+        var diverror = $("<div>  Has tenido un error en un campo, comprueba tus datos</div>").attr("class" , "alert alert-warning beautiful").attr("role",  "alert").attr("id", "top").appendTo($("#contenedorprincipalpagina"));
         var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
         var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
 
@@ -262,7 +260,7 @@ alert($("#cantidadpeso").val());
 
 
 $(document).on("click", ".pesosbotonanadir", function(){
-
+alert("holaa");
 $("#animalhidden").val($(this).val());
 
 

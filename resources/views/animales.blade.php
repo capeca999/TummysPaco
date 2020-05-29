@@ -109,7 +109,7 @@
 @endif
 @endif
     @endfor
-            <li class="page-item"><a class="page-link" href="javascript:void(0)" data-abc="true">»</a></li>
+            <li class="page-item disabled"><a class="page-link" href="javascript:void(0)" data-abc="true">»</a></li>
         </ul>
     </nav>
     </div>

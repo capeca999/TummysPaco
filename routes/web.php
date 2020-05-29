@@ -89,6 +89,7 @@ Route::get('/animalesAdoptados/', 'ApiController@MostrarAnimalesAdoptados');
 Route::get('/animalesAdoptados/{pagina}', 'ApiController@MostrarAnimalesAdoptadosPagina');
 
 Route::get('/animales/{especie}', 'ApiController@getAnimalsSpecie');
+
 Route::get('/animales/{especie}/{pagina}', 'ApiController@getAnimalsSpecieListPagina');
 
 

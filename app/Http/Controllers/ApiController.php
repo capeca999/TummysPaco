@@ -317,7 +317,7 @@ public function getAnimalsSpecie($especie){
 
     $data =  array();
     $data['animales']  =  json_decode($this::getAnimalsSpecieList(1, $especie, 9));
-    $data['cantidad']  =  Animal::where('id_user', '=', null)->count();
+    $data['cantidad']  =  Animal::where('id_user', '=', null)->where('species', '=', $especie)->count();
     $data['especie'] = $especie;
     return view('animales',compact("data"));
 
@@ -345,6 +345,7 @@ $saltar = $pagina*9;
 
     ->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
     ->groupBy('animals.id')
+    ->where('id_user', '=', 'null')
     ->get()
     ->skip($saltar)
     ->take($cantidad)

@@ -43,7 +43,6 @@ $.ajax({
  })
 .fail(function(response){ 
 
-    console.log(response);
 
 });
 
@@ -116,14 +115,12 @@ $(document).on('click', '#replybutton', function(){
          .done(function(response){
         $("#divform").empty();
 
-            console.log(response);
 
         
         
          })
         .fail(function(response){ 
         
-            console.log(response);
         
         });
         
@@ -217,7 +214,7 @@ contdias = contdias*-1;
        
        
         var divtextruncate = $("<div>"+" Hace " + contdias + " Días" + "</div>").attr("class", "line-height-1 text-truncate").appendTo(divtruncate);
-        var aby=$("<a>"  + arraypreguntas[index].date + arraypreguntas[index].first_name + arraypreguntas[index].last_name +  "</a>").attr("href", "javascript:void(0)").attr("class", "text-muted small text-truncate").attr("data-abc", "true").appendTo(divtruncate);
+        var aby=$("<a>"  + arraypreguntas[index].date + " " + arraypreguntas[index].first_name + " " +  arraypreguntas[index].last_name +  "</a>").attr("href", "javascript:void(0)").attr("class", "text-muted small text-truncate").attr("data-abc", "true").appendTo(divtruncate);
 
 
     }
@@ -227,7 +224,6 @@ contdias = contdias*-1;
      })
     .fail(function(response){ 
     
-        console.log(response);
     
     });
 
@@ -277,7 +273,6 @@ if($(elemento).hasClass("answerquestion")){
          })
         .fail(function(response){ 
       
-            console.log(response);
     
     });
 
@@ -297,7 +292,6 @@ if($(elemento).hasClass("answerquestion")){
        
             })
            .fail(function(response){ 
-               console.log(response);  
        });
        
        }
@@ -326,7 +320,6 @@ if(!$(elemento).hasClass("heart")){
 
      })
     .fail(function(response){ 
-        console.log(response);
 
 });
 }
@@ -362,7 +355,6 @@ else{
 $(".likesnumeroanswer").click(function(event){
 
     var elemento = $(this);
-    console.log($(elemento).attr("id"));
 
     if(!$(elemento).hasClass("heart")){
      
@@ -381,7 +373,6 @@ $(".likesnumeroanswer").click(function(event){
          })
         .fail(function(response){ 
       
-            console.log(response);
     
     });
     }
@@ -400,7 +391,6 @@ $(".likesnumeroanswer").click(function(event){
     
          })
         .fail(function(response){ 
-            console.log(response);  
     });
     
     }
@@ -424,7 +414,6 @@ $(".likesnumeroanswer").click(function(event){
     
          })
         .fail(function(response){   
-            console.log(response);
     });
     
     });

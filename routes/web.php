@@ -174,7 +174,7 @@ Route::get('animales/', function() {
                 Route::middleware('auth')->post('/forum/', 'PreguntasController@crearquestion');
                 Route::middleware('auth')->post('/forum/thread', 'PreguntasController@crearrespuesta');
 
-                Route::get('/forum/thread/{id}', 'PreguntasController@getthread');
+                Route::middleware('auth')->get('/forum/thread/{id}', 'PreguntasController@getthread');
 
 
                 

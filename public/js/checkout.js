@@ -98,7 +98,6 @@ $("#postal_code").val(response[0].postal_code);
 
         })
         .fail(function(response) {
-            console.log(response);
 
         });
 

@@ -99,7 +99,6 @@ else{
 
                     },
                 error:function(data){
-                    console.log(data); //===Show Error Message====
                 }
            
             });             
@@ -112,7 +111,6 @@ else{
                 var diverror = $("<div>Has realizado la petición con anterioridad</div>").attr("class" , "alert alert-warning beautiful").attr("role",  "alert").attr("id", "top").appendTo($("#todoContenido"));
                 var buttonerror = $("<button>").attr("type", "button").attr("class" , "close").attr("data-dismiss" , "alert").attr("aria-label", "close").appendTo(diverror);
                 var spanaria= $("<span>&times</span>").attr("aria-hidden", "true").appendTo(buttonerror);
-          console.log(data); //===Show Error Message====
         }
     });
 

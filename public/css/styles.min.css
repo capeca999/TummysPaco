@@ -3272,13 +3272,13 @@ div.jumbotron.carousel-hero {
 }
 
 div.jumbotron.hero-primera {
-    background-image: url(../img/animales.jpg)
+    background-image: url(../img/carrusel/animales.jpg)
 }
 div.jumbotron.hero-segunda {
-    background-image: url(../img/missu.jpeg)}
+    background-image: url(../img/carrusel/perro.jpg)}
 
 div.jumbotron.hero-tercera{
-    background-image: url(../img/perro.jpg)
+    background-image: url(../img/carrusel/gato.jpeg)
 }
 
 

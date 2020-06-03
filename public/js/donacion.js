@@ -165,7 +165,6 @@ if(correcto==true){
             
                 })
                 .done(function(response) {
-                console.log(response);
                     if($("#top").length == 1) {
             
                         $("#top").remove();
@@ -187,7 +186,6 @@ if(correcto==true){
                 })
                 .fail(function(response) {
             
-            console.log(response);
             
                 });
 

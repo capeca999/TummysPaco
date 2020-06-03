@@ -92,7 +92,7 @@ $(document).ready(function(){
 <td class="negrostatus">
                             <span class="status text-success"> </span>
                             
-							{{$pedido->status}}
+                            Pedido Procesado
                             
                             </td>
 
@@ -102,7 +102,7 @@ $(document).ready(function(){
 <td class="amarillostatus">
                             <span class="status text-success"> </span>
                             
-							{{$pedido->status}}
+                            Pedido Enviado
                             
                             </td>
 
@@ -113,7 +113,7 @@ $(document).ready(function(){
 <td class="naranjastatus">
                             <span class="status text-success"> </span>
                             
-							{{$pedido->status}}
+                            Pedido En Ruta
                             
                             </td>
 
@@ -125,7 +125,7 @@ $(document).ready(function(){
 <td class="verdestatus">
                             <span class="status text-success"> </span>
                             
-							{{$pedido->status}}
+                            Pedido Recibido
                             
                             </td>
 
@@ -140,7 +140,7 @@ $(document).ready(function(){
 						<td>
                             
 			
-                        <a href="#" id="{{$pedido->identificadororder}}" value="avanzar" class="view" title="View Details" data-toggle="tooltip">
+                        <a href="#" id="{{$pedido->identificadororder}}" value="avanzar" class="view" title="Avanzar Estado" data-toggle="tooltip">
                             <i class="  fa fa-arrow-right  material-icons"> </i>
                     </a>
 

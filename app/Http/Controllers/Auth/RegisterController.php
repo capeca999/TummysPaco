@@ -57,7 +57,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email:rfc,dns','string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'nif' => ['required', 'string', 'min:8', 'regex:/^[0-9]+$/',  'max:8', 'unique:users'],
+            'nif' => ['required', 'string', 'min:8', 'regex:/^[0-9]+$/',  'max:8', 'unique:users,nif'],
             'date_of_birth' =>['required', 'date'],
             'first_name' =>['nullable',  'string', 'min:2'],
             'last_name' =>['nullable',  'string', 'min:2'],

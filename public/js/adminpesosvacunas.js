@@ -178,7 +178,6 @@ var nombrepdf=randomStr(7, '12345abcde');
      })
     
      .done(function(response){
-         console.log(response);
         if($("#top").length == 1) {
             $("#top").remove();
             }
@@ -207,7 +206,6 @@ var nombrepdf=randomStr(7, '12345abcde');
 });
 $(document).on( "click", "#submitpeso", function() {
 
-alert($("#cantidadpeso").val());
 
     $.ajax({
         type: 'post',
@@ -233,7 +231,6 @@ alert($("#cantidadpeso").val());
      })
     
     .fail(function(response){
-        console.log(response);
     if($("#top").length == 1) {
 
         $("#top").remove();
@@ -260,7 +257,6 @@ alert($("#cantidadpeso").val());
 
 
 $(document).on("click", ".pesosbotonanadir", function(){
-alert("holaa");
 $("#animalhidden").val($(this).val());
 
 

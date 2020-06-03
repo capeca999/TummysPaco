@@ -337,7 +337,6 @@ $("#productosañadirtr").remove();
                      })
                     
                     .fail(function(response){
-                console.log(response);
                         
                     if($("#top").length == 1) {
                 
@@ -414,7 +413,6 @@ $(document).on('blur','#dato-anyadir',function(){
 
                                     
                                     .fail(function(response){
-                                console.log(response);
                                 
                                     });
 

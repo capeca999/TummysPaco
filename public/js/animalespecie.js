@@ -80,7 +80,6 @@ $(document).ready(function() {
          })
         .fail(function(response){ 
         
-            console.log(response);
         
         });  
     }
@@ -114,7 +113,6 @@ $(document).ready(function() {
 
 
 
-                console.log(data); //===Show Error Message====
             }
         });
     })

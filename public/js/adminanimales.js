@@ -177,7 +177,6 @@ var nombrepdf=randomStr(7, '12345abcde');
 
 
              if( $(this).attr('name')=="gender"){
-alert("hola");
                 var input =$('<select>');
                 input.attr("name", "selectgender");
                 var optionmale=$("<option>Macho</option>").attr("value", "macho");
@@ -812,7 +811,6 @@ $(document).on('blur','#dato-anyadir',function(){
 $(document).on('click','#eliminar',function(){
     var id=$(this).parent().parent().attr('id');
 
-     alert(id);
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $ ('meta[name="csrf-token"]').attr ('content')

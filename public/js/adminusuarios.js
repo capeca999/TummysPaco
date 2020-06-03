@@ -127,7 +127,6 @@ else{
         $(this).focus();
       
         var filename = $('iinput:file').val().replace(/C:\\fakepath\\/i, '');
-        alert(filename);
 
     });
 
@@ -184,7 +183,6 @@ $(document).on('blur','#dato-anyadir',function(){
                 
                 error:function(data){
                 
-                    console.log(data);
 
 
                     if($("#top").length == 1) {
@@ -326,7 +324,6 @@ function comprobacionModificacion(atributo, valor) {
                 else if (parseInt(valor[1]) == mm){
                  
                     if (parseInt(valor[2]) < dd) {
-                        alert("entrado al dia");
         
                         res = true;
                     }

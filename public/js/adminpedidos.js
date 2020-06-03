@@ -45,25 +45,25 @@ function fnExcelReport()
 
 
 
-$(".view").click(function(){
-
+$(document).on("click", ".view" , function(){
+  
 //Función que cambia el estado de los pedidos
 
     var myStr = $(this).parent().prev().prev().text();
     var trimStr = $.trim(myStr);
   
-  if(trimStr=="Order Processed"){
-  
-      $(this).parent().prev().prev().text("Order Shipped");
+  if(trimStr=="Pedido Procesado"){
+
+      $(this).parent().prev().prev().text("Pedido Enviado");
 
       $.ajax({
         type: 'GET',
          dataType: "json",
-         url: '/api/pedidosCambiarEstado/'+$(this).attr("id") + '/' + $(this).parent().prev().prev().text(),            
+         url: '/api/pedidosCambiarEstado/'+$(this).attr("id") + '/' + "Order Shipped",            
         })
     
         .done(function(response){
-      
+            console.log(response);
             
             $(this).parent().prev().prev().removeClass( "negrostatus" ).addClass( "amarillostatus" );
 
@@ -71,21 +71,21 @@ $(".view").click(function(){
             })
            .fail(function(response){ 
            
-               console.log(response);
-           
+           console.log(response);
            });  
 
   }
   
   
-  else if(trimStr=="Order Shipped"){
-  
-      $(this).parent().prev().prev().text("Order En Route");
+  else if(trimStr=="Pedido Enviado"){
+
+
+      $(this).parent().prev().prev().text("Pedido En Ruta");
 
       $.ajax({
         type: 'GET',
          dataType: "json",
-         url: '/api/pedidosCambiarEstado/'+$(this).attr("id") + '/' + $(this).parent().prev().prev().text(),            
+         url: '/api/pedidosCambiarEstado/'+$(this).attr("id") + '/' + "Order En Route",            
         })
     
         .done(function(response){
@@ -96,21 +96,22 @@ $(".view").click(function(){
 
             })
            .fail(function(response){ 
-           
-               console.log(response);
+            console.log(response);
+
            
            });  
   }
   
-  if(trimStr=="Order En Route"){
-  
-      $(this).parent().prev().prev().text("Order Arrived");
+  if(trimStr=="Pedido En Ruta"){
+
+
+      $(this).parent().prev().prev().text("Pedido Recibido");
 
 
       $.ajax({
         type: 'GET',
          dataType: "json",
-         url: '/api/pedidosCambiarEstado/'+$(this).attr("id") + '/' + $(this).parent().prev().prev().text(),            
+         url: '/api/pedidosCambiarEstado/'+$(this).attr("id") + '/' + "Order Arrived",            
         })
     
         .done(function(response){
@@ -120,8 +121,8 @@ $(".view").click(function(){
 
             })
            .fail(function(response){ 
-           
-               console.log(response);
+            console.log(response);
+
            
            });  
 
@@ -163,7 +164,6 @@ $(".view").click(function(){
                 
                  .done(function(response){
                     $("#tbodyprincipal").empty();
-            
             console.log(response);
             
             
@@ -180,17 +180,44 @@ $(".view").click(function(){
             
             var locationtd =$("<td>" +response[index].location+ "</td>").appendTo(trprincipal);
             var dateorder =$("<td>" +response[index].date_order+ "</td>").appendTo(trprincipal);
-            var statustd =$("<td>" +response[index].status+ "</td>").appendTo(trprincipal);
+
+
+            if(response[index].status=="Order Arrived"){
+
+                var statustd =$("<td>"  + "Pedido Recibido"  + "</td>").attr("class", "verdestatus").appendTo(trprincipal);
+
+
+            }else if(response[index].status=="Order En route" ){
+
+                var statustd =$("<td>"  + "Pedido En Ruta"  + "</td>").attr("class", "naranjastatus").appendTo(trprincipal);
+
+            }
+            else if(response[index].status=="Order Shipped" ){
+
+                var statustd =$("<td>"  + "Pedido Enviado"  + "</td>").attr("class", "amarillostatus").appendTo(trprincipal);
+
+            }
+            else if(response[index].status=="Order Processed" ){
+
+                var statustd =$("<td>"  + "Pedido Procesado"  + "</td>").attr("class", "negrostatus").appendTo(trprincipal);
+
+            }
+
+
+
+
+
+
+
             var spanstatus =$("<span>" +"&SVGFEGaussianBlurElement;"+ "</span").attr("class", "status text-success").appendTo(statustd);
             var preciototaltd =$("<td>" +response[index].total_price+ "</td>").appendTo(trprincipal);
             var detalledtd =$("<td>").appendTo(trprincipal);
-            var ahrefdetalles =$("<a>").attr("href", "#").attr("class", "view").attr("data-toggle", "tooltip").appendTo(detalledtd);
-            var ahrefdetalles =$("<i>" +"&#xE5C8;"+ "</i>").attr("class", "material-icons").appendTo(ahrefdetalles);
+            var ahrefdetalles =$("<a>").attr("href", "#").attr("id", response[index].id).attr("value", "avanzar").attr("title", "Avanzar Estado").attr("class", "view").attr("data-toggle", "tooltip").appendTo(detalledtd);
+            var ahrefdetalles =$("<i>").attr("class", " fa fa-arrow-right material-icons").appendTo(ahrefdetalles);
             }
                  })
                 .fail(function(response){ 
                 
-                    console.log(response);
                 
                 });  
             
@@ -220,7 +247,6 @@ $(document).on('change', '#statuspedido', function(){
      .done(function(response){
         $("#tbodyprincipal").empty();
 
-console.log(response);
 
 
 for (let index = 0; index < response.length; index++) {
@@ -259,13 +285,12 @@ else if(response[index].status=="Order Arrived"){
 var spanstatus =$("<span>" +"&SVGFEGaussianBlurElement;"+ "</span").attr("class", "status text-success").appendTo(statustd);
 var preciototaltd =$("<td>" +response[index].total_price+ "</td>").appendTo(trprincipal);
 var detalledtd =$("<td>").appendTo(trprincipal);
-var ahrefdetalles =$("<a> fa fa-arrow-right + </a>").attr("href", "#").attr("class", "view").attr("data-toggle", "tooltip").appendTo(detalledtd);
-var ahrefdetalles2 =$("<i>" +"&#xE5C8;"+ "</i>").attr("class", "material-icons").appendTo(ahrefdetalles);
+var ahrefdetalles =$("<a>").attr("href", "#").attr("id", response[index].id).attr("value", "avanzar").attr("title", "Avanzar Estado").attr("class", "view").attr("data-toggle", "tooltip").appendTo(detalledtd);
+var ahrefdetalles =$("<i>").attr("class", " fa fa-arrow-right material-icons").appendTo(ahrefdetalles);
 }
      })
     .fail(function(response){ 
     
-        console.log(response);
     
     });  
 
@@ -295,7 +320,6 @@ var ahrefdetalles2 =$("<i>" +"&#xE5C8;"+ "</i>").attr("class", "material-icons")
             $("#tbodyprincipal").empty();
 
 
-console.log(response);
 
 
 for (let index = 0; index < response.length; index++) {
@@ -311,17 +335,38 @@ $(hrefname).append(response[index].name + response[index].first_name);
 
 var locationtd =$("<td>" +response[index].location+ "</td>").appendTo(trprincipal);
 var dateorder =$("<td>" +response[index].date_order+ "</td>").appendTo(trprincipal);
-var statustd =$("<td>" +response[index].status+ "</td>").appendTo(trprincipal);
+
+if(response[index].status=="Order Arrived"){
+
+    var statustd =$("<td>"  + "Pedido Recibido"  + "</td>").attr("class", "verdestatus").appendTo(trprincipal);
+
+
+}else if(response[index].status=="Order En route" ){
+
+    var statustd =$("<td>"  + "Pedido En Ruta"  + "</td>").attr("class", "naranjastatus").appendTo(trprincipal);
+
+}
+else if(response[index].status=="Order Shipped" ){
+
+    var statustd =$("<td>"  + "Pedido Enviado"  + "</td>").attr("class", "amarillostatus").appendTo(trprincipal);
+
+}
+else if(response[index].status=="Order Processed" ){
+
+    var statustd =$("<td>"  + "Pedido Procesado"  + "</td>").attr("class", "negrostatus").appendTo(trprincipal);
+
+}
+
+
 var spanstatus =$("<span>" +"&SVGFEGaussianBlurElement;"+ "</span").attr("class", "status text-success").appendTo(statustd);
 var preciototaltd =$("<td>" +response[index].total_price+ "</td>").appendTo(trprincipal);
 var detalledtd =$("<td>").appendTo(trprincipal);
-var ahrefdetalles =$("<a>").attr("href", "#").attr("class", "view").attr("data-toggle", "tooltip").appendTo(detalledtd);
-var ahrefdetalles =$("<i>" +"&#xE5C8;"+ "</i>").attr("class", "material-icons").appendTo(ahrefdetalles);
+var ahrefdetalles =$("<a>").attr("href", "#").attr("id", response[index].id).attr("value", "avanzar").attr("title", "Avanzar Estado").attr("class", "view").attr("data-toggle", "tooltip").appendTo(detalledtd);
+var ahrefdetalles =$("<i>").attr("class", " fa fa-arrow-right material-icons").appendTo(ahrefdetalles);
 }
          })
         .fail(function(response){ 
         
-            console.log(response);
         
         });  
    });
@@ -342,7 +387,6 @@ var id=$(this).attr("value");
    animalId=$("#"+id).attr("name");
   var emailenviar = $(this).parent();
 var idusuario= $(emailenviar).prev().prev().prev().prev().prev().prev().prev().text();
-alert(idusuario);
     $.ajax({
         dataType:"json",
         headers: {
@@ -356,8 +400,6 @@ if(valor=="Accepted"){
     var mensaje="Felicidades " + $(emailenviar).prev().prev().prev().prev().prev().text()+ "! Tu solicitud de adopción de " + data[0].nickname + " Ha sido aceptada!, el siguiente paso es ir a nuestro refugio y cojer a tu mascota";
 
 
-alert(idusuario);
-alert(animalId);
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $ ('meta[name="csrf-token"]').attr ('content')
@@ -365,7 +407,6 @@ alert(animalId);
         url: "/modificarAnimalAdoptar/"+idusuario+'/'+animalId,
         method: "GET",
     })                     .done(function(response){
-        console.log(response);
 
         
         
@@ -373,7 +414,6 @@ alert(animalId);
                              })
                             
                             .fail(function(response){
-                        console.log(response);
                                 
                          
                             });

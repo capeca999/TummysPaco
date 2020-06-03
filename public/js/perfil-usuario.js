@@ -108,36 +108,36 @@ else{
     
     
     if(data[index3].status=="Order Processed"){
-        var liorderedprocessed=$("<li> Ordered Processed </li>").attr("id", "step1").attr("class", "step0 active").appendTo(ulbar);
-        var lishipped =$("<li>Order Shipped</li>").attr("class", "step0 text-center").attr("id", "step2").appendTo(ulbar);
-        var Enroute =$("<li>Order En Route</li>").attr("class", "step0 text-right").attr("id", "step2").appendTo(ulbar);
-        var Arrived =$("<li>Delivered</li>").attr("class", "step0 text-right").attr("id", "step4").appendTo(ulbar);
+        var liorderedprocessed=$("<li> Pedido Procesado </li>").attr("id", "step1").attr("class", "step0 active").appendTo(ulbar);
+        var lishipped =$("<li>Pedido Enviado</li>").attr("class", "step0 text-center").attr("id", "step2").appendTo(ulbar);
+        var Enroute =$("<li>Pedido En Camino</li>").attr("class", "step0 text-right").attr("id", "step2").appendTo(ulbar);
+        var Arrived =$("<li>Pedido Recibido</li>").attr("class", "step0 text-right").attr("id", "step4").appendTo(ulbar);
     }
     
     
     
     
     else if(data[index3].status=="Order Shipped"){
-        var liorderedprocessed=$("<li> Ordered Processed </li>").attr("id", "step1").attr("class", "step0 active").appendTo(ulbar);
-        var lishipped =$("<li>Order Shipped</li>").attr("class", "step0 active text-center").attr("id", "step2").appendTo(ulbar);
-        var Enroute =$("<li>Order En Route</li>").attr("class", "step0 text-right").attr("id", "step2").appendTo(ulbar);
-        var Arrived =$("<li>Delivered</li>").attr("class", "step0 text-right").attr("id", "step4").appendTo(ulbar);
+        var liorderedprocessed=$("<li> Pedido Procesado </li>").attr("id", "step1").attr("class", "step0 active").appendTo(ulbar);
+        var lishipped =$("<li>Pedido Enviado</li>").attr("class", "step0 active text-center").attr("id", "step2").appendTo(ulbar);
+        var Enroute =$("<li>Pedido En Camino</li>").attr("class", "step0 text-right").attr("id", "step2").appendTo(ulbar);
+        var Arrived =$("<li>Pedido Recibido</li>").attr("class", "step0 text-right").attr("id", "step4").appendTo(ulbar);
     }
     
     
     
     else if(data[index3].status=="Order En Route"){
-        var liorderedprocessed=$("<li> Ordered Processed </li>").attr("id", "step1").attr("class", "step0 active").appendTo(ulbar);
-        var lishipped =$("<li>Order Shipped</li>").attr("class", "step0 active text-center").attr("id", "step2").appendTo(ulbar);
-        var Enroute =$("<li>Order En Route</li>").attr("class", "step0  active text-right").attr("id", "step2").appendTo(ulbar);
-        var Arrived =$("<li>Delivered</li>").attr("class", "step0 text-right").attr("id", "step4").appendTo(ulbar);
+        var liorderedprocessed=$("<li> Pedido Procesado </li>").attr("id", "step1").attr("class", "step0 active").appendTo(ulbar);
+        var lishipped =$("<li>Pedido Enviado</li>").attr("class", "step0 active text-center").attr("id", "step2").appendTo(ulbar);
+        var Enroute =$("<li>Pedido En Camino</li>").attr("class", "step0  active text-right").attr("id", "step2").appendTo(ulbar);
+        var Arrived =$("<li>Pedido Recibido</li>").attr("class", "step0 text-right").attr("id", "step4").appendTo(ulbar);
     }
     
     else if(data[index3].status=="Order Arrived"){
-        var liorderedprocessed=$("<li> Ordered Processed </li>").attr("id", "step1").attr("class", "step0 active").appendTo(ulbar);
-        var lishipped =$("<li>Order Shipped</li>").attr("class", "step0 active text-center").attr("id", "step2").appendTo(ulbar);
-        var Enroute =$("<li>Order En Route</li>").attr("class", "step0  active text-right").attr("id", "step2").appendTo(ulbar);
-        var Arrived =$("<li>Delivered</li>").attr("class", "step0 active text-right").attr("id", "step4").appendTo(ulbar);
+        var liorderedprocessed=$("<li> Pedido Procesado </li>").attr("id", "step1").attr("class", "step0 active").appendTo(ulbar);
+        var lishipped =$("<li>Pedido Enviado</li>").attr("class", "step0 active text-center").attr("id", "step2").appendTo(ulbar);
+        var Enroute =$("<li>Pedido En Camino</li>").attr("class", "step0  active text-right").attr("id", "step2").appendTo(ulbar);
+        var Arrived =$("<li>Pedido Recibido</li>").attr("class", "step0 active text-right").attr("id", "step4").appendTo(ulbar);
     }
     
     
@@ -178,7 +178,6 @@ else{
     
     
     
-                console.log(data); //===Show Error Message====
             }
         });
     
@@ -452,7 +451,6 @@ else{
                     else if (parseInt(valor[1]) == mm){
                      
                         if (parseInt(valor[2]) < dd) {
-                            alert("entrado al dia");
             
                             res = true;
                         }
@@ -511,7 +509,6 @@ else{
 
 
     $('#usuario-perfil').on('click','#guardar-perfil',function(){
-        console.log('MODIFICARLO - para insertar los datos en la BBDD');
     })
 
 });

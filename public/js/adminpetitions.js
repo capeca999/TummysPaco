@@ -148,14 +148,11 @@ if(valor=="Accepted"){
      })
     
      .done(function(response){
-         console.log(response);
      })
     
     .fail(function(response){
-        console.log(response);
     });
 
-    alert("holaaaaaa");
 
 
 
@@ -174,7 +171,6 @@ if(valor=="Accepted"){
                              })
                             
                             .fail(function(response){
-                        console.log(response);
                                 
                          
                             });

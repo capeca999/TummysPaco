@@ -341,7 +341,6 @@ $saltar = $pagina*9;
 
 
         return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition' , 'animals.id_user','images_animals.url')
-        ->where('animals.id_user', '=', null)
 
     ->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
     ->groupBy('animals.id')
@@ -393,7 +392,7 @@ if($estado=="Todos"){
 if($nombre==""){
 
     $historiales = User::select('users.id', 'users.avatar','users.name', 'users.first_name', 'orders.payment_method','orders.total_price',
-    'orders.date_order','orders.descuento', 'orders.expected_arrival','orders.status', 'orders.USPS', 'orders.location', 'orders.street', 'orders.number')
+    'orders.date_order','orders.descuento', 'orders.expected_arrival','orders.status', 'orders.USPS', 'orders.location', 'orders.street', 'orders.number', 'orders.id')
       ->join('orders','users.id','=','orders.id_user')
       ->orderBy('orders.id')
       ->get()
@@ -405,7 +404,7 @@ if($nombre==""){
 }
 else{
     $historiales = User::select('users.id', 'users.avatar','users.name', 'users.first_name', 'orders.payment_method','orders.total_price',
-    'orders.date_order','orders.descuento', 'orders.expected_arrival','orders.status', 'orders.USPS', 'orders.location', 'orders.street', 'orders.number')
+    'orders.date_order','orders.descuento', 'orders.expected_arrival','orders.status', 'orders.USPS', 'orders.location', 'orders.street', 'orders.number', 'orders.id')
       ->join('orders','users.id','=','orders.id_user')
       ->where('users.name', 'LIKE', '%'.$nombre.'%')
       ->orWhere('users.first_name', 'LIKE', '%'.$nombre.'%')

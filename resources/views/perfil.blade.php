@@ -180,7 +180,7 @@
 
 
                                             @if( Auth::user()->location=="")
-                                            <p>Introduce tu Provincia</p>
+                                            <p>Introduce tu Localización</p>
 
                                             @else
                                             <p>{{Auth::user()->location}}</p>

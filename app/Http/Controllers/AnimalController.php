@@ -90,11 +90,11 @@ class AnimalController extends Controller
 
 public static function getNewerAnimals()
 {
-    $animales = Animal::select('animals.id','animals.race','animals.species','animals.date_of_birth','animals.description','animals.health','animals.nickname','animals.place_found','animals.size','animals.date_found','animals.condition','animals.gender', 'images_animals.url')
+    $animales = Animal::select('animals.id','animals.id_user','animals.race','animals.species','animals.date_of_birth','animals.description','animals.health','animals.nickname','animals.place_found','animals.size','animals.date_found','animals.condition','animals.gender', 'images_animals.url')
     ->orderBy('date_found', 'DESC')
     ->where('animals.id_user', '=' ,null)
     ->join('images_animals', 'images_animals.id_animal', 'animals.id')
-    ->groupBy('animals.id')
+   // ->groupBy('animals.id')
     ->limit(6)
     ->get();
 

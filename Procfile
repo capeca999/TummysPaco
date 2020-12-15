@@ -1,1 +1,1 @@
- web:resources/views/indice.blade.php
+web: vendor/bin/heroku-php-apache2 public/

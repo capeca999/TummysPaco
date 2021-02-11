@@ -155,7 +155,7 @@ public static function getvacunas($id){
     ->join('vaccines', 'vaccines.id', 'vaccinations.id_vaccine')
     ->get()
     ->toJson();
-//        ->join('images_animals','images_animals.id_animal','animals.id')
+        ->join('images_animals','images_animals.id_animal','animals.id')
 
 $arrayvacunas= json_decode($vacunas);
 
@@ -187,7 +187,7 @@ public static function gethistorialusuario($id){
     ->join('products', 'products.id', 'lines.id_product')
     ->get()
     ->toJson();
-//        ->join('images_animals','images_animals.id_animal','animals.id')
+        ->join('images_animals','images_animals.id_animal','animals.id')
 
 $arraypedidos= json_decode($pedidos);
 
@@ -240,7 +240,7 @@ $saltar = $int*9;
         return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition' , 'images_animals.url')
     ->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
     ->whereNotNull('animals.id_user')
-   // ->groupBy('animals.id')
+    ->groupBy('animals.id')
     ->get()
     ->skip($saltar)
     ->take($cantidad)
@@ -278,7 +278,7 @@ $saltar = $pagina*9;
         return Animal::select('animals.id','animals.id_user', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition' , 'images_animals.url')
     ->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
     ->whereNotNull('animals.id_user')
-    //->groupBy('animals.id')
+    ->groupBy('animals.id')
     ->get()
     ->skip($saltar)
     ->take($cantidad)
@@ -343,7 +343,7 @@ $saltar = $pagina*9;
         return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition' , 'animals.id_user','images_animals.url')
 
     ->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
-  //  ->groupBy('animals.id')
+    ->groupBy('animals.id')
     ->where('id_user', '=', 'null')
     ->get()
     ->skip($saltar)
@@ -491,7 +491,7 @@ $saltar = $int*9;
         return Animal::select('animals.id', 'animals.race', 'animals.species','animals.date_of_birth','animals.description','animals.nickname', 'animals.place_found', 'animals.date_found', 'animals.condition' , 'images_animals.url')
     ->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
     ->where('animals.id_user', '=', null)
-    //->groupBy('animals.id')
+    ->groupBy('animals.id')
     ->get()
     ->skip($saltar)
     ->take($cantidad)
@@ -502,7 +502,7 @@ $saltar = $int*9;
     ->join('images_animals', 'images_animals.id_animal', '=',  'animals.id')
     ->where('species', 'like', $especie)
     ->where('animals.id_user', '=', null)
-   // ->groupBy('animals.id')
+    ->groupBy('animals.id')
     ->get()
     ->skip($saltar)
     ->take($cantidad)

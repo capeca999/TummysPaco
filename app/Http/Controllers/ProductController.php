@@ -33,7 +33,7 @@ return view('donarProductos')->with('productos', json_decode($Productos));
     public static function getProductosAgrupadosList(){
 
      return Product::select('products.id',  'products.stock','products.name','products.description', 'products.price', 'products.image')
-  //  ->groupBy('products.id')
+    ->groupBy('products.id')
      ->get()
      ->toJson();
         }
@@ -47,7 +47,7 @@ return view('donarProductos')->with('productos', json_decode($Productos));
               
                 public static function getProductosAgrupadosListAdmin(){           
                  return Product::select('products.id',  'products.stock','products.name','products.description', 'products.price', 'products.image')
-             //   ->groupBy('products.id')
+                ->groupBy('products.id')
                  ->get()
                  ->toJson();
                     }

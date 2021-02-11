@@ -155,7 +155,7 @@ public static function getvacunas($id){
     ->join('vaccines', 'vaccines.id', 'vaccinations.id_vaccine')
     ->get()
     ->toJson();
-        ->join('images_animals','images_animals.id_animal','animals.id')
+     //   ->join('images_animals','images_animals.id_animal','animals.id')
 
 $arrayvacunas= json_decode($vacunas);
 
@@ -187,7 +187,7 @@ public static function gethistorialusuario($id){
     ->join('products', 'products.id', 'lines.id_product')
     ->get()
     ->toJson();
-        ->join('images_animals','images_animals.id_animal','animals.id')
+    //    ->join('images_animals','images_animals.id_animal','animals.id')
 
 $arraypedidos= json_decode($pedidos);
 
